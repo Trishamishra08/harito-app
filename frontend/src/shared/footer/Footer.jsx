@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="space-y-6">
             <div className="flex items-center gap-3 text-white">
                <div className="h-12 w-12 flex items-center justify-center overflow-hidden rounded-xl shrink-0">
-                  <img src="/logo.png" alt="Harito Logo" className="h-full w-full object-contain" />
+                  <img src="/images/logo.png" alt="Harito Logo" className="h-full w-full object-contain" />
                </div>
                <span className="style-font font-black text-2xl tracking-tighter italic leading-tight mt-1">Harito</span>
             </div>

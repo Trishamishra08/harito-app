@@ -3,7 +3,7 @@ import { useData } from '../../data/DataContext';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
 const Carousel = () => {
-  const { carousel } = useData();
+  const { carousel, getImageUrl } = useData();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -33,7 +33,7 @@ const Carousel = () => {
           {/* Background Image */}
           <div className="absolute inset-0 bg-slate-900">
             <img
-              src={slide.image}
+              src={getImageUrl(slide.image)}
               alt=""
               className="h-full w-full object-cover grayscale-[20%]"
             />

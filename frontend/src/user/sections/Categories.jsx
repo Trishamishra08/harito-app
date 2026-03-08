@@ -3,7 +3,7 @@ import { useData } from '../../data/DataContext';
 import { ArrowRight, Layers } from 'lucide-react';
 
 const Categories = () => {
-  const { categories } = useData();
+  const { categories, getImageUrl } = useData();
   const scrollRef = React.useRef(null);
 
   const scroll = (direction) => {
@@ -22,7 +22,7 @@ const Categories = () => {
       {/* Misty Green Field Background - Full Scene */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img 
-          src="/misty-green-bg.png" 
+          src="/images/misty-green-bg.png" 
           alt="Misty Green Background" 
           className="w-full h-full object-cover"
         />
@@ -62,7 +62,7 @@ const Categories = () => {
           >
             <ArrowRight size={24} />
           </button>
-
+ 
           <div 
             ref={scrollRef}
             className="flex flex-nowrap overflow-x-auto no-scrollbar gap-x-8 md:gap-x-12 px-2 md:px-0 pb-10 scroll-smooth items-start justify-start md:justify-center"
@@ -76,7 +76,7 @@ const Categories = () => {
               >
                 <div className="relative w-32 h-32 md:w-52 md:h-52 rounded-full overflow-hidden shadow-2xl group-hover:shadow-green-900/20 group-hover:scale-105 transition-all duration-500 ring-0 hover:ring-8 hover:ring-white/10 border-4 border-white">
                   <img 
-                    src={item.image} 
+                    src={getImageUrl(item.image)} 
                     alt={item.name} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                   />

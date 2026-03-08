@@ -4,7 +4,7 @@ import { Plus, Trash2, Edit3, Tags, X, Check, Image as ImageIcon, LayoutGrid, Fl
 import { motion, AnimatePresence } from 'framer-motion';
 
 const CategoryManagement = () => {
-  const { categories, setCategories } = useData();
+  const { categories, setCategories, fetchCategories, getImageUrl } = useData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
   const [formData, setFormData] = useState({ name: '', description: '', image: '' });
@@ -34,7 +34,8 @@ const CategoryManagement = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Delete this category? This might leave products unassigned.')) {
       try {
-        const response = await fetch(`http://localhost:5000/api/categories/${id}`, {
+        const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+        const response = await fetch(`${apiBase}/categories/${id}`, {
           method: 'DELETE',
         });
         if (response.ok) {
@@ -49,14 +50,14 @@ const CategoryManagement = () => {
     }
   };
 
-  const { fetchCategories } = useData();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
       const url = editingCategory 
-        ? `http://localhost:5000/api/categories/${editingCategory.id || editingCategory._id}` 
-        : 'http://localhost:5000/api/categories';
+        ? `${apiBase}/categories/${editingCategory.id || editingCategory._id}` 
+        : `${apiBase}/categories`;
       
       const method = editingCategory ? 'PUT' : 'POST';
       
@@ -183,7 +184,7 @@ const CategoryManagement = () => {
                       <div className="flex items-center gap-4">
                         {formData.image && (
                           <div className="w-16 h-16 bg-slate-50 border border-slate-200 overflow-hidden flex items-center justify-center shrink-0">
-                            <img src={formData.image} alt="Preview" className="h-full object-contain" />
+                             <img src={getImageUrl(formData.image)} alt="Preview" className="h-full object-contain" />
                           </div>
                         )}
                         <div className="flex-1 relative">
@@ -198,10 +199,11 @@ const CategoryManagement = () => {
                               formDataToUpload.append('image', file);
                               
                               try {
-                                const response = await fetch('http://localhost:5000/api/upload', {
-                                  method: 'POST',
-                                  body: formDataToUpload
-                                });
+                                 const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+                                 const response = await fetch(`${apiBase}/upload`, {
+                                   method: 'POST',
+                                   body: formDataToUpload
+                                 });
                                 if (response.ok) {
                                   const data = await response.json();
                                   setFormData({...formData, image: data.imageUrl});

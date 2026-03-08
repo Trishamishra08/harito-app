@@ -40,6 +40,7 @@ const ProductManagement = () => {
     categories, 
     fetchProducts, 
     fetchCategories,
+    getImageUrl,
     loading 
   } = useData();
   
@@ -91,7 +92,8 @@ const ProductManagement = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Delete this product? This action cannot be undone.')) {
       try {
-        const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+        const url = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+        const response = await fetch(`${url}/products/${id}`, {
           method: 'DELETE',
         });
         if (response.ok) {
@@ -109,9 +111,10 @@ const ProductManagement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
       const url = editingProduct 
-        ? `http://localhost:5000/api/products/${editingProduct.id || editingProduct._id}` 
-        : 'http://localhost:5000/api/products';
+        ? `${apiBase}/products/${editingProduct.id || editingProduct._id}` 
+        : `${apiBase}/products`;
       
       const method = editingProduct ? 'PUT' : 'POST';
       
@@ -195,7 +198,7 @@ const ProductManagement = () => {
                   <td className="py-1.5 px-3">
                     <div className="flex items-center gap-2.5">
                       <div className="w-7 h-7 rounded-none bg-white border border-teal-900/5 p-0.5 overflow-hidden shrink-0 flex items-center justify-center">
-                        <img src={product.image} alt={product.name} className="h-full object-contain" />
+                        <img src={getImageUrl(product.image)} alt={product.name} className="h-full object-contain" />
                       </div>
                       <div>
                         <h4 className="font-bold text-slate-800 text-[10px] uppercase tracking-widest leading-tight whitespace-pre-line">{product.name}</h4>
@@ -325,7 +328,7 @@ const ProductManagement = () => {
                     <div className="flex items-center gap-4">
                       {formData.image && (
                         <div className="w-16 h-16 bg-slate-50 border border-slate-200 overflow-hidden flex items-center justify-center shrink-0">
-                          <img src={formData.image} alt="Preview" className="h-full object-contain" />
+                          <img src={getImageUrl(formData.image)} alt="Preview" className="h-full object-contain" />
                         </div>
                       )}
                       <div className="flex-1 relative">
@@ -340,7 +343,8 @@ const ProductManagement = () => {
                             formDataToUpload.append('image', file);
                             
                             try {
-                              const response = await fetch('http://localhost:5000/api/upload', {
+                              const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+                              const response = await fetch(`${apiBase}/upload`, {
                                 method: 'POST',
                                 body: formDataToUpload
                               });

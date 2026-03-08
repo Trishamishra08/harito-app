@@ -3,7 +3,7 @@ import { useData } from '../../data/DataContext';
 import { Search, Filter, Layers, Info, ChevronRight, LayoutGrid, List } from 'lucide-react';
 
 const ProductsPage = () => {
-  const { products, categories } = useData();
+  const { products, categories, getImageUrl } = useData();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [activeSub, setActiveSub] = useState('All');
@@ -113,7 +113,7 @@ const ProductsPage = () => {
               {filteredProducts.map(product => (
                 <div key={product.id} className="premium-card group flex flex-col">
                   <div className="relative h-52 overflow-hidden m-3 rounded-[1.2rem] bg-slate-100 border border-slate-50">
-                    <img src={product.image} alt={product.name} className="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
+                    <img src={getImageUrl(product.image)} alt={product.name} className="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
                     <div className="absolute top-2.5 right-2.5 bg-slate-900 text-white px-2 py-0.5 rounded-full text-[7px] font-black uppercase tracking-[0.2em] border border-white/5 shadow-xl">{product.category}</div>
                   </div>
                   <div className="p-5 pt-0 space-y-3 flex-grow flex flex-col">

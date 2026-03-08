@@ -30,7 +30,8 @@ const AdminRegister = () => {
     setError('');
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', formData);
+      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const response = await axios.post(`${apiBase}/auth/register`, formData);
       if (response.data.success) {
         setSuccess(true);
         setTimeout(() => navigate('/admin/login', { replace: true }), 2000);
@@ -74,7 +75,7 @@ const AdminRegister = () => {
            {/* Harito Logo & Name at Top (Compact) */}
            <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm border border-slate-100">
-                 <img src="/logo.png" alt="Harito" className="h-5 w-5" />
+                 <img src="/images/logo.png" alt="Harito" className="h-5 w-5" />
               </div>
               <h1 className="text-xl font-black text-[#1E5D57] tracking-tighter italic">Harito</h1>
            </div>

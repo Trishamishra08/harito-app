@@ -31,7 +31,8 @@ const AdminLogin = () => {
     setError('');
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/send-otp', { phone });
+      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const response = await axios.post(`${apiBase}/auth/send-otp`, { phone });
       if (response.data.success) setStep(2);
     } catch (err) {
       setError(err.response?.data?.message || 'Check your contact number.');
@@ -55,7 +56,8 @@ const AdminLogin = () => {
     setError('');
     const otpValue = otp.join('');
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/verify-otp', { phone, otp: otpValue });
+      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const response = await axios.post(`${apiBase}/auth/verify-otp`, { phone, otp: otpValue });
       if (response.data.success) {
         localStorage.setItem('adminToken', response.data.token);
         localStorage.setItem('adminUser', JSON.stringify(response.data.user));
@@ -93,7 +95,7 @@ const AdminLogin = () => {
            {/* Harito Logo & Name at Top (Compact) */}
            <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm border border-slate-100">
-                 <img src="/logo.png" alt="Harito" className="h-5 w-5" />
+                 <img src="/images/logo.png" alt="Harito" className="h-5 w-5" />
               </div>
               <h1 className="text-xl font-black text-[#1E5D57] tracking-tighter italic">Harito</h1>
            </div>

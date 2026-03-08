@@ -15,7 +15,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 const CarouselManagement = () => {
-  const { carousel, addCarouselSlide, updateCarouselSlide, deleteCarouselSlide } = useData();
+  const { carousel, addCarouselSlide, updateCarouselSlide, deleteCarouselSlide, getImageUrl } = useData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingSlide, setEditingSlide] = useState(null);
   const [formData, setFormData] = useState({
@@ -83,7 +83,7 @@ const CarouselManagement = () => {
             <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-[#1E5D57]/10 pointer-events-none transition-transform group-hover:scale-125 focus-within:scale-125" />
             
             <div className="relative h-28 overflow-hidden m-1.5 rounded-none shadow-sm border border-teal-900/5">
-              <img src={slide.image} alt={slide.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+               <img src={getImageUrl(slide.image)} alt={slide.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a201e]/80 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
               
               <div className="absolute top-1.5 right-1.5 flex gap-1">

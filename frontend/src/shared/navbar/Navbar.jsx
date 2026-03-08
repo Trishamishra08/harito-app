@@ -69,7 +69,7 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <a href="#home" className="flex items-center gap-3 md:gap-4 group cursor-pointer">
               <div className="h-10 w-10 md:h-12 md:w-12 flex items-center justify-center transition-all duration-500 transform group-hover:scale-105">
-                <img src="/logo.png" alt="Harito Logo" className="h-full w-full object-contain filter drop-shadow-2xl" />
+                <img src="/images/logo.png" alt="Harito Logo" className="h-full w-full object-contain filter drop-shadow-2xl" />
               </div>
               <div className="flex items-center text-white">
                 <span className="style-font italic font-black text-2xl md:text-3xl tracking-tighter leading-none">

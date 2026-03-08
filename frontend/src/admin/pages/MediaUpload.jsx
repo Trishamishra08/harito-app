@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useData } from '../../data/DataContext';
 
 const MediaManagement = () => {
-  const { products, setProducts, categories, setCategories, carousel, setCarousel } = useData();
+  const { products, setProducts, categories, setCategories, carousel, setCarousel, getImageUrl } = useData();
   const [activeTab, setActiveTab] = useState('all');
   
   // Dynamically collect all images from DataContext
@@ -88,7 +88,7 @@ const MediaManagement = () => {
                whileHover={{ y: -2 }}
                className="group relative aspect-square rounded-none overflow-hidden border border-teal-900/5 bg-white shadow-sm transition-all duration-300 cursor-pointer"
             >
-              <img src={item.url} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+               <img src={getImageUrl(item.url)} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-[#0a201e]/90 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center p-2 text-center backdrop-blur-[1px]">
                  <p className="text-white text-[7px] font-bold uppercase tracking-widest mb-1 truncate w-full px-1">{item.name}</p>
                  <p className="text-teal-400 text-[6px] font-bold uppercase tracking-tighter opacity-80">{item.type}</p>

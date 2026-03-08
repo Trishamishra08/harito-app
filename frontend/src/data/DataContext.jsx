@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const DataContext = createContext();
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 export const DataProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
@@ -131,7 +131,14 @@ export const DataProvider = ({ children }) => {
     initData();
   }, []);
 
-  return (
+    const getImageUrl = (path) => {
+      if (!path) return '';
+      if (path.startsWith('http')) return path;
+      if (path.startsWith('/images')) return path; // Static public images
+      return `${API_BASE_URL.replace('/api', '')}${path}`;
+    };
+
+    return (
     <DataContext.Provider value={{
       categories, setCategories,
       products, setProducts,
@@ -143,6 +150,7 @@ export const DataProvider = ({ children }) => {
       addCarouselSlide,
       updateCarouselSlide,
       deleteCarouselSlide,
+      getImageUrl,
       siteName, setSiteName,
       adminEmail, setAdminEmail,
       loading

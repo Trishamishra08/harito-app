@@ -9,7 +9,7 @@ import { useData } from '../../data/DataContext';
 import { ArrowRightCircle, Sprout, Droplets, Leaf, Flower2 } from 'lucide-react';
 
 const FeaturedProducts = () => {
-  const { products } = useData();
+  const { products, getImageUrl } = useData();
   const icons = [Sprout, Droplets, Leaf, Flower2];
   const [expandedId, setExpandedId] = React.useState(null);
 
@@ -28,9 +28,9 @@ const FeaturedProducts = () => {
         {/* Zig Zag Torn Design Top Divider added here */}
         <div className="absolute inset-x-0 top-0 w-full h-8 md:h-12 bg-[#d0e6d4] wavy-bottom z-20" style={{ transform: 'rotate(180deg)' }}></div>
         <div className="absolute inset-x-0 top-[-2px] w-full h-[4px] bg-[#d0e6d4] z-20"></div> {/* Covers the hairline gap with the exact same color */}
-
+ 
         <img 
-          src="/agri-bg-products.png" 
+          src="/images/agri-bg-products.png" 
           alt="Agriculture Services background" 
           className="w-full h-full object-cover"
         />
@@ -59,7 +59,7 @@ const FeaturedProducts = () => {
                 {/* Product Image */}
                 <div className="h-[140px] w-full mb-2.5 overflow-hidden rounded-none flex items-center justify-center p-1">
                   <img 
-                    src={item.image} 
+                    src={getImageUrl(item.image)} 
                     alt={item.name} 
                     className="h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out" 
                   />

@@ -19,7 +19,7 @@ const About = () => {
       {/* Left Leaf Cluster */}
       <div className="absolute left-0 top-0 bottom-0 w-1/4 md:w-1/3 opacity-80 pointer-events-none z-0 overflow-hidden">
         <img 
-          src="/leaf-left.png" 
+          src="/images/leaf-left.png" 
           alt="Watercolor Leaf Left" 
           className="w-full h-full object-contain object-left"
         />
@@ -28,7 +28,7 @@ const About = () => {
       {/* Right Leaf Cluster */}
       <div className="absolute right-0 top-0 bottom-0 w-1/4 md:w-1/3 opacity-80 pointer-events-none z-0 overflow-hidden">
         <img 
-          src="/leaf-right.png" 
+          src="/images/leaf-right.png" 
           alt="Watercolor Leaf Right" 
           className="w-full h-full object-contain object-right"
         />
