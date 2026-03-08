@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Leaf, Sprout, Tractor } from 'lucide-react';
+import { useData } from '../../data/DataContext';
 
 const Hero = () => {
   const { getImageUrl } = useData();
