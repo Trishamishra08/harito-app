@@ -1,5 +1,6 @@
 import React from 'react';
 import { useData } from '../../data/DataContext';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   Package, 
   Tags, 
@@ -7,140 +8,230 @@ import {
   Image as ImageIcon, 
   TrendingUp, 
   TrendingDown, 
-  ArrowRight,
   Plus,
-  Activity
+  ArrowUpRight,
+  Zap,
+  Star,
+  Activity,
+  FlaskConical,
+  Microscope,
+  Leaf,
+  Tractor,
+  LayoutGrid
 } from 'lucide-react';
+import { 
+  PieChart, 
+  Pie, 
+  Cell, 
+  Tooltip, 
+  ResponsiveContainer,
+  LineChart,
+  Line
+} from 'recharts';
+import { motion } from 'framer-motion';
 
-const StatCard = ({ title, value, icon: Icon, trend }) => (
-  <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
-    <div className="absolute top-0 right-0 w-24 h-24 bg-green-50/50 -translate-y-1/2 translate-x-1/2 rounded-full -z-0 group-hover:bg-green-100/50 transition-colors"></div>
-    
-    <div className="relative z-10 flex flex-col gap-4">
-      <div className="flex justify-between items-start">
-        <div className={`bg-green-100 text-green-700 p-3 rounded-xl shadow-sm group-hover:scale-110 transition-transform`}>
-          <Icon size={20} />
+const StatCard = ({ title, value, icon: Icon, trend, trendValue, color, to }) => {
+  const CardContent = (
+    <motion.div 
+      whileHover={{ y: -2 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      className="relative overflow-hidden p-4 rounded-none h-full transition-all duration-300 group border-none"
+      style={{ backgroundColor: `${color}10` }}
+    >
+      {/* Decorative Corner Shape */}
+      <div 
+        className="absolute -top-6 -right-6 w-16 h-16 rounded-full opacity-20 pointer-events-none"
+        style={{ backgroundColor: color }}
+      />
+      
+      <div className="relative z-10 flex flex-col gap-3">
+        {/* Icon in Box */}
+        <div className="w-8 h-8 rounded-md flex items-center justify-center text-white shadow-sm" style={{ backgroundColor: color }}>
+          <Icon size={16} />
         </div>
-        <div className="flex items-center gap-1">
-          {trend > 0 ? (
-            <span className="text-xs font-bold text-green-600 flex items-center gap-1 bg-green-50 px-2 py-1 rounded-md">
-              <TrendingUp size={12} /> +{trend}%
-            </span>
-          ) : trend < 0 ? (
-            <span className="text-xs font-bold text-red-600 flex items-center gap-1 bg-red-50 px-2 py-1 rounded-md">
-              <TrendingDown size={12} /> {trend}%
-            </span>
-          ) : (
-            <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-md">
-              Stable
-            </span>
-          )}
+        
+        <div>
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1.5">{title}</p>
+          <div className="flex items-baseline gap-1.5">
+            <h3 className="text-lg font-bold text-slate-800 tracking-tight">{value}</h3>
+            {trendValue && (
+              <span className={`text-[8px] font-bold ${trend === 'up' ? 'text-green-600' : 'text-red-600'} uppercase tracking-tighter`}>
+                {trend === 'up' ? '↑' : '↓'}{trendValue}%
+              </span>
+            )}
+          </div>
         </div>
       </div>
-      <div>
-        <p className="text-sm font-semibold text-slate-500 mb-1">{title}</p>
-        <h3 className="text-3xl font-bold text-slate-800 leading-none">{value}</h3>
-      </div>
-    </div>
-  </div>
-);
+    </motion.div>
+  );
+
+  return to ? <Link to={to} className="h-full">{CardContent}</Link> : CardContent;
+};
+
+const getCategoryIcon = (name) => {
+  const props = { size: 12, className: "shrink-0" };
+  switch (name?.toLowerCase()) {
+    case 'pesticides': return <FlaskConical {...props} />;
+    case 'fertilizers': return <Microscope {...props} />;
+    case 'seeds': return <Leaf {...props} />;
+    case 'agricultural equipment': return <Tractor {...props} />;
+    default: return <LayoutGrid {...props} />;
+  }
+};
 
 const AdminDashboard = () => {
   const { products, categories, godowns, carousel } = useData();
+  const navigate = useNavigate();
+
+  const mockSparkline = [
+    { value: 30 }, { value: 45 }, { value: 35 }, { value: 50 }, { value: 40 }, { value: 60 }
+  ];
+
+  const categoryDistribution = categories.map((cat, idx) => ({
+    name: cat.name,
+    value: products.filter(p => p.category === cat.name).length,
+    color: ['#1E5D57', '#FBBF24', '#3B82F6', '#10B981'][idx % 4]
+  })).slice(0, 4);
 
   return (
-    <div className="space-y-6 md:space-y-8 animate-fade-in">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm">
-        <div>
-          <span className="text-xs font-bold text-green-600 uppercase tracking-widest block mb-1">Overview</span>
-          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-800 tracking-tight">System Dashboard</h1>
-          <p className="text-sm text-slate-500 font-medium mt-1">Manage your agriculture catalog and facility resources.</p>
-        </div>
-        <div className="flex gap-3 w-full md:w-auto">
-          <button className="flex-1 md:flex-none bg-white hover:bg-slate-50 text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm transition-all border border-slate-200 shadow-sm">
-            Export Report
-          </button>
-          <button className="flex-1 md:flex-none bg-[#1b3d2c] hover:bg-green-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-md flex items-center justify-center gap-2">
-            <Plus size={16} /> Add New
-          </button>
-        </div>
+    <div className="space-y-3 animate-in fade-in zoom-in-95 duration-700">
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard title="Total Products" value={products.length} icon={Package} trend="up" trendValue="12" color="#1E5D57" to="/admin/products" />
+        <StatCard title="Product Types" value={categories.length} icon={Tags} trend="up" trendValue="5" color="#3B82F6" to="/admin/categories" />
+        <StatCard title="Active Campaigns" value={carousel.length} icon={Zap} trend="up" trendValue="0" color="#FBBF24" to="/admin/carousel" />
+        <StatCard title="Total Facilities" value={godowns.length} icon={Warehouse} trend="up" trendValue="2" color="#10B981" to="/admin/godown" />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-        <StatCard title="Total Products" value={products.length} icon={Package} trend={12} />
-        <StatCard title="Categories" value={categories.length} icon={Tags} trend={5} />
-        <StatCard title="Godowns / Facilities" value={godowns.length} icon={Warehouse} trend={-2} />
-        <StatCard title="Active Banners" value={carousel.length} icon={ImageIcon} trend={0} />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Recent Activity Card */}
-        <div className="lg:col-span-2 bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm flex flex-col">
-          <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
-            <div className="flex items-center gap-3">
-               <div className="w-1.5 h-6 bg-green-500 rounded-full"></div>
-               <h3 className="text-lg font-extrabold text-slate-800 tracking-tight">Recent Activity</h3>
-            </div>
-            <button className="text-green-600 hover:text-green-800 text-sm font-bold flex items-center gap-1 transition-colors">
-              View All <ArrowRight size={16} />
-            </button>
-          </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Main List Section */}
+        <div className="lg:col-span-2 relative overflow-hidden bg-[#1E5D57]/5 rounded-none p-3 border-none shadow-sm">
+          {/* Decorative Corner Shape */}
+          <div className="absolute -top-12 -right-12 w-24 h-24 rounded-full bg-[#1E5D57]/10 pointer-events-none" />
           
-          <div className="space-y-3 flex-grow">
-            {products.slice(0, 5).map((product, idx) => (
-              <div key={product.id} className="flex items-center gap-4 p-3 rounded-xl hover:bg-green-50 transition-all border border-transparent hover:border-green-100 group cursor-pointer">
-                <div className="w-12 h-12 rounded-lg overflow-hidden shadow-sm shrink-0 border border-slate-200 bg-white">
-                   <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-bold text-slate-800 text-sm leading-tight group-hover:text-green-700 transition-colors">{product.name}</h4>
-                  <p className="text-xs font-semibold text-slate-500 mt-0.5">{product.category}</p>
-                </div>
-                <div className="text-right">
-                  <span className="text-xs font-bold text-slate-600 bg-slate-100 px-3 py-1 rounded-full group-hover:bg-white group-hover:text-green-700 transition-all shadow-sm">Updated</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* System Health */}
-        <div className="bg-[#1b3d2c] rounded-2xl p-6 md:p-8 text-white flex flex-col relative overflow-hidden group shadow-lg">
-          <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-            <Activity size={80} className="text-green-400" />
-          </div>
-          
-          <h3 className="text-sm font-black mb-8 tracking-widest uppercase text-green-300/80 border-b border-white/10 pb-3">System Health</h3>
-          
-          <div className="space-y-8 relative z-10 font-sans">
-            <div>
-              <div className="flex justify-between items-end mb-2">
-                <p className="text-xs font-bold text-green-100">Storage Usage</p>
-                <p className="text-sm font-black text-white">64.8%</p>
-              </div>
-              <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                <div className="h-full bg-green-400 w-[64%] rounded-full"></div>
-              </div>
+          <div className="relative z-10">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-sm font-bold text-slate-800 tracking-tight flex items-center gap-2 uppercase">
+                 Recent Catalog
+              </h3>
+              <Link to="/admin/products" className="text-[9px] font-bold text-teal-600 hover:text-white hover:bg-teal-600 px-2 py-1 transition-all uppercase tracking-widest border border-teal-600/20">
+                View All <ArrowUpRight size={10} />
+              </Link>
             </div>
             
-            <div>
-              <div className="flex justify-between items-end mb-2">
-                <p className="text-xs font-bold text-green-100">Server Status</p>
-                <p className="text-sm font-black text-white">Optimal</p>
-              </div>
-              <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                <div className="h-full bg-green-400 w-full rounded-full"></div>
-              </div>
+            <div className="overflow-x-auto no-scrollbar">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="text-[9px] font-bold text-slate-400 uppercase tracking-widest border-b border-teal-900/5">
+                    <th className="pb-2 px-2">Catalog Item</th>
+                    <th className="pb-2 px-2">Category</th>
+                    <th className="pb-2 text-right pr-4">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="">
+                  {products.slice(0, 5).map((product) => (
+                    <tr key={product.id} className="group hover:bg-white/50 transition-all duration-200 cursor-pointer border-b border-teal-900/5 last:border-0" onClick={() => navigate('/admin/products')}>
+                      <td className="py-2 px-2">
+                         <div className="flex items-center gap-2">
+                           <div className="w-7 h-7 rounded-none bg-white border border-teal-900/5 overflow-hidden flex items-center justify-center p-1 group-hover:scale-105 transition-transform">
+                              <img src={product.image} alt="" className="h-full object-contain" />
+                           </div>
+                           <span className="font-bold text-[11px] text-slate-700 whitespace-pre-line leading-tight uppercase tracking-widest">{product.name}</span>
+                         </div>
+                      </td>
+                       <td className="py-2 px-2">
+                          <div className="flex items-center gap-2">
+                             <span className="text-teal-600/50">{getCategoryIcon(product.category, 12)}</span>
+                             <span className="text-[9px] font-medium text-slate-500 uppercase tracking-widest">{product.category}</span>
+                          </div>
+                       </td>
+                        <td className="py-1 px-2">
+                           <div className="flex items-center gap-1.5">
+                              <span className="w-1 h-1 rounded-full bg-green-500"></span>
+                              <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Active</span>
+                           </div>
+                        </td>
+                        <td className="py-1 text-right pr-4">
+                           <button className="w-6 h-6 flex items-center justify-center text-slate-400 group-hover:text-teal-600 group-hover:bg-white transition-all border border-transparent group-hover:border-teal-900/5">
+                             <ArrowUpRight size={12} />
+                           </button>
+                        </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
+          </div>
+        </div>
 
-            <div className="pt-6 space-y-3">
-              <p className="text-xs font-bold text-green-300/80 uppercase tracking-widest mb-2">Quick Actions</p>
-              <button className="w-full bg-white/10 hover:bg-white text-white hover:text-[#1b3d2c] font-bold text-sm py-3 rounded-xl transition-all flex items-center justify-between px-5 group shadow-sm">
-                Add New Banner <ImageIcon size={18} className="text-green-300 group-hover:text-green-600 transition-colors" />
-              </button>
-              <button className="w-full bg-white/10 hover:bg-white text-white hover:text-[#1b3d2c] font-bold text-sm py-3 rounded-xl transition-all flex items-center justify-between px-5 group shadow-sm">
-                Manage Godowns <Warehouse size={18} className="text-green-300 group-hover:text-green-600 transition-colors" />
-              </button>
+        {/* Sidebar Info Section */}
+        <div className="space-y-4">
+           {/* Distribution Card */}
+        <div className="relative overflow-hidden bg-[#1E5D57]/5 rounded-none p-4 border-none shadow-sm">
+          {/* Ornament */}
+          <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-[#1E5D57]/10 pointer-events-none" />
+          
+          <div className="relative z-10">
+            <h3 className="text-sm font-bold text-slate-800 tracking-tight uppercase mb-4">
+              Inventory Distribution
+            </h3>
+   <div className="h-[150px] w-full relative">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={categoryDistribution}
+                      innerRadius={50}
+                      outerRadius={70}
+                      paddingAngle={8}
+                      dataKey="value"
+                      stroke="none"
+                    >
+                      {categoryDistribution.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip cursor={{fill: 'transparent'}} />
+                  </PieChart>
+                </ResponsiveContainer>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                  <p className="text-lg font-medium text-slate-800 leading-none">{products.length}</p>
+                  <p className="text-[9px] font-medium text-slate-400 uppercase tracking-widest mt-1">Items</p>
+                </div>
+             </div>
+             <div className="mt-4 space-y-2">
+                {categoryDistribution.map(item => (
+                  <div key={item.name} className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-none" style={{ background: item.color }}></div>
+                      <span className="text-[11px] font-medium text-slate-500 uppercase tracking-widest">{item.name}</span>
+                    </div>
+                    <span className="text-[11px] font-medium text-slate-700">{item.value}</span>
+                  </div>
+                ))}
+             </div>
+          </div>
+        </div>
+
+          {/* Quick Actions Card */}
+          <div className="bg-slate-900 rounded-none p-4 text-white relative overflow-hidden shadow-sm">
+            <div className="absolute -right-10 -bottom-10 opacity-5 rotate-12 scale-150 text-teal-400">
+               <Activity size={100} />
+            </div>
+            <div className="relative z-10">
+              <h3 className="text-md font-medium mb-1 flex items-center gap-2 italic">
+                <Zap size={16} className="text-yellow-400 fill-yellow-400" /> Metrics
+              </h3>
+              <p className="text-slate-400 text-[10px] mb-4 font-normal leading-relaxed">
+                 Optimize inventory in one click.
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                 <Link to="/admin/godown" className="flex items-center justify-center h-9 rounded-none bg-white text-slate-900 text-[11px] font-medium hover:bg-teal-50 transition-all shadow-sm">
+                   Storage
+                 </Link>
+                 <Link to="/admin/carousel" className="flex items-center justify-center h-9 rounded-none bg-white/10 text-white border border-white/10 text-[11px] font-medium hover:bg-white/20 transition-all">
+                   Banners
+                 </Link>
+              </div>
             </div>
           </div>
         </div>

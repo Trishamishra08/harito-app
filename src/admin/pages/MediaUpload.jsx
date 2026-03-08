@@ -1,75 +1,107 @@
-import React from 'react';
-import { Camera, Layers, Check, Search, Filter } from 'lucide-react';
+import React, { useState } from 'react';
+import { Camera, Layers, Check, Search, Filter, Upload, Image as ImageIcon, FileText, Trash2, Plus } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useData } from '../../data/DataContext';
 
 const MediaManagement = () => {
-  const [activeTab, setActiveTab] = React.useState('all');
+  const { products, setProducts, categories, setCategories, carousel, setCarousel } = useData();
+  const [activeTab, setActiveTab] = useState('all');
   
+  // Dynamically collect all images from DataContext
   const mediaItems = [
-    { id: 1, type: 'image', url: 'https://images.unsplash.com/photo-1506484381205-f7945653044d?auto=format&fit=crop&w=400&q=80', size: '1.2 MB', name: 'hero-farm.jpg' },
-    { id: 2, type: 'image', url: 'https://images.unsplash.com/photo-1588636402435-0955f11116c4?auto=format&fit=crop&w=400&q=80', size: '840 KB', name: 'seeds-pack.jpg' },
-    { id: 3, type: 'image', url: 'https://images.unsplash.com/photo-1628189675276-80db61b2e673?auto=format&fit=crop&w=400&q=80', size: '1.1 MB', name: 'biopesticide.jpg' },
-    { id: 4, type: 'image', url: 'https://images.unsplash.com/photo-1592982537447-6f2a6a0c5c13?auto=format&fit=crop&w=400&q=80', size: '2.4 MB', name: 'fertilizer-bag.jpg' },
-    { id: 5, type: 'image', url: 'https://images.unsplash.com/photo-1593444030119-94b29bb3e314?auto=format&fit=crop&w=400&q=80', size: '1.5 MB', name: 'seeds-close.jpg' },
-    { id: 6, type: 'image', url: 'https://images.unsplash.com/photo-1522851147748-0ca5eebb6f5f?auto=format&fit=crop&w=400&q=80', size: '3.1 MB', name: 'tractor-demo.jpg' },
+    ...products.map(p => ({ id: `p-${p.id}`, originalId: p.id, name: p.name.replace('\n', ' '), url: p.image, type: 'product', size: '1.2 MB' })),
+    ...categories.map(c => ({ id: `c-${c.id}`, originalId: c.id, name: c.name, url: c.image, type: 'category', size: '2.4 MB' })),
+    ...carousel.map(i => ({ id: `i-${i.id}`, originalId: i.id, name: i.title, url: i.image, type: 'carousel', size: '3.1 MB' }))
   ];
 
+  const filteredItems = mediaItems.filter(item => {
+    if (activeTab === 'all') return true;
+    if (activeTab === 'products') return item.type === 'product';
+    if (activeTab === 'categories') return item.type === 'category';
+    if (activeTab === 'carousel') return item.type === 'carousel';
+    return true;
+  });
+
+  const handleDelete = (item) => {
+    if (!window.confirm(`Delete "${item.name}"? This will remove the item from the system.`)) return;
+    
+    if (item.type === 'product') {
+      setProducts(prev => prev.filter(p => p.id !== item.originalId));
+    } else if (item.type === 'category') {
+      setCategories(prev => prev.filter(c => c.id !== item.originalId));
+    } else if (item.type === 'carousel') {
+      setCarousel(prev => prev.filter(c => c.id !== item.originalId));
+    }
+  };
+
   return (
-    <div className="space-y-8 animate-fade-in">
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
-        <div>
-          <span className="text-[9px] font-black text-green-600 uppercase tracking-[0.3em]">Asset Repository</span>
-          <h1 className="text-3xl font-black text-slate-800 tracking-tighter uppercase leading-none mt-1">Media Library</h1>
-          <p className="text-xs text-slate-500 font-medium italic mt-2">Manage all digital assets used across the Hirato ecosystem.</p>
-        </div>
-        <div className="flex gap-4 w-full lg:w-auto">
-          <button className="bg-slate-900 hover:bg-green-600 text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg flex items-center gap-2">
-            <Camera size={16} /> UPLOAD NEW ASSET
-          </button>
+    <div className="space-y-3 animate-in fade-in zoom-in-95 duration-500 pb-4">
+      {/* Header Section */}
+      <div className="relative overflow-hidden bg-[#1E5D57]/5 rounded-none p-3 border-none shadow-sm mb-2">
+        {/* Decorative Corner Shape */}
+        <div className="absolute -top-10 -right-10 w-16 h-16 rounded-full bg-[#1E5D57]/10 pointer-events-none" />
+        
+        <div className="relative z-10">
+          <div>
+            <span className="text-[8px] font-bold text-teal-600 uppercase tracking-widest mb-0.5 block">Digital Warehouse</span>
+            <h1 className="text-base font-bold text-slate-800 tracking-tight leading-none uppercase">Media Assets</h1>
+          </div>
         </div>
       </div>
 
-      <div className="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-8">
-          <div className="flex bg-slate-100 p-1 rounded-xl w-full sm:w-auto">
-            {['all', 'images', 'documents'].map(tab => (
+      <div className="bg-[#1E5D57]/5 backdrop-blur-md rounded-none p-3 border-none shadow-sm">
+        {/* Filters and Search */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-3 mb-4">
+          <div className="flex bg-white/50 p-1 rounded-none w-full md:w-auto border border-teal-900/5 shadow-sm">
+            {[
+               { id: 'all', label: 'All', icon: Layers },
+               { id: 'products', label: 'Products', icon: ImageIcon },
+               { id: 'categories', label: 'Categories', icon: ImageIcon },
+               { id: 'carousel', label: 'Banners', icon: ImageIcon }
+            ].map(tab => (
               <button 
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`flex-1 sm:flex-none px-6 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
-                  activeTab === tab ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-400 hover:text-slate-600'
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex-1 md:flex-none px-3 py-1 rounded-none text-[8px] font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 ${
+                  activeTab === tab.id ? 'bg-[#1E5D57] text-white shadow-sm' : 'text-slate-400 hover:text-teal-600'
                 }`}
               >
-                {tab}
+                <tab.icon size={10} /> {tab.label}
               </button>
             ))}
           </div>
-          <div className="relative w-full sm:w-64 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-green-600 transition-colors" size={14} />
+          <div className="relative w-full md:w-64 group">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-teal-500 transition-all" size={12} />
             <input 
               type="text" 
-              placeholder="SEARCH MEDIA..." 
-              className="w-full bg-slate-50 border-none rounded-xl py-2.5 pl-10 pr-6 focus:ring-2 focus:ring-green-500/50 outline-none text-slate-800 transition-all font-black text-[10px] uppercase tracking-widest"
+              placeholder="Filter resources..." 
+              className="bg-white border border-teal-900/5 rounded-none py-1.5 pl-9 pr-3 w-full focus:ring-4 focus:ring-teal-500/5 outline-none transition-all font-bold text-[10px] text-slate-600 shadow-sm uppercase tracking-widest"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-          {mediaItems.map(item => (
-            <div key={item.id} className="group relative aspect-square bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:border-green-300 transition-all cursor-pointer">
-              <img src={item.url} alt={item.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0" />
-              <div className="absolute inset-0 bg-slate-900/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-3 text-center">
-                 <p className="text-white text-[9px] font-black uppercase tracking-tight mb-1 truncate w-full">{item.name}</p>
-                 <p className="text-green-500 text-[8px] font-black uppercase tracking-widest">{item.size}</p>
-                 <div className="mt-3 flex gap-2">
-                   <button className="bg-white/10 hover:bg-white text-white hover:text-slate-900 p-2 rounded-lg transition-colors">
-                     <Layers size={12} />
-                   </button>
-                   <button className="bg-white/10 hover:bg-red-600 text-white p-2 rounded-lg transition-colors">
-                     <Filter size={12} />
-                   </button>
+        {/* Grid Display */}
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2">
+          {filteredItems.map(item => (
+            <motion.div 
+               key={item.id} 
+               whileHover={{ y: -2 }}
+               className="group relative aspect-square rounded-none overflow-hidden border border-teal-900/5 bg-white shadow-sm transition-all duration-300 cursor-pointer"
+            >
+              <img src={item.url} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-[#0a201e]/90 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center p-2 text-center backdrop-blur-[1px]">
+                 <p className="text-white text-[7px] font-bold uppercase tracking-widest mb-1 truncate w-full px-1">{item.name}</p>
+                 <p className="text-teal-400 text-[6px] font-bold uppercase tracking-tighter opacity-80">{item.type}</p>
+                 <div className="mt-3 translate-y-2 group-hover:translate-y-0 transition-transform">
+                    <button 
+                      onClick={() => handleDelete(item)}
+                      className="bg-red-500/80 hover:bg-red-600 text-white p-1.5 rounded-none transition-all border border-red-400/30"
+                    >
+                      <Trash2 size={12} />
+                    </button>
                  </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

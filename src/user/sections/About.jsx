@@ -40,12 +40,12 @@ const About = () => {
             About Us
           </h2>
           <span className="text-green-800 font-black text-[10px] md:text-xs uppercase tracking-[0.4em] mb-10 block opacity-80">
-            HIRATO LANDSCAPING SERVICES
+            HARITO LANDSCAPING SERVICES
           </span>
           
           <div className="max-w-2xl mx-auto">
              <p className="text-[#4a553c] text-sm md:text-base leading-relaxed font-bold italic text-slate-500/90 [text-shadow:0_1px_rgba(255,255,255,0.5)]">
-               Since 2010, Hirato Landscaping has provided year-round landscaping services for residential 
+               Since 2010, Harito Landscaping has provided year-round landscaping services for residential 
                and commercial properties in the global agricultural area. In addition to routine maintenance, design, 
                and installation of shrubs, trees, and plants, we also create unique hardscapes on your property 
                such as outdoor kitchens, fire pits, and pergolas.

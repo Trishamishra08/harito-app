@@ -28,9 +28,9 @@ const Navbar = () => {
   const NavLink = ({ link, className = "" }) => {
     const isAnchor = link.path.startsWith('#');
     const content = (
-      <span className="relative py-1 group-hover:text-green-400 transition-colors duration-300">
+      <span className="relative py-1 group-hover:text-[#1E5D57] transition-colors duration-300">
         {link.name}
-        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
+        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#1E5D57] transition-all duration-300 group-hover:w-full"></span>
       </span>
     );
 
@@ -69,11 +69,11 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <a href="#home" className="flex items-center gap-3 md:gap-4 group cursor-pointer">
               <div className="h-10 w-10 md:h-12 md:w-12 flex items-center justify-center transition-all duration-500 transform group-hover:scale-105">
-                <img src="/logo.png" alt="Hirato Logo" className="h-full w-full object-contain filter drop-shadow-2xl" />
+                <img src="/logo.png" alt="Harito Logo" className="h-full w-full object-contain filter drop-shadow-2xl" />
               </div>
               <div className="flex items-center text-white">
                 <span className="style-font italic font-black text-2xl md:text-3xl tracking-tighter leading-none">
-                  Hirato
+                  Harito
                 </span>
               </div>
             </a>
@@ -93,9 +93,9 @@ const Navbar = () => {
               onMouseLeave={() => setIsCategoryOpen(false)}
             >
               <button className="flex items-center gap-1 text-white px-2 py-1 text-[13px] xl:px-4 md:text-[14px] font-medium italic tracking-wide group whitespace-nowrap style-font">
-                <span className="relative py-1 group-hover:text-green-400 transition-colors duration-300">
+                <span className="relative py-1 group-hover:text-[#1E5D57] transition-colors duration-300">
                   Category
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#1E5D57] transition-all duration-300 group-hover:w-full"></span>
                 </span>
                 <ChevronDown size={14} className={`transition-transform duration-300 ${isCategoryOpen ? 'rotate-180 mb-1' : ''}`} />
               </button>
@@ -107,7 +107,7 @@ const Navbar = () => {
                     <a 
                       key={cat.id} 
                       href={`#category-${cat.name.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="block px-6 py-3.5 text-[11px] font-bold text-white/70 hover:text-green-400 hover:bg-white/5 transition-all uppercase tracking-widest border-b border-white/5 last:border-0"
+                      className="block px-6 py-3.5 text-[11px] font-bold text-white/70 hover:text-[#1E5D57] hover:bg-white/5 transition-all uppercase tracking-widest border-b border-white/5 last:border-0"
                       onClick={() => setIsCategoryOpen(false)}
                     >
                       {cat.name}
@@ -118,10 +118,6 @@ const Navbar = () => {
             </div>
 
             {navLinks.slice(3).map((link) => <NavLink key={link.name} link={link} />)}
-
-            <Link to="/admin" className="ml-4 bg-green-600 hover:bg-white text-white hover:text-black px-6 py-2 rounded-lg text-[12px] font-bold uppercase tracking-widest transition-all shadow-lg active:scale-95">
-              Admin
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -148,18 +144,11 @@ const Navbar = () => {
                 key={cat.id} 
                 href={`#category-${cat.name.toLowerCase().replace(/\s+/g, '-')}`} 
                 onClick={() => setIsOpen(false)} 
-                className="text-white/60 hover:text-green-400 py-1 text-sm italic font-medium"
+                className="text-white/60 hover:text-[#1E5D57] py-1 text-sm italic font-medium"
               >
                 {cat.name}
               </a>
             ))}
-            <Link 
-              to="/admin" 
-              onClick={() => setIsOpen(false)}
-              className="bg-green-600 text-white w-full max-w-xs py-4 rounded-xl text-xs font-black uppercase tracking-[0.3em] text-center"
-            >
-              ADMIN
-            </Link>
           </div>
         )}
       </nav>

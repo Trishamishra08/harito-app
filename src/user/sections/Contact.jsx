@@ -3,79 +3,93 @@ import { Phone, Mail, MapPin, MessageSquare, Send } from 'lucide-react';
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-8 md:py-12 bg-[#1b3d2c] overflow-hidden relative">
+    <section id="contact" className="py-6 md:py-10 bg-[#1E5D57] overflow-hidden relative">
       <div className="absolute top-0 left-0 w-1/4 h-1/4 bg-green-500/10 pointer-events-none rounded-br-full blur-[100px]"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="space-y-4 text-center lg:text-left">
             <div>
-              <span className="text-green-500 font-black text-[9px] md:text-[10px] uppercase tracking-[0.4em] opacity-80 mb-1 block">
+              <span className="text-[#3ed0a5] font-black text-[9px] uppercase tracking-[0.4em] mb-1 block">
                 Operational Support
               </span>
-              <h2 className="style-font text-3xl md:text-5xl font-black text-white mb-2 italic tracking-tight">
-                Get In <span className="text-green-500">Touch</span>
+              <h2 className="style-font text-2xl md:text-4xl font-black text-white mb-2 italic tracking-tight leading-none">
+                Get In <span className="text-[#3ed0a5]">Touch</span>
               </h2>
-              <p className="text-white/80 text-xs font-bold max-w-sm mx-auto lg:mx-0 opacity-80 leading-relaxed italic">
-                Hirato landscaping & agriculture experts are ready to assist with your product queries and facility information.
+              <p className="text-white/60 text-[11px] font-medium max-w-[300px] mx-auto lg:mx-0 leading-relaxed italic">
+                Harito experts are ready to assist with your queries.
               </p>
             </div>
             
-            <div className="space-y-3 pt-2">
+            <div className="space-y-3 pt-4">
               {[
                 { icon: Phone, label: "Hotline", val: "+92 (210) 420-0890" },
-                { icon: Mail, label: "Comms", val: "INFO@HIRATO-AGRI.COM" },
-                { icon: MapPin, label: "Hub", val: "UNIT 123, SECTOR-A, INDUSTRIAL ZONE" }
+                { icon: Mail, label: "Comms", val: "INFO@HARITO-AGRI.COM" },
+                { icon: MapPin, label: "Hub", val: "UNIT 123, SECTOR-A" }
               ].map((item, id) => (
                 <div key={id} className="flex items-center gap-3 group justify-center lg:justify-start">
-                  <div className="bg-white/10 p-2 rounded-lg group-hover:bg-green-500 transition-all border border-white/10">
-                    <item.icon className="text-white" size={14} />
+                  <div className="bg-white/5 p-2 rounded-none group-hover:bg-[#1E5D57] transition-all border border-white/10">
+                    <item.icon className="text-[#3ed0a5]" size={14} />
                   </div>
                   <div className="text-left">
-                    <h3 className="text-[9px] font-black text-green-400 uppercase tracking-widest leading-none mb-1 opacity-80">{item.label}</h3>
-                    <p className="text-white font-bold text-xs uppercase tracking-tight">{item.val}</p>
+                    <h3 className="text-[8px] font-black text-[#3ed0a5]/60 uppercase tracking-widest leading-none mb-1">{item.label}</h3>
+                    <p className="text-white font-bold text-[11px] uppercase tracking-tight">{item.val}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
           
-          <div className="bg-white rounded-[1.5rem] p-5 lg:p-6 shadow-2xl relative border-b-4 border-[#1b3d2c] animate-fade-in max-w-lg mx-auto w-full">
+          <div className="bg-white rounded-none p-4 lg:p-6 shadow-2xl relative border-t-4 border-[#3ed0a5] animate-fade-in max-w-md mx-auto w-full">
             <div className="flex items-center gap-3 mb-4 pb-2 border-b border-slate-100">
-              <div className="w-7 h-7 rounded-lg bg-[#1b3d2c] flex items-center justify-center text-green-400">
+              <div className="w-8 h-8 rounded-none bg-[#1E5D57] flex items-center justify-center text-[#3ed0a5]">
                  <MessageSquare size={14} />
               </div>
-              <h3 className="style-font text-base font-black text-[#1b3d2c] italic tracking-tight">Direct Comms</h3>
+              <div>
+                <h3 className="style-font text-base font-black text-[#1E5D57] italic tracking-tight leading-none">Direct Comms</h3>
+              </div>
             </div>
             
             <form className="space-y-2">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div className="space-y-0.5">
+                  <label className="text-[8px] font-black text-slate-400 uppercase tracking-widest ml-1">Identity</label>
+                  <input 
+                    type="text" 
+                    placeholder="NAME / ID" 
+                    className="w-full bg-slate-50 border border-slate-100 rounded-none py-2 px-3 focus:border-[#1E5D57] outline-none text-[#1E5D57] transition-all font-bold text-[10px] uppercase tracking-wider"
+                  />
+                </div>
+                <div className="space-y-0.5">
+                  <label className="text-[8px] font-black text-slate-400 uppercase tracking-widest ml-1">Channel</label>
+                  <input 
+                    type="email" 
+                    placeholder="EMAIL ADDR" 
+                    className="w-full bg-slate-50 border border-slate-100 rounded-none py-2 px-3 focus:border-[#1E5D57] outline-none text-[#1E5D57] transition-all font-bold text-[10px] uppercase tracking-wider"
+                  />
+                </div>
+              </div>
+              
+              <div className="space-y-0.5">
+                <label className="text-[8px] font-black text-slate-400 uppercase tracking-widest ml-1">Objective</label>
                 <input 
                   type="text" 
-                  placeholder="Identifier / Name" 
-                  className="w-full bg-slate-50 border-none rounded-xl py-2 px-3 focus:ring-2 focus:ring-[#1b3d2c]/50 outline-none text-[#1b3d2c] transition-all font-bold text-[11px]"
-                />
-                <input 
-                  type="email" 
-                  placeholder="Email Channel" 
-                  className="w-full bg-slate-50 border-none rounded-xl py-2 px-3 focus:ring-2 focus:ring-[#1b3d2c]/50 outline-none text-[#1b3d2c] transition-all font-bold text-[11px]"
+                  placeholder="SUBJECT" 
+                  className="w-full bg-slate-50 border border-slate-100 rounded-none py-2 px-3 focus:border-[#1E5D57] outline-none text-[#1E5D57] transition-all font-bold text-[10px] uppercase tracking-wider"
                 />
               </div>
               
-              <input 
-                type="text" 
-                placeholder="Subject of Interest" 
-                className="w-full bg-slate-50 border-none rounded-xl py-2 px-3 focus:ring-2 focus:ring-[#1b3d2c]/50 outline-none text-[#1b3d2c] transition-all font-bold text-[11px]"
-              />
+              <div className="space-y-0.5">
+                <label className="text-[8px] font-black text-slate-400 uppercase tracking-widest ml-1">Intelligence</label>
+                <textarea 
+                  rows="2" 
+                  placeholder="MESSAGE" 
+                  className="w-full bg-slate-50 border border-slate-100 rounded-none py-2 px-3 focus:border-[#1E5D57] outline-none text-[#1E5D57] transition-all font-bold text-[10px] uppercase tracking-wider resize-none"
+                ></textarea>
+              </div>
               
-              <textarea 
-                rows="2" 
-                placeholder="Detailed Intel" 
-                className="w-full bg-slate-50 border-none rounded-xl py-2 px-3 focus:ring-2 focus:ring-[#1b3d2c]/50 outline-none text-[#1b3d2c] transition-all font-bold text-[11px]"
-              ></textarea>
-              
-              <button className="w-full bg-[#1b3d2c] hover:bg-green-600 text-white font-black text-[9px] uppercase tracking-[0.2em] py-3 rounded-xl transition-all shadow-xl flex items-center justify-center gap-2 active:scale-95 mt-1">
-                DISPATCH MESSAGE <Send size={12} />
+              <button className="w-full bg-[#1E5D57] hover:bg-[#132c20] text-white font-black text-[10px] uppercase tracking-[0.3em] py-3 rounded-none transition-all shadow-xl flex items-center justify-center gap-2 active:scale-95 mt-2 group">
+                DISPATCH <Send size={12} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>
             </form>
           </div>

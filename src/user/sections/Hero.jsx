@@ -21,7 +21,7 @@ const Hero = () => {
             </h1>
             
             <p className="text-sm md:text-base text-slate-400 leading-relaxed max-w-xl mx-auto lg:mx-0 font-black uppercase tracking-widest italic opacity-70">
-              Hirato empowers global farmers with specialized data assets and high-yield agricultural solutions.
+              Harito empowers global farmers with specialized data assets and high-yield agricultural solutions.
             </p>
             
             <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
@@ -45,7 +45,7 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity"></div>
               
               {/* Reference-inspired torn effect overlay */}
-              <div className="absolute bottom-0 left-0 w-full h-16 bg-white torn-bottom"></div>
+              <div className="absolute bottom-0 left-0 w-full h-16 bg-white wavy-bottom"></div>
             </div>
             
             {/* Minimalist Floating Stats Badge */}

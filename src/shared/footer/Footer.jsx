@@ -11,20 +11,14 @@ const Footer = () => {
           <div className="space-y-6">
             <div className="flex items-center gap-3 text-white">
                <div className="h-12 w-12 flex items-center justify-center overflow-hidden rounded-xl shrink-0">
-                  <img src="/logo.png" alt="Hirato Logo" className="h-full w-full object-contain" />
+                  <img src="/logo.png" alt="Harito Logo" className="h-full w-full object-contain" />
                </div>
-               <span className="style-font font-black text-2xl tracking-tighter italic leading-tight mt-1">Hirato</span>
+               <span className="style-font font-black text-2xl tracking-tighter italic leading-tight mt-1">Harito</span>
             </div>
             <p className="text-slate-400 leading-relaxed text-xs">
               Transforming agricultural data into high-yield assets since 2010. Precision intelligence and landscape solutions for the modern farmer.
             </p>
-            <div className="flex space-x-3">
-              {[Facebook, Twitter, Instagram, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-900 hover:bg-green-600 text-slate-400 hover:text-white transition-all active:scale-95 border border-white/5">
-                  <Icon size={14} />
-                </a>
-              ))}
-            </div>
+            {/* Social Icons Removed as per user request */}
           </div>
 
           {/* Quick Links */}
@@ -32,7 +26,7 @@ const Footer = () => {
             <h3 className="text-white font-bold text-sm uppercase tracking-wide mb-6">Quick Links</h3>
             <ul className="space-y-3">
               {[
-                { label: 'Home', to: '/' },
+                { label: 'Home', to: '#home' },
                 { label: 'About Us', to: '#about' },
                 { label: 'Products', to: '/products' },
                 { label: 'Categories', to: '#categories' },
@@ -40,11 +34,11 @@ const Footer = () => {
               ].map((link, i) => (
                 <li key={i}>
                   {link.to.startsWith('/') ? (
-                    <Link to={link.to} className="text-xs font-medium hover:text-green-500 transition-colors flex items-center gap-2 group">
+                    <Link to={link.to} className="text-xs font-medium hover:text-[#3ed0a5] transition-colors flex items-center gap-2 group">
                       {link.label}
                     </Link>
                   ) : (
-                    <a href={link.to} className="text-xs font-medium hover:text-green-500 transition-colors flex items-center gap-2 group">
+                    <a href={link.to} className="text-xs font-medium hover:text-[#3ed0a5] transition-colors flex items-center gap-2 group">
                       {link.label}
                     </a>
                   )}
@@ -58,19 +52,19 @@ const Footer = () => {
             <h3 className="text-white font-bold text-sm uppercase tracking-wide mb-6">Contact Us</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin className="text-green-600 shrink-0 mt-0.5" size={16} />
+                <MapPin className="text-[#3ed0a5] shrink-0 mt-0.5" size={16} />
                 <span className="text-xs font-medium leading-relaxed">
                   123 Farming Road, Agriculture Center,<br />
                   TX 78201, USA
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="text-green-600 shrink-0" size={16} />
+                <Phone className="text-[#3ed0a5] shrink-0" size={16} />
                 <span className="text-xs font-medium">(210) 420-0890</span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="text-green-600 shrink-0" size={16} />
-                <span className="text-xs font-medium">info@hirato-agri.com</span>
+                <Mail className="text-[#3ed0a5] shrink-0" size={16} />
+                <span className="text-xs font-medium">info@harito-agri.com</span>
               </li>
             </ul>
           </div>
@@ -78,7 +72,7 @@ const Footer = () => {
         
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
           <p className="text-xs font-medium text-slate-500">
-            © {new Date().getFullYear()} Hirato Agriculture. All rights reserved.
+            © {new Date().getFullYear()} Harito Agriculture. All rights reserved.
           </p>
           <div className="flex gap-6 text-xs font-medium text-slate-600">
              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

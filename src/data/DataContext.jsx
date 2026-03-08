@@ -1,44 +1,182 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const DataContext = createContext();
 
-const initialCategories = [
-  { id: 1, name: 'Pesticides', description: 'Protect your crops from pests.', image: '/category_pesticides.jpg' },
-  { id: 2, name: 'Fertilizers', description: 'Enhance crop growth and yield.', image: '/category_fertilizers.jpg' },
-  { id: 3, name: 'Seeds', description: 'High quality seeds for better harvest.', image: '/category_seeds.jpg' },
-  { id: 4, name: 'Agricultural Equipment', description: 'Modern farming machinery.', image: '/category_equipment.jpg' },
-];
-
-const initialProducts = [
-  { id: 1, name: 'Eco-Friendly Biopesticide', category: 'Pesticides', subcategory: 'Bio Pesticides', brand: 'AgroCare', description: 'Organic solution to keep insects away safely.', cropUsage: 'Wheat, Rice, Cotton', applicationMethod: 'Foliar Spray', image: 'https://images.unsplash.com/photo-1628189675276-80db61b2e673?auto=format&fit=crop&w=400&q=80' },
-  { id: 2, name: 'SuperGrow NPK', category: 'Fertilizers', subcategory: 'Chemical', brand: 'YieldBoost', description: 'Balanced nutrients for all stages of growth.', cropUsage: 'Vegetables, Fruits', applicationMethod: 'Soil Application', image: 'https://images.unsplash.com/photo-1592982537447-6f2a6a0c5c13?auto=format&fit=crop&w=400&q=80' },
-];
-
-const initialCarousel = [
-  { id: 1, title: 'FRESH HARVEST, DIRECT TO YOU', description: 'Experience the quality of farm-fresh produce picked at the peak of ripeness.', image: '/carousel-1.png' },
-  { id: 2, title: 'PRECISION CROP PROTECTION', description: 'Advanced solutions for healthy growth and maximum yield through modern agricultural techniques.', image: '/carousel-2.png' },
-];
-
-const initialGodowns = [
-  { id: 1, name: 'Central Silo Storage', location: 'San Antonio, TX', capacity: '5000 MT', storedProducts: 'Wheat, Corn Seeds, Fertilizer Bulk', contactDetails: '(210) 420-0890' },
-];
+const API_BASE_URL = 'http://localhost:5000/api';
 
 export const DataProvider = ({ children }) => {
-  const [categories, setCategories] = useState(initialCategories);
-  const [products, setProducts] = useState(initialProducts);
-  const [carousel, setCarousel] = useState(initialCarousel);
-  const [godowns, setGodowns] = useState(initialGodowns);
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [carousel, setCarousel] = useState([]);
+  const [godowns, setGodowns] = useState([
+    { id: 1, name: 'Central Silo Storage', location: 'San Antonio, TX', capacity: '5000 MT', storedProducts: 'Wheat, Corn Seeds, Fertilizer Bulk', contactDetails: '(210) 420-0890' },
+  ]);
+  const [loading, setLoading] = useState(true);
+
+  // Settings state
+  const [siteName, setSiteName] = useState('Harito Agriculture');
+  const [adminEmail, setAdminEmail] = useState('admin@harito.com');
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/categories`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Categories fetched:', data.length);
+        setCategories(data.map(cat => ({ ...cat, id: cat._id })));
+      } else {
+        console.error('Failed to fetch categories:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/products`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Products fetched:', data.length);
+        setProducts(data.map(prod => ({ ...prod, id: prod._id })));
+      } else {
+        console.error('Failed to fetch products:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  const fetchCarousel = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/carousel`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Carousel fetched:', data.length);
+        if (data.length === 0) {
+          // Seed defaults
+          await fetch(`${API_BASE_URL}/carousel/seed`, { method: 'POST' });
+          const seeded = await fetch(`${API_BASE_URL}/carousel`);
+          if (seeded.ok) {
+            const seedData = await seeded.json();
+            setCarousel(seedData.map(s => ({ ...s, id: s._id })));
+          }
+        } else {
+          setCarousel(data.map(s => ({ ...s, id: s._id })));
+        }
+      } else {
+        console.error('Failed to fetch carousel:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching carousel:', error);
+    }
+  };
+
+  // Carousel CRUD helpers
+  const addCarouselSlide = async (slideData) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/carousel`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(slideData)
+      });
+      if (response.ok) {
+        await fetchCarousel();
+        return true;
+      }
+    } catch (error) {
+      console.error('Error adding carousel slide:', error);
+    }
+    return false;
+  };
+
+  const updateCarouselSlide = async (id, slideData) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/carousel/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(slideData)
+      });
+      if (response.ok) {
+        await fetchCarousel();
+        return true;
+      }
+    } catch (error) {
+      console.error('Error updating carousel slide:', error);
+    }
+    return false;
+  };
+
+  const deleteCarouselSlide = async (id) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/carousel/${id}`, {
+        method: 'DELETE'
+      });
+      if (response.ok) {
+        await fetchCarousel();
+        return true;
+      }
+    } catch (error) {
+      console.error('Error deleting carousel slide:', error);
+    }
+    return false;
+  };
+
+  useEffect(() => {
+    const initData = async () => {
+      setLoading(true);
+      await Promise.all([fetchCategories(), fetchProducts(), fetchCarousel()]);
+      setLoading(false);
+    };
+    initData();
+  }, []);
 
   return (
     <DataContext.Provider value={{
       categories, setCategories,
       products, setProducts,
       carousel, setCarousel,
-      godowns, setGodowns
+      godowns, setGodowns,
+      fetchCategories,
+      fetchProducts,
+      fetchCarousel,
+      addCarouselSlide,
+      updateCarouselSlide,
+      deleteCarouselSlide,
+      siteName, setSiteName,
+      adminEmail, setAdminEmail,
+      loading
     }}>
       {children}
     </DataContext.Provider>
   );
 };
 
-export const useData = () => useContext(DataContext);
+export const useData = () => {
+  const context = useContext(DataContext);
+  if (!context) {
+    return {
+      categories: [],
+      products: [],
+      carousel: [],
+      godowns: [],
+      setCategories: () => {},
+      setProducts: () => {},
+      setCarousel: () => {},
+      setGodowns: () => {},
+      fetchCategories: () => {},
+      fetchProducts: () => {},
+      fetchCarousel: () => {},
+      addCarouselSlide: () => {},
+      updateCarouselSlide: () => {},
+      deleteCarouselSlide: () => {},
+      siteName: '',
+      setSiteName: () => {},
+      adminEmail: '',
+      setAdminEmail: () => {},
+      loading: false
+    };
+  }
+  return context;
+};
+

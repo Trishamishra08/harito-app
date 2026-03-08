@@ -13,6 +13,9 @@ import ManageProducts from './admin/pages/ManageProducts.jsx';
 import ManageCategories from './admin/pages/ManageCategories.jsx';
 import ManageGodown from './admin/pages/ManageGodown.jsx';
 import MediaUpload from './admin/pages/MediaUpload.jsx';
+import Settings from './admin/pages/Settings.jsx';
+import AdminLogin from './admin/pages/AdminLogin.jsx';
+import AdminRegister from './admin/pages/AdminRegister.jsx';
 
 function App() {
   return (
@@ -26,13 +29,16 @@ function App() {
           </Route>
 
           {/* Admin Dashboard */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/register" element={<AdminRegister />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="carousel" element={<ManageCarousel />} />
             <Route path="products" element={<ManageProducts />} />
             <Route path="categories" element={<ManageCategories />} />
             <Route path="godown" element={<ManageGodown />} />
-            <Route path="media" element={<MediaUpload />} />
+            <Route path="assets" element={<MediaUpload />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
         </Routes>
       </Router>
