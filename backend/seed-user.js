@@ -10,19 +10,20 @@ const seedUser = async () => {
     await connectDB();
     
     // Check if user already exists
-    const existingUser = await User.findOne({ phone: '6260491554' });
+    const existingUser = await User.findOne({ email: 'trishamishra@gmail.com' });
     
     if (!existingUser) {
       const user = new User({
-        name: 'Harito Admin',
-        email: 'admin@harito.com',
+        name: 'Trisha Mishra',
+        email: 'trishamishra@gmail.com',
         phone: '6260491554',
+        password: 'admin',
         role: 'admin'
       });
       await user.save();
-      console.log('✅ Admin user 6260491554 created successfully!');
+      console.log('✅ Admin user trishamishra@gmail.com created successfully!');
     } else {
-      console.log('ℹ️ Admin user 6260491554 already exists.');
+      console.log('ℹ️ Admin user trishamishra@gmail.com already exists.');
     }
     
     process.exit();

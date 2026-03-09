@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useData } from '../../data/DataContext';
-import { Search, Filter, Layers, Info, ChevronRight, LayoutGrid, List } from 'lucide-react';
+import { Search, Filter, Layers, Info, ChevronRight, LayoutGrid, List, Leaf, ShieldCheck, Zap } from 'lucide-react';
 
 const ProductsPage = () => {
   const { products, categories, getImageUrl } = useData();
@@ -26,24 +26,41 @@ const ProductsPage = () => {
   return (
     <div className="bg-slate-50 min-h-screen pb-24">
       {/* Page Header Segment */}
-      <div className="bg-slate-900 pt-40 md:pt-52 pb-12 md:pb-16 text-white text-center shadow-xl relative overflow-hidden mb-8 border-b-4 border-green-600">
-        <div className="max-w-7xl mx-auto px-4 relative z-10 space-y-1">
-          <span className="section-subtitle opacity-50">Operational Archive</span>
-          <h1 className="text-3xl md:text-5xl font-black tracking-tighter uppercase leading-none">Catalog Assets</h1>
-          <p className="text-[9px] md:text-[10px] text-slate-400 max-w-xl mx-auto font-black uppercase tracking-[0.3em] pt-3 opacity-60">High-Precision Intelligence for Modern Agricultural Excellence.</p>
+      <div className="bg-slate-900 pt-40 md:pt-52 pb-12 md:pb-20 text-white text-center shadow-xl relative overflow-hidden border-b-4 border-green-600">
+        <div className="max-w-7xl mx-auto px-4 relative z-10 space-y-2">
+          <span className="text-green-500 font-black uppercase tracking-[0.4em] text-[10px] opacity-80">Scientific Crop Protection</span>
+          <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase italic leading-none">Crop Solutions</h1>
+          <p className="text-[10px] md:text-xs text-slate-400 max-w-2xl mx-auto font-medium uppercase tracking-widest pt-4 opacity-70 leading-relaxed">
+            Harito Crop Science Private Limited delivers ISO 9001:2015 certified fertilizers and pesticides engineered to optimize nutrient uptake and maximize farm profitability.
+          </p>
+          
+          {/* Benefits Icons */}
+          <div className="flex flex-wrap justify-center gap-6 mt-10">
+             <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-green-600/20 flex items-center justify-center text-green-500 border border-green-500/20"><Leaf size={14} /></div>
+                <span className="text-[9px] font-black uppercase tracking-widest">High Yield</span>
+             </div>
+             <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-green-600/20 flex items-center justify-center text-green-500 border border-green-500/20"><ShieldCheck size={14} /></div>
+                <span className="text-[9px] font-black uppercase tracking-widest">Eco-Safe</span>
+             </div>
+             <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-green-600/20 flex items-center justify-center text-green-500 border border-green-500/20"><Zap size={14} /></div>
+                <span className="text-[9px] font-black uppercase tracking-widest">Fast Action</span>
+             </div>
+          </div>
         </div>
-        {/* Dynamic decorative element */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-800 -skew-x-12 translate-x-12 border-l border-white/5"></div>
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-800 -skew-x-12 translate-x-12 border-l border-white/5 pointer-events-none"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4">
         {/* Unified Search & Toolbar */}
-        <div className="bg-white p-3 rounded-[1.5rem] shadow-sm border border-slate-100 mb-8 flex flex-col lg:flex-row gap-3 items-center">
+        <div className="mt-12 bg-white p-3 rounded-[1.5rem] shadow-sm border border-slate-100 mb-8 flex flex-col lg:flex-row gap-3 items-center">
           <div className="relative flex-grow w-full">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
             <input 
               type="text" 
-              placeholder="LOCATE ASSETS OR MANUFACTURERS..." 
+              placeholder="SEARCH CROP SOLUTIONS..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full bg-slate-50 border-none rounded-xl py-3 pl-11 pr-6 focus:ring-2 focus:ring-green-500/50 outline-none font-black text-[9px] text-slate-900 uppercase tracking-widest"
@@ -55,7 +72,7 @@ const ProductsPage = () => {
                <button className="p-2.5 rounded-lg text-slate-400 hover:text-slate-600 transition-colors"><List size={14} /></button>
              </div>
              <button className="bg-slate-900 text-white px-6 py-3 rounded-xl text-[9px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl hover:bg-green-600 transition-all active:scale-95">
-               <Filter size={12} /> FILTER ENGINE
+               <Filter size={12} /> FILTER CATALOG
              </button>
           </div>
         </div>
@@ -96,7 +113,7 @@ const ProductsPage = () => {
                      <button 
                        key={sub} 
                        onClick={() => setActiveSub(sub)}
-                       className={`w-full text-left px-4 py-2.5 rounded-lg text-[8px] font-black uppercase tracking-[0.2em] flex items-center justify-between transition-colors ${activeSub === sub ? 'text-green-600 bg-green-50' : 'text-slate-400 hover:text-slate-900'}`}
+                       className={`w-full text-left px-4 py-2.5 rounded-lg text-[8px] font-black uppercase tracking-2em flex items-center justify-between transition-colors ${activeSub === sub ? 'text-green-600 bg-green-50' : 'text-slate-400 hover:text-slate-900'}`}
                      >
                        {sub}
                        <ChevronRight size={10} className={`transition-transform ${activeSub === sub ? 'translate-x-1' : 'opacity-0'}`} />
@@ -112,7 +129,7 @@ const ProductsPage = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredProducts.map(product => (
                 <div key={product.id} className="premium-card group flex flex-col">
-                  <div className="relative h-52 overflow-hidden m-3 rounded-[1.2rem] bg-slate-100 border border-slate-50">
+                  <div className="relative h-52 overflow-hidden m-3 rounded-[1.2rem] bg-slate-100 border border-slate-100">
                     <img src={getImageUrl(product.image)} alt={product.name} className="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
                     <div className="absolute top-2.5 right-2.5 bg-slate-900 text-white px-2 py-0.5 rounded-full text-[7px] font-black uppercase tracking-[0.2em] border border-white/5 shadow-xl">{product.category}</div>
                   </div>
@@ -126,7 +143,7 @@ const ProductsPage = () => {
                        <span className="bg-slate-50 text-slate-500 px-2 py-1 rounded-md text-[7px] font-black uppercase tracking-tighter flex items-center gap-1 border border-slate-100 transition-colors group-hover:border-green-100"><Layers size={9} className="text-green-500" /> {product.subcategory}</span>
                     </div>
                     <button className="w-full bg-slate-50 group-hover:bg-slate-900 group-hover:text-white text-slate-400 py-3 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] mt-4 transition-all flex items-center justify-center gap-2 border border-slate-100 group-hover:border-slate-900 shadow-sm group-hover:shadow-green-500/10 active:scale-95">
-                       INTEL CORE <Info size={12} />
+                       SPECIFICATIONS <Info size={12} />
                     </button>
                   </div>
                 </div>
@@ -135,7 +152,7 @@ const ProductsPage = () => {
             {filteredProducts.length === 0 && (
                <div className="text-center py-20 bg-white rounded-[2.5rem] border border-slate-100 animate-fade-in shadow-sm">
                   <Search size={32} className="mx-auto text-slate-200 mb-4" />
-                  <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em]">NO ASSETS MATCHING QUERY</p>
+                  <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em]">NO MATCHING SOLUTIONS FOUND</p>
                </div>
             )}
           </main>

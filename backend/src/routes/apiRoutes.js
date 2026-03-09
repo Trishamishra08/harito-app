@@ -39,6 +39,7 @@ router.post('/carousel/seed', carouselController.seedCarousel);
  * Auth Routes
  */
 router.post('/auth/register', authController.register);
+router.post('/auth/login', authController.login);
 router.post('/auth/send-otp', authController.sendOtp);
 router.post('/auth/verify-otp', authController.verifyOtp);
 

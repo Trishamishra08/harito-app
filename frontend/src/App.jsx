@@ -4,6 +4,10 @@ import { DataProvider } from './data/DataContext.jsx';
 import UserLayout from './user/UserLayout.jsx';
 import HomePage from './user/pages/HomePage.jsx';
 import ProductsPage from './user/pages/ProductsPage.jsx';
+import AboutPage from './user/pages/AboutPage.jsx';
+import CategoriesPage from './user/pages/CategoriesPage.jsx';
+import GodownPage from './user/pages/GodownPage.jsx';
+import ContactPage from './user/pages/ContactPage.jsx';
 
 // Admin Imports
 import AdminLayout from './admin/AdminLayout.jsx';
@@ -26,6 +30,10 @@ function App() {
           <Route path="/" element={<UserLayout />}>
             <Route index element={<HomePage />} />
             <Route path="products" element={<ProductsPage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="categories" element={<CategoriesPage />} />
+            <Route path="godown" element={<GodownPage />} />
+            <Route path="contact" element={<ContactPage />} />
           </Route>
 
           {/* Admin Dashboard */}

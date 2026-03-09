@@ -7,15 +7,49 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
 export const DataProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
-  const [carousel, setCarousel] = useState([]);
+  const [carousel, setCarousel] = useState([
+    {
+      id: 1,
+      title: "SMART AGRICULTURE",
+      subtitle: "NURTURING NATURE WITH PRECISION SCIENCE",
+      description: "ISO 9001:2015 Certified manufacturer providing high-yield solutions for the modern farmer.",
+      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80",
+      link: "/products"
+    },
+    {
+      id: 2,
+      title: "ISO 9001:2015 CERTIFIED",
+      subtitle: "QUALITY YOU CAN TRUST",
+      description: "High-grade chemical fertilizers and pesticides manufactured with international safety standards.",
+      image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1600&q=80",
+      link: "/about"
+    },
+    {
+      id: 3,
+      title: "BAREILLY PRECISION",
+      subtitle: "EFFICIENT SUPPLY CHAIN SOLUTIONS",
+      description: "Safe storage and nationwide distribution of agricultural chemicals from our Uttar Pradesh facility.",
+      image: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1600&q=80",
+      link: "/godown"
+    }
+  ]);
   const [godowns, setGodowns] = useState([
-    { id: 1, name: 'Central Silo Storage', location: 'San Antonio, TX', capacity: '5000 MT', storedProducts: 'Wheat, Corn Seeds, Fertilizer Bulk', contactDetails: '(210) 420-0890' },
+    { id: 1, name: 'Harito Central Godown', location: 'Bareilly, Uttar Pradesh', capacity: '10,000 MT', storedProducts: 'Fertilizers, Pesticides, Growth Promoters', contactDetails: '+91 62604 91554' },
   ]);
   const [loading, setLoading] = useState(true);
 
   // Settings state
-  const [siteName, setSiteName] = useState('Harito Agriculture');
-  const [adminEmail, setAdminEmail] = useState('admin@harito.com');
+  const [siteName, setSiteName] = useState('Harito Crop Science Private Limited');
+  const [adminEmail, setAdminEmail] = useState('trishamishra@gmail.com');
+  const [companyInfo, setCompanyInfo] = useState({
+    fullName: 'Harito Crop Science Private Limited',
+    certification: 'ISO 9001:2015 Certified Manufacturer and Trader',
+    location: 'Bareilly, Uttar Pradesh, India',
+    address: 'Durga Nagar Back in Megha City, Near Mandir & Suresh Sharma Nagar, Mahanagar, Bareilly, Uttar Pradesh – 243006, India',
+    tagline: 'Empowering Farmers with Quality Agricultural Solutions',
+    mission: 'To provide high-quality fertilizers and pesticides that ensure sustainable agriculture and healthy crops.',
+    vision: 'To be the most trusted partner for farmers in India through innovative crop protection solutions.'
+  });
 
   const fetchCategories = async () => {
     try {
@@ -133,9 +167,21 @@ export const DataProvider = ({ children }) => {
 
     const getImageUrl = (path) => {
       if (!path) return '';
+      // 1. Absolute external URLs
       if (path.startsWith('http')) return path;
-      if (path.startsWith('/images')) return path; // Static public images
-      return `${API_BASE_URL.replace('/api', '')}${path}`;
+      
+      // 2. Already prefixed with /images/ (Frontend Public)
+      if (path.startsWith('/images')) return path;
+      
+      // 3. Backend uploads (served from backend)
+      if (path.startsWith('/uploads')) {
+        return `${API_BASE_URL.replace('/api', '')}${path}`;
+      }
+      
+      // 4. Default fallback: assume it is a frontend public asset in /images/
+      // This handles database paths like "/rizo.png" or "rider-plus.png"
+      const cleanPath = path.startsWith('/') ? path : `/${path}`;
+      return `/images${cleanPath}`;
     };
 
     return (
@@ -153,6 +199,7 @@ export const DataProvider = ({ children }) => {
       getImageUrl,
       siteName, setSiteName,
       adminEmail, setAdminEmail,
+      companyInfo, setCompanyInfo,
       loading
     }}>
       {children}

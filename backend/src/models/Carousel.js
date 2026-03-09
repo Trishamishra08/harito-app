@@ -6,6 +6,10 @@ const carouselSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  subtitle: {
+    type: String,
+    default: ''
+  },
   description: {
     type: String,
     default: ''

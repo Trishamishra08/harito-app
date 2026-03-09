@@ -80,7 +80,7 @@ const getCategoryIcon = (name) => {
 };
 
 const AdminDashboard = () => {
-  const { products, categories, godowns, carousel } = useData();
+  const { products, categories, godowns, carousel, getImageUrl } = useData();
   const navigate = useNavigate();
 
   const mockSparkline = [
@@ -134,7 +134,7 @@ const AdminDashboard = () => {
                       <td className="py-2 px-2">
                          <div className="flex items-center gap-2">
                            <div className="w-7 h-7 rounded-none bg-white border border-teal-900/5 overflow-hidden flex items-center justify-center p-1 group-hover:scale-105 transition-transform">
-                              <img src={product.image} alt="" className="h-full object-contain" />
+                              <img src={getImageUrl(product.image)} alt="" className="h-full object-contain" />
                            </div>
                            <span className="font-bold text-[11px] text-slate-700 whitespace-pre-line leading-tight uppercase tracking-widest">{product.name}</span>
                          </div>

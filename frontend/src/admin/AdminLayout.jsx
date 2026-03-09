@@ -101,24 +101,19 @@ const AdminLayout = () => {
         animate={{ width: isOpen ? 260 : 88 }}
         className={`bg-[#0F172A] fixed lg:relative z-50 h-screen flex flex-col border-none`}
       >
-        {/* Profile Header */}
-        <div className={`p-6 transition-all duration-300 border-b border-white/5 mb-4`}>
-           <div className={`flex items-center gap-3 ${!isOpen && 'justify-center'}`}>
-              <div className="w-12 h-12 rounded-none overflow-hidden border border-white/10 shrink-0">
-                 <img src={`https://ui-avatars.com/api/?name=${adminUser?.name || 'Admin'}&background=1E5D57&color=fff`} alt="User" className="w-full h-full object-cover" />
-              </div>
-              {isOpen && (
-                 <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="overflow-hidden"
-                >
-                   <p className="text-white font-black text-sm leading-tight truncate uppercase italic tracking-tighter">{adminUser?.name || 'SUPER ADMIN'}</p>
-                   <p className="text-teal-400 text-[10px] font-black uppercase tracking-widest mt-0.5 whitespace-nowrap opacity-80 italic">{adminUser?.phone || '★ HARITO MANAGER'}</p>
-                </motion.div>
-              )}
+        {/* Logo Section */}
+        <div className={`p-6 flex items-center gap-3 border-b border-white/5 ${!isOpen && 'justify-center'}`}>
+           <div className="w-10 h-10 flex items-center justify-center bg-white rounded-xl shadow-sm border border-white/10 shrink-0 p-1.5">
+              <img src="/images/logo.png" alt="Harito" className="w-full h-full object-contain" />
            </div>
+           {isOpen && (
+             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+               <h1 className="text-xl font-black text-white tracking-tighter italic">Harito</h1>
+               <p className="text-[8px] text-teal-400 font-black uppercase tracking-[0.2em] leading-none opacity-60">Admin Portal</p>
+             </motion.div>
+           )}
         </div>
+
 
         {/* Navigation */}
         <nav className="flex-grow space-y-2 overflow-y-auto no-scrollbar">
@@ -135,9 +130,9 @@ const AdminLayout = () => {
         <div className="p-4 border-t border-white/5 mt-auto">
           <button 
             className={`w-full flex items-center ${isOpen ? 'px-4 justify-start' : 'justify-center'} py-3 rounded-none text-slate-400 hover:text-white hover:bg-white/5 transition-all group gap-3`}
-            onClick={handleLogout}
+            onClick={() => navigate('/')}
           >
-            <LogOut size={20} />
+            <LogOut size={20} className="rotate-180" />
             {isOpen && (
               <span className="font-medium text-[14px] tracking-wide">Back to Site</span>
             )}

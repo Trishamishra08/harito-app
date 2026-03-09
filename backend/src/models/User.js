@@ -7,24 +7,24 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: false,
+    required: true,
+    unique: true,
     trim: true,
     lowercase: true,
   },
   phone: {
     type: String,
-    required: true,
-    unique: true,
+    required: false,
     trim: true,
+  },
+  password: {
+    type: String,
+    required: true,
   },
   role: {
     type: String,
     enum: ['user', 'admin'],
     default: 'admin',
-  },
-  otp: {
-    type: String,
-    required: false,
   },
 }, {
   timestamps: true,

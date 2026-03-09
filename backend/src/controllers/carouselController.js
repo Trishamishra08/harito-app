@@ -13,8 +13,8 @@ export const getCarouselSlides = async (req, res) => {
 // Create a new carousel slide
 export const createCarouselSlide = async (req, res) => {
   try {
-    const { title, description, image } = req.body;
-    const newSlide = new Carousel({ title, description, image });
+    const { title, subtitle, description, image } = req.body;
+    const newSlide = new Carousel({ title, subtitle, description, image });
     const savedSlide = await newSlide.save();
     res.status(201).json(savedSlide);
   } catch (error) {
@@ -26,11 +26,11 @@ export const createCarouselSlide = async (req, res) => {
 export const updateCarouselSlide = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, image } = req.body;
+    const { title, subtitle, description, image } = req.body;
     
     const updatedSlide = await Carousel.findByIdAndUpdate(
       id, 
-      { title, description, image },
+      { title, subtitle, description, image },
       { new: true, runValidators: true }
     );
     
@@ -67,19 +67,22 @@ export const seedCarousel = async (req, res) => {
     if (count === 0) {
       const defaults = [
         {
-          title: 'ADVANCED CROP PROTECTION',
-          description: 'Shield your harvest with our premium range of insecticides and pesticides engineered for maximum effectiveness.',
-          image: 'https://images.unsplash.com/photo-1632923057890-4e3a3db1a3e0?w=1920&q=80'
+          title: 'SMART AGRICULTURE',
+          subtitle: 'NURTURING NATURE WITH PRECISION SCIENCE',
+          description: 'ISO 9001:2015 Certified manufacturer providing high-yield solutions for the modern farmer.',
+          image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80'
         },
         {
-          title: 'PRECISION PEST MANAGEMENT',
-          description: 'Targeted solutions for modern agriculture — protect your crops with science-backed formulations.',
-          image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=1920&q=80'
+          title: 'ISO 9001:2015 CERTIFIED',
+          subtitle: 'QUALITY YOU CAN TRUST',
+          description: 'High-grade chemical fertilizers and pesticides manufactured with international safety standards.',
+          image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1600&q=80'
         },
         {
-          title: 'HEALTHY FIELDS, HIGHER YIELDS',
-          description: 'Empowering farmers with eco-friendly fertilizers and cutting-edge seed technology for a greener tomorrow.',
-          image: 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1920&q=80'
+          title: 'BAREILLY PRECISION',
+          subtitle: 'EFFICIENT SUPPLY CHAIN SOLUTIONS',
+          description: 'Safe storage and nationwide distribution of agricultural chemicals from our Uttar Pradesh facility.',
+          image: 'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1600&q=80'
         }
       ];
       await Carousel.insertMany(defaults);

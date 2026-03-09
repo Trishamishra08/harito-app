@@ -40,11 +40,10 @@ const Categories = () => {
       </div>
 
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
-        <div className="mb-14">
-          <h2 className="style-font text-4xl md:text-5xl font-black text-[#1b3d2c] italic tracking-tight drop-shadow-sm">
-            Categories
+        <div className="mb-10 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#2A3324] font-inter">
+            Explore Our Categories
           </h2>
-          <div className="w-12 h-1 bg-[#1E5D57]/30 mx-auto mt-2"></div>
         </div>
 
         <div className="relative group/scroll">
@@ -65,29 +64,30 @@ const Categories = () => {
  
           <div 
             ref={scrollRef}
-            className="flex flex-nowrap overflow-x-auto no-scrollbar gap-x-8 md:gap-x-12 px-2 md:px-0 pb-10 scroll-smooth items-start justify-start md:justify-center"
+            className="flex flex-nowrap overflow-x-auto no-scrollbar gap-x-5 md:gap-x-6 px-10 md:px-20 pb-10 scroll-smooth items-stretch justify-start"
             style={{ WebkitOverflowScrolling: 'touch' }}
           >
             {categories.map((item) => (
               <div 
                 key={item.id} 
                 id={`category-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-                className="group flex flex-col items-center cursor-pointer shrink-0 transition-all duration-500 w-[140px] md:w-[220px]"
+                className="group flex flex-col cursor-pointer shrink-0 transition-all duration-500 w-[140px] md:w-[190px] bg-white rounded-xl shadow-lg border border-white/20 overflow-hidden"
               >
-                <div className="relative w-32 h-32 md:w-52 md:h-52 rounded-full overflow-hidden shadow-2xl group-hover:shadow-green-900/20 group-hover:scale-105 transition-all duration-500 ring-0 hover:ring-8 hover:ring-white/10 border-4 border-white">
+                {/* Header at Top */}
+                <div className="bg-white py-3 md:py-4 px-2 border-b border-slate-50 text-center overflow-hidden flex items-center justify-center min-h-[50px] md:min-h-[60px]">
+                  <h3 className="text-[9px] md:text-[11px] font-bold text-[#2A3324] font-inter uppercase tracking-wide group-hover:text-green-700 transition-colors whitespace-nowrap px-1">
+                    {item.name}
+                  </h3>
+                </div>
+
+                {/* Image at Bottom */}
+                <div className="relative aspect-[4/3] md:aspect-square overflow-hidden bg-white">
                   <img 
                     src={getImageUrl(item.image)} 
                     alt={item.name} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                   />
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-transparent to-black/10 group-hover:to-black/20 transition-all"></div>
-                </div>
-
-                <div className="mt-6">
-                  <h3 className="text-[10px] md:text-[13px] font-black text-slate-800 uppercase tracking-[0.2em] leading-tight group-hover:text-[#1E5D57] transition-colors">
-                    {item.name}
-                  </h3>
-                  <div className="w-6 group-hover:w-full h-1 bg-[#1E5D57] mx-auto transition-all duration-500 mt-2 opacity-30"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
               </div>
             ))}

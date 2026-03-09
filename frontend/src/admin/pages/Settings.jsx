@@ -120,7 +120,7 @@ const Settings = () => {
                 />
              </div>
              <div className="space-y-1.5">
-                <label className="text-[8px] font-bold text-slate-400 uppercase tracking-widest ml-1">Admin Email</label>
+                <label className="text-[8px] font-bold text-slate-400 uppercase tracking-widest ml-1">Edit Email</label>
                 <input 
                   type="email" 
                   value={adminEmail}
@@ -157,13 +157,13 @@ const Settings = () => {
                         />
                      </div>
                      <div className="space-y-1">
-                        <label className="text-[8px] font-black text-slate-400 uppercase tracking-widest ml-1">Contact Phone</label>
+                        <label className="text-[8px] font-black text-slate-400 uppercase tracking-widest ml-1">Change Password</label>
                         <input 
-                           type="text" 
-                           value={adminUser?.phone || ''} 
-                           onChange={(e) => handleUserChange('phone', e.target.value)}
+                           type="password" 
+                           value={adminUser?.password || ''} 
+                           onChange={(e) => handleUserChange('password', e.target.value)}
                            className="w-full bg-white border border-teal-900/5 rounded-none py-2 px-3 focus:ring-4 focus:ring-teal-500/5 outline-none text-slate-700 transition-all font-bold text-[10px] tracking-widest italic"
-                           placeholder="PHONE NUMBER"
+                           placeholder="••••••••"
                         />
                      </div>
                   </div>

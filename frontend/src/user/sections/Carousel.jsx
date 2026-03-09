@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useData } from '../../data/DataContext';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Search, MapPin, Globe } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Carousel = () => {
   const { carousel, getImageUrl } = useData();
@@ -22,69 +24,65 @@ const Carousel = () => {
   if (!carousel || carousel.length === 0) return null;
 
   return (
-    <div id="home" className="relative min-h-[85vh] md:min-h-screen w-full overflow-hidden group">
-      {carousel.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${
-            index === currentIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-110 pointer-events-none'
-          }`}
-        >
-          {/* Background Image */}
-          <div className="absolute inset-0 bg-slate-900">
-            <img
-              src={getImageUrl(slide.image)}
-              alt=""
-              className="h-full w-full object-cover grayscale-[20%]"
-            />
-            {/* Dark Overlay with Top Gradient to protect navbar */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/50" />
-          </div>
+    <div id="home" className="relative w-full overflow-hidden">
+      <div className="relative h-screen w-full overflow-hidden group">
+        <AnimatePresence mode="wait">
+          {carousel.map((slide, index) => index === currentIndex && (
+            <motion.div
+              key={slide.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+              className="absolute inset-0"
+            >
+              {/* Background Image */}
+              <div className="absolute inset-0">
+                <img
+                  src={getImageUrl(slide.image)}
+                  alt={slide.title}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40" />
+              </div>
 
-          {/* Content Container */}
-          <div className="relative h-full flex flex-col items-center justify-center text-center px-4 pt-48 pb-32">
-            <div className="max-w-4xl space-y-6 md:space-y-8 animate-fade-in">
-              <h1 className="text-3xl md:text-5xl lg:text-7xl font-extrabold italic text-white leading-[1.2] tracking-tighter drop-shadow-2xl">
-                <span className="text-[#22c55e] block mb-2 drop-shadow-[0_2px_15px_rgba(34,197,94,0.3)]">Smart Solutions for</span>
-                <span className="block text-white/95">Healthy Crops</span>
-              </h1>
-            </div>
-          </div>
+              {/* Minimalist Content Container - Realigned and Resized */}
+              <div className="relative h-full flex flex-col justify-center items-start px-6 md:px-24 max-w-7xl mx-auto">
+                 <motion.h1 
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-3xl md:text-5xl font-extrabold text-white leading-tight tracking-tight drop-shadow-2xl max-w-md mb-10 capitalize"
+                 >
+                    {slide.title || slide.subtitle}
+                 </motion.h1>
 
-          {/* Wavy Mask Bottom Effect */}
-          <div className="absolute bottom-0 left-0 w-full h-24 md:h-32 bg-[#d0e6d4] wavy-bottom z-10" />
+                 <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                 >
+                    <Link to={slide.link || '/products'} className="bg-green-600 hover:bg-white hover:text-green-800 text-white transition-all px-6 py-2.5 rounded-full font-bold text-[9px] uppercase tracking-[0.2em] shadow-xl flex items-center gap-3 group/btn">
+                       EXPLORE CATALOG <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                    </Link>
+                 </motion.div>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+
+        {/* Minimalist Navigation Dots */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+           {carousel.map((_, i) => (
+             <button 
+               key={i} 
+               onClick={() => setCurrentIndex(i)}
+               className={`h-1.5 transition-all duration-500 rounded-full ${i === currentIndex ? 'w-12 bg-green-500' : 'w-4 bg-white/30 hover:bg-white/50'}`}
+             />
+           ))}
         </div>
-      ))}
-
-      {/* Navigation Controls */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-[#1E5D57] text-white rounded-full transition-all opacity-0 group-hover:opacity-100 backdrop-blur-sm"
-      >
-        <ChevronLeft size={24} />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-[#1E5D57] text-white rounded-full transition-all opacity-0 group-hover:opacity-100 backdrop-blur-sm"
-      >
-        <ChevronRight size={24} />
-      </button>
-
-      {/* Dots Indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {carousel.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`h-1.5 transition-all duration-500 rounded-full ${
-              index === currentIndex ? 'w-8 bg-[#1E5D57]' : 'w-2 bg-white/30 hover:bg-white/60'
-            }`}
-          />
-        ))}
       </div>
     </div>
   );
 };
 
 export default Carousel;
-
