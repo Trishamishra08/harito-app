@@ -9,7 +9,7 @@ export const DataProvider = ({ children }) => {
     { id: '1', name: 'Seeds', image: 'category_seeds.jpg' },
     { id: '2', name: 'Fertilizers', image: 'category_fertilizers.jpg' },
     { id: '3', name: 'Pesticides', image: 'category_pesticides.jpg' },
-    { id: '4', name: 'Equipment', image: 'category_equipment.jpg' }
+    { id: '4', name: 'Agriculture Equipment', image: 'category_equipment.jpg' }
   ]);
   const [products, setProducts] = useState([
     { id: '1', name: 'Rizo Plus', image: 'rizo.png', description: 'Advanced bio-fertilizer for enhanced root growth.' },
@@ -67,9 +67,7 @@ export const DataProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         console.log('Categories fetched:', data.length);
-        if (data.length > 0) {
-          setCategories(data.map(cat => ({ ...cat, id: cat._id })));
-        }
+        setCategories(data.map(cat => ({ ...cat, id: cat._id })));
       } else {
         console.error('Failed to fetch categories:', response.status);
       }
@@ -84,9 +82,7 @@ export const DataProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         console.log('Products fetched:', data.length);
-        if (data.length > 0) {
-          setProducts(data.map(prod => ({ ...prod, id: prod._id })));
-        }
+        setProducts(data.map(prod => ({ ...prod, id: prod._id })));
       } else {
         console.error('Failed to fetch products:', response.status);
       }
@@ -182,6 +178,12 @@ export const DataProvider = ({ children }) => {
     const getImageUrl = (path) => {
       if (!path) return '';
       
+      // Override legacy Unsplash seeds to local images
+      if (path.includes('unsplash.com')) {
+        if (path.includes('1500382017468') || path.includes('1523348837708')) return '/images/carousel-1.png';
+        if (path.includes('1464226184884')) return '/images/carousel-2.png';
+      }
+
       // 1. Absolute external URLs
       if (path.startsWith('http')) return path;
       

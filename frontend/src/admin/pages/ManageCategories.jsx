@@ -15,6 +15,7 @@ const CategoryManagement = () => {
       case 'pesticides': return <FlaskConical {...props} className={`${props.className} text-teal-600 group-hover:text-teal-700`} />;
       case 'fertilizers': return <Microscope {...props} className={`${props.className} text-teal-600 group-hover:text-teal-700`} />;
       case 'seeds': return <Leaf {...props} className={`${props.className} text-teal-600 group-hover:text-teal-700`} />;
+      case 'agriculture equipment': return <Tractor {...props} className={`${props.className} text-teal-600 group-hover:text-teal-700`} />;
       case 'agricultural equipment': return <Tractor {...props} className={`${props.className} text-teal-600 group-hover:text-teal-700`} />;
       default: return <LayoutGrid {...props} className={`${props.className} text-teal-600 group-hover:text-teal-700`} />;
     }
