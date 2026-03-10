@@ -20,7 +20,7 @@ const GodownPage = () => {
               className="mt-2 md:mt-4"
             >
               <img 
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" 
+                src="/images/storage_facility_agri.png" 
                 alt="Storage Facility" 
                 className="w-full h-[200px] md:h-[280px] object-cover rounded-none grayscale group-hover:grayscale-0 transition-all duration-700 shadow-2xl border border-white/5"
               />

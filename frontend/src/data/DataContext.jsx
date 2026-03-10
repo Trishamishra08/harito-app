@@ -23,7 +23,7 @@ export const DataProvider = ({ children }) => {
       title: "SMART AGRICULTURE",
       subtitle: "NURTURING NATURE WITH PRECISION SCIENCE",
       description: "ISO 9001:2015 Certified manufacturer providing high-yield solutions for the modern farmer.",
-      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80",
+      image: "carousel-1.png",
       link: "/products"
     },
     {
@@ -31,7 +31,7 @@ export const DataProvider = ({ children }) => {
       title: "ISO 9001:2015 CERTIFIED",
       subtitle: "QUALITY YOU CAN TRUST",
       description: "High-grade chemical fertilizers and pesticides manufactured with international safety standards.",
-      image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1600&q=80",
+      image: "carousel-2.png",
       link: "/about"
     },
     {
@@ -39,7 +39,7 @@ export const DataProvider = ({ children }) => {
       title: "BAREILLY PRECISION",
       subtitle: "EFFICIENT SUPPLY CHAIN SOLUTIONS",
       description: "Safe storage and nationwide distribution of agricultural chemicals from our Uttar Pradesh facility.",
-      image: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1600&q=80",
+      image: "carousel-1.png",
       link: "/godown"
     }
   ]);
@@ -182,20 +182,24 @@ export const DataProvider = ({ children }) => {
     const getImageUrl = (path) => {
       if (!path) return '';
       
-      // 1. Absolute external URLs (like Unsplash)
+      // 1. Absolute external URLs
       if (path.startsWith('http')) return path;
       
-      // 2. Already prefixed with /images/ (Frontend Public)
+      // 2. Handle paths that already start with /images/ or images/
       if (path.startsWith('/images/')) return path;
+      if (path.startsWith('images/')) return `/${path}`;
       
-      // 3. Backend uploads (served from backend)
+      // 3. Handle paths starting with public/images/
+      if (path.startsWith('public/images/')) return `/${path.replace('public/', '')}`;
+      if (path.startsWith('/public/images/')) return path.replace('/public/', '/');
+      
+      // 4. Backend uploads
       if (path.startsWith('/uploads')) {
         const base = API_BASE_URL.replace('/api', '');
         return `${base}${path}`;
       }
       
-      // 4. Default fallback: assume it is a frontend public asset in /images/
-      // This handles paths like "logo.png" or "/rizo.png"
+      // 5. Default fallback: assume it is a filename in /images/
       const cleanPath = path.startsWith('/') ? path : `/${path}`;
       return `/images${cleanPath}`;
     };

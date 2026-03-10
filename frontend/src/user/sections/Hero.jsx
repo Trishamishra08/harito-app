@@ -56,7 +56,7 @@ const Hero = () => {
           <div className="flex-1 relative w-full max-w-lg lg:max-w-none">
             <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border-8 border-white aspect-[4/3] group">
               <img 
-                src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1200&q=80" 
+                src="/images/agri-bg-products.png" 
                 alt="Healthy Crop Science" 
                 className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-110"
               />
