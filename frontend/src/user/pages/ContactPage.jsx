@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useData } from '../../data/DataContext';
-import { Mail, Phone, MapPin, Send, MessageSquare, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, ShieldCheck, ArrowRight, ChevronRight, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const ContactPage = () => {
@@ -21,162 +21,195 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="pt-24 pb-16 bg-white min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
-        <div className="text-center mb-16 underline-offset-8">
-          <motion.span 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-green-600 font-bold uppercase tracking-widest text-xs mb-4 block"
-          >
-            Get In Touch
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-black text-slate-900 italic tracking-tighter"
-          >
-            Contact Harito Team
-          </motion.h1>
-          <p className="text-slate-500 text-sm mt-4 uppercase tracking-[0.2em] font-medium max-w-2xl mx-auto">
-            Our experts are ready to assist you with agricultural queries and high-quality product support.
-          </p>
+    <div className="bg-[#f8faf8] min-h-screen pb-24 font-inter">
+      {/* Page Header Segment - Dark Combo (Matched with other pages) */}
+      <div className="bg-[#1e3932] pt-20 md:pt-24 pb-10 md:pb-14 text-white text-center relative overflow-hidden">
+        {/* Decorative elements for dark background */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] bg-[#00704A]/20 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 relative z-10 flex flex-col items-center justify-center text-center">
+           <div className="w-full max-w-2xl mx-auto space-y-3">
+              <motion.span 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-[#d4e9e2] font-black uppercase tracking-[0.3em] text-[10px]"
+              >
+                 Get in Touch
+              </motion.span>
+              <motion.h1 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white font-inter uppercase"
+              >
+                 Contact Harito Team
+              </motion.h1>
+              <p className="text-[#d4e9e2]/60 text-[10px] md:text-xs uppercase tracking-[0.25em] font-medium max-w-lg mx-auto leading-relaxed">
+                Connect with our agriculture experts for high-quality product support.
+              </p>
+           </div>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Contact Info */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="bg-[#1E5D57] rounded-[2.5rem] p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
-              {/* Decorative Circle */}
-              <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+      <div className="max-w-6xl mx-auto px-4 relative z-20 mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          {/* Left Column: Official Details (Sharp & Compact) */}
+          <div className="lg:col-span-5 space-y-4">
+            <motion.div 
+               initial={{ opacity: 0, x: -20 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.6 }}
+               className="bg-[#1e3932] text-white p-6 md:p-8 shadow-2xl relative overflow-hidden rounded-none border border-white/5"
+            >
+              <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                 <Globe size={80} />
+              </div>
               
-              <div className="relative z-10">
-                <h3 className="text-2xl font-bold italic tracking-tight mb-8">Official Communication</h3>
+              <div className="relative z-10 space-y-8">
+                <div className="space-y-1.5 border-b border-white/10 pb-4">
+                  <h3 className="text-lg md:text-xl font-black tracking-tight uppercase">Official Channels</h3>
+                  <div className="flex items-center gap-1.5 text-[8px] font-bold text-[#a4c639] uppercase tracking-[0.3em]">
+                    <ShieldCheck size={10} /> Certified Communication
+                  </div>
+                </div>
                 
-                <div className="space-y-10">
-                  <div className="flex items-start gap-4 group">
-                    <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white group-hover:text-green-800 transition-all duration-300">
-                       <MapPin size={22} />
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-9 h-9 bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
+                       <MapPin size={16} className="text-[#a4c639]" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black text-teal-400 uppercase tracking-widest mb-1.5 leading-none">Registered Office</p>
-                      <p className="text-sm font-medium leading-relaxed text-white/80">{companyInfo.address}</p>
+                      <p className="text-[8px] font-black text-[#d4e9e2]/40 uppercase tracking-widest mb-1.5 leading-none">Registered Office</p>
+                      <p className="text-[11px] font-bold leading-relaxed text-[#d4e9e2] uppercase">{companyInfo.address}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4 group">
-                    <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white group-hover:text-green-800 transition-all duration-300">
-                       <Mail size={22} />
+                  <div className="flex items-start gap-4">
+                    <div className="w-9 h-9 bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
+                       <Mail size={16} className="text-[#a4c639]" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black text-teal-400 uppercase tracking-widest mb-1.5 leading-none">Email Support</p>
-                      <p className="text-sm font-bold tracking-wide italic">contact@haritocrop.com</p>
-                      <p className="text-sm font-bold tracking-wide italic mt-1">trishamishra@gmail.com</p>
+                      <p className="text-[8px] font-black text-[#d4e9e2]/40 uppercase tracking-widest mb-1.5 leading-none">Email Support</p>
+                      <p className="text-xs font-bold tracking-tight">contact@haritocrop.com</p>
+                      <p className="text-[10px] text-white/50 font-medium">trishamishra@gmail.com</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4 group">
-                    <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white group-hover:text-green-800 transition-all duration-300">
-                       <Phone size={22} />
+                  <div className="flex items-start gap-4">
+                    <div className="w-9 h-9 bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
+                       <Phone size={16} className="text-[#a4c639]" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-black text-teal-400 uppercase tracking-widest mb-1.5 leading-none">Inquiry Line</p>
-                      <p className="text-sm font-bold tracking-wide italic">+91 62604 91554</p>
-                      <p className="text-sm font-bold tracking-wide italic mt-1">+91 91316 26127</p>
+                      <p className="text-[8px] font-black text-[#d4e9e2]/40 uppercase tracking-widest mb-1.5 leading-none">Inquiry Hotline</p>
+                      <p className="text-xs font-bold tracking-tight">+91 62604 91554</p>
+                      <p className="text-[10px] text-white/50 font-medium">+91 91316 26127</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-16 pt-8 border-t border-white/10 flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-teal-400 italic">
-                   <ShieldCheck size={14} fill="currentColor" className="text-teal-900" /> ISO 9001:2015 REGISTERED
+                <div className="pt-4 flex items-center gap-2 text-[8px] font-black uppercase tracking-[0.3em] text-[#a4c639] border-t border-white/5 opacity-80">
+                   ISO 9001:2015 REGISTERED FACILITY
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="bg-slate-50 border border-slate-100 p-8 rounded-3xl flex items-center justify-between group cursor-pointer hover:border-green-600 transition-all">
+            <motion.div 
+               initial={{ opacity: 0, x: -20 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.6, delay: 0.2 }}
+               className="bg-white border border-slate-100 p-5 rounded-none flex items-center justify-between group cursor-pointer hover:border-[#1e3932] transition-all shadow-sm"
+            >
                <div>
-                 <p className="text-xs font-bold text-slate-800 uppercase tracking-tight">Visit Corporate Site</p>
-                 <p className="text-[10px] text-slate-400 font-medium mt-0.5">Learn more about our scientific divisions</p>
+                 <p className="text-[10px] font-black text-slate-800 uppercase tracking-tight">Corporate Relations</p>
+                 <p className="text-[9px] text-slate-400 font-medium mt-0.5">Explore our scientific partnership divisions</p>
                </div>
-               <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-slate-300 group-hover:bg-green-600 group-hover:text-white transition-all shadow-sm">
-                  <ArrowRight size={18} />
+               <div className="w-8 h-8 rounded-none bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-[#1e3932] group-hover:text-white transition-all">
+                  <ArrowRight size={14} />
                </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Contact Form */}
+          {/* Right Column: Contact Form (Sharp & Premium) */}
           <div className="lg:col-span-7">
-             <div className="bg-white p-8 md:p-12 rounded-[2.5rem] border border-slate-100 shadow-sm relative overflow-hidden">
+             <motion.div 
+               initial={{ opacity: 0, x: 20 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.6 }}
+               className="bg-white p-6 md:p-10 rounded-none border border-slate-100 shadow-xl relative overflow-hidden"
+             >
                 {submitted ? (
                   <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="py-20 text-center"
+                    className="py-16 text-center"
                   >
-                     <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <Send size={32} />
+                     <div className="w-16 h-16 bg-[#f0fcf4] text-[#a4c639] flex items-center justify-center mx-auto mb-5 border border-[#a4c639]/10">
+                        <Send size={24} />
                      </div>
-                     <h3 className="text-2xl font-bold text-slate-900 mb-2 italic">Message Sent!</h3>
-                     <p className="text-slate-500 text-sm max-w-xs mx-auto mb-8">Thank you for reaching out. A Harito expert will contact you within 24 business hours.</p>
-                     <button onClick={() => setSubmitted(false)} className="text-xs font-black uppercase tracking-widest text-green-600 hover:bg-green-50 px-6 py-2 rounded-full transition-all">Send Another</button>
+                     <h3 className="text-xl font-black text-[#1e3932] mb-2 uppercase tracking-tight">Transmission Successful</h3>
+                     <p className="text-slate-500 text-[11px] max-w-[240px] mx-auto mb-8 font-medium">Our experts will verify your inquiry and coordinate a response within 24 business hours.</p>
+                     <button onClick={() => setSubmitted(false)} className="text-[9px] font-black uppercase tracking-[0.2em] text-[#1e3932] hover:bg-slate-50 border border-slate-100 px-8 py-3 transition-all">New Communication</button>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                       <div className="space-y-2">
-                          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-1">Your Name</label>
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                       <div className="space-y-1.5">
+                          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
                           <input 
                             type="text" required value={formState.name}
                             onChange={(e) => setFormState({...formState, name: e.target.value})}
-                            placeholder="John Doe"
-                            className="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-4 focus:ring-green-500/5 focus:bg-white outline-none text-slate-800 transition-all font-bold text-xs"
+                            placeholder="Type name here..."
+                            className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-3.5 px-5 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[11px] placeholder:text-slate-200 placeholder:font-medium"
                           />
                        </div>
-                       <div className="space-y-2">
-                          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
+                       <div className="space-y-1.5">
+                          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Work Email</label>
                           <input 
                             type="email" required value={formState.email}
                             onChange={(e) => setFormState({...formState, email: e.target.value})}
-                            placeholder="john@example.com"
-                            className="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-4 focus:ring-green-500/5 focus:bg-white outline-none text-slate-800 transition-all font-bold text-xs"
+                            placeholder="email@example.com"
+                            className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-3.5 px-5 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[11px] placeholder:text-slate-200 placeholder:font-medium"
                           />
                        </div>
                     </div>
                     
-                    <div className="space-y-2">
-                       <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-1">Subject</label>
+                    <div className="space-y-1.5">
+                       <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Inquiry Subject</label>
                        <input 
                          type="text" required value={formState.subject}
                          onChange={(e) => setFormState({...formState, subject: e.target.value})}
-                         placeholder="Product Inquiry / Partnership"
-                         className="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-4 focus:ring-green-500/5 focus:bg-white outline-none text-slate-800 transition-all font-bold text-xs"
+                         placeholder="e.g. Bulk Pesticide Inquiry"
+                         className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-3.5 px-5 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[11px] placeholder:text-slate-200 placeholder:font-medium"
                        />
                     </div>
 
-                    <div className="space-y-2">
-                       <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-1">Your Message</label>
+                    <div className="space-y-1.5">
+                       <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Inquiry Details</label>
                        <textarea 
-                         rows="5" required value={formState.message}
+                         rows="4" required value={formState.message}
                          onChange={(e) => setFormState({...formState, message: e.target.value})}
-                         placeholder="How can our agriculture experts help you today?"
-                         className="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-4 focus:ring-green-500/5 focus:bg-white outline-none text-slate-800 transition-all font-bold text-xs leading-relaxed"
+                         placeholder="Please describe your requirements..."
+                         className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-3.5 px-5 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[11px] leading-relaxed placeholder:text-slate-200 placeholder:font-medium"
                        ></textarea>
                     </div>
 
                     <button 
                        type="submit" disabled={isSubmitting}
-                       className="w-full bg-green-600 hover:bg-green-700 text-white font-black uppercase tracking-widest text-[11px] py-5 rounded-2xl transition-all active:scale-[0.98] shadow-lg shadow-green-200 flex items-center justify-center gap-3 disabled:opacity-70"
+                       className="w-full bg-[#1e3932] hover:bg-[#a4c639] text-white hover:text-[#1e3932] font-black uppercase tracking-[0.2em] text-[10px] py-4 rounded-none transition-all active:scale-[0.98] shadow-xl flex items-center justify-center gap-3 disabled:opacity-70 group"
                     >
-                       {isSubmitting ? 'TRANSMITTING...' : <>SUBMIT COMMUNICATION <Send size={16} /></>}
+                       {isSubmitting ? 'TRANSMITTING...' : <>Initialize Communication <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" /></>}
                     </button>
                     
-                    <p className="text-center text-[9px] text-slate-400 font-medium uppercase tracking-widest">
-                       Secure Encryption Enabled <MessageSquare size={10} className="inline ml-1" />
-                    </p>
+                    <div className="flex items-center justify-center gap-2 pt-2">
+                       <div className="h-[1px] w-8 bg-slate-100"></div>
+                       <p className="text-center text-[8px] text-slate-300 font-black uppercase tracking-widest">
+                          Encrypted Transmission Active
+                       </p>
+                       <div className="h-[1px] w-8 bg-slate-100"></div>
+                    </div>
                   </form>
                 )}
-             </div>
+             </motion.div>
           </div>
         </div>
       </div>

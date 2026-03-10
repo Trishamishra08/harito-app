@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useData } from '../../data/DataContext';
 import { Search, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const ProductsPage = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const ProductsPage = () => {
               <span className="text-[#d4e9e2] font-black uppercase tracking-[0.3em] text-[10px]">
                  Scientific Crop Protection
               </span>
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter text-white">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white font-inter">
                  The highest yields of the year
               </h1>
            </div>
@@ -49,7 +50,7 @@ const ProductsPage = () => {
         <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-10">
            <button 
              onClick={() => {setSelectedCategory('All'); setActiveSub('All');}}
-             className={`px-3 py-1 rounded-none text-[8px] md:text-[9px] font-black uppercase tracking-wider transition-all shadow-sm border ${selectedCategory === 'All' ? 'bg-[#00704A] text-white border-[#00704A] shadow-md' : 'bg-white text-slate-500 border-white hover:text-[#00704A] hover:bg-slate-50 hover:shadow-md'}`}
+             className={`px-4 py-1.5 rounded-none text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm border ${selectedCategory === 'All' ? 'bg-[#3A5A38] text-white border-[#3A5A38] shadow-md' : 'bg-white text-slate-500 border-white hover:text-[#3A5A38] hover:bg-slate-50 hover:shadow-md'}`}
            >
              All Solutions
            </button>
@@ -57,7 +58,7 @@ const ProductsPage = () => {
              <button 
                key={cat.id} 
                onClick={() => {setSelectedCategory(cat.name); setActiveSub('All');}}
-               className={`px-3 py-1 rounded-none text-[8px] md:text-[9px] font-black uppercase tracking-wider transition-all shadow-sm border ${selectedCategory === cat.name ? 'bg-[#00704A] text-white border-[#00704A] shadow-md' : 'bg-white text-slate-500 border-white hover:text-[#00704A] hover:bg-slate-50 hover:shadow-md'}`}
+               className={`px-4 py-1.5 rounded-none text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm border ${selectedCategory === cat.name ? 'bg-[#3A5A38] text-white border-[#3A5A38] shadow-md' : 'bg-white text-slate-500 border-white hover:text-[#3A5A38] hover:bg-slate-50 hover:shadow-md'}`}
              >
                {cat.name}
              </button>
@@ -82,55 +83,59 @@ const ProductsPage = () => {
           {/* Starbucks-Style 3D Product Grid - Full Width */}
           <main className="flex-grow w-full mt-6 md:mt-8">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 lg:gap-x-8 gap-y-24 pt-4 pb-16">
-              {filteredProducts.map(product => (
-                <div 
-                  key={product.id} 
-                  onClick={() => navigate(`/products/${product._id || product.id}`)}
-                  className="relative group cursor-pointer perspective-1000 mt-8 md:mt-0"
-                >
-                  
-                  {/* Product Image Popping Out (3D Effect) - Balanced */}
-                  <div className="absolute -top-10 md:-top-12 left-1/2 -translate-x-1/2 z-20 w-24 h-24 md:w-28 md:h-28 transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-110 group-hover:-translate-y-2 filter drop-shadow-2xl">
-                    <img 
-                      src={getImageUrl(product.image)} 
-                      alt={product.name} 
-                      className="w-full h-full object-contain" 
-                    />
-                  </div>
+               {filteredProducts.map((product, index) => (
+                 <motion.div 
+                   key={product.id} 
+                   initial={{ opacity: 0, y: 30 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   viewport={{ once: true, margin: "-50px" }}
+                   transition={{ duration: 0.5, delay: index % 5 * 0.1 }}
+                   onClick={() => navigate(`/products/${product._id || product.id}`)}
+                   className="relative group cursor-pointer perspective-1000 mt-8 md:mt-0"
+                 >
+                   
+                   {/* Product Image Popping Out (3D Effect) - Balanced */}
+                   <div className="absolute -top-10 md:-top-12 left-1/2 -translate-x-1/2 z-20 w-24 h-24 md:w-28 md:h-28 transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-110 group-hover:-translate-y-2 filter drop-shadow-2xl text-center">
+                     <img 
+                       src={getImageUrl(product.image)} 
+                       alt={product.name} 
+                       className="w-full h-full object-contain mx-auto" 
+                     />
+                   </div>
 
-                  {/* Card Background Container - Balanced Compact Version */}
-                  <div className="bg-[#fcf8f1] group-hover:bg-[#1e3932] rounded-none p-3 pt-16 md:pt-18 pb-4 transition-all duration-500 shadow-sm border border-[#eee8dc] group-hover:border-[#1e3932] hover:shadow-xl relative z-10 flex flex-col items-center text-center h-[200px] md:h-[230px]">
-                    
-                    {/* Arrows indicator visible on hover */}
-                    <div className="absolute top-1/4 left-2 text-white opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-500 hidden md:block">
-                      <ChevronRight className="rotate-180" size={12} />
-                    </div>
-                    <div className="absolute top-1/4 right-2 text-white opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0 transition-all duration-500 hidden md:block">
-                      <ChevronRight size={12} />
-                    </div>
+                   {/* Card Background Container - Balanced Compact Version */}
+                   <div className="bg-[#fcf8f1] group-hover:bg-[#1e3932] rounded-none p-3 pt-16 md:pt-18 pb-4 transition-all duration-500 shadow-sm border border-[#eee8dc] group-hover:border-[#1e3932] hover:shadow-xl relative z-10 flex flex-col items-center text-center h-[200px] md:h-[230px]">
+                     
+                     {/* Arrows indicator visible on hover */}
+                     <div className="absolute top-1/4 left-2 text-white opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-500 hidden md:block">
+                       <ChevronRight className="rotate-180" size={12} />
+                     </div>
+                     <div className="absolute top-1/4 right-2 text-white opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0 transition-all duration-500 hidden md:block">
+                       <ChevronRight size={12} />
+                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-[#1e3932] group-hover:text-white font-black text-xs md:text-sm mb-2 transition-colors duration-500 line-clamp-2 leading-tight min-h-[2.5rem] flex items-center justify-center">
-                       {product.name}
-                    </h3>
-                    
-                    {/* Detailed Specs area - Balanced */}
-                    <div className="w-full space-y-1.5 mt-auto mb-1 text-left transition-all duration-500">
-                       {/* Row 1 */}
-                       <div className="flex justify-between items-center border-b border-black/5 group-hover:border-white/10 pb-1 transition-colors">
-                          <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[8px] md:text-[9px] font-bold">Category</span>
-                          <span className="text-slate-800 group-hover:text-white text-[9px] md:text-[10px] font-black">{product.category}</span>
-                       </div>
-                       {/* Row 2 */}
-                       <div className="flex justify-between items-center border-b border-black/5 group-hover:border-white/10 pb-1 transition-colors">
-                          <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[8px] md:text-[9px] font-bold">Brand</span>
-                          <span className="text-slate-800 group-hover:text-white text-[9px] md:text-[10px] font-black">{product.brand}</span>
-                       </div>
-                    </div>
+                     {/* Title */}
+                     <h3 className="text-[#2A3324] group-hover:text-white font-bold text-[13px] md:text-[14px] mb-2 transition-colors duration-500 line-clamp-2 leading-tight min-h-[2.5rem] flex items-center justify-center font-inter">
+                        {product.name}
+                     </h3>
+                     
+                     {/* Detailed Specs area - Balanced */}
+                     <div className="w-full space-y-1.5 mt-auto mb-1 text-left transition-all duration-500">
+                        {/* Row 1 */}
+                        <div className="flex justify-between items-center border-b border-black/5 group-hover:border-white/10 pb-1 transition-colors">
+                           <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[9px] font-bold uppercase tracking-wider">Category</span>
+                           <span className="text-slate-800 group-hover:text-white text-[10px] font-bold">{product.category}</span>
+                        </div>
+                        {/* Row 2 */}
+                        <div className="flex justify-between items-center border-b border-black/5 group-hover:border-white/10 pb-1 transition-colors">
+                           <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[9px] font-bold uppercase tracking-wider">Brand</span>
+                           <span className="text-slate-800 group-hover:text-white text-[10px] font-bold">{product.brand}</span>
+                        </div>
+                     </div>
 
-                  </div>
-                </div>
-              ))}
+                   </div>
+                 </motion.div>
+               ))}
             </div>
             
             {filteredProducts.length === 0 && (

@@ -64,13 +64,18 @@ const Navbar = () => {
                      <div className={`absolute left-0 top-full pt-2 transition-all duration-300 origin-top ${isCategoryOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'}`}>
                         <div className="bg-white/95 backdrop-blur-2xl border border-slate-100 rounded-2xl shadow-2xl min-w-[200px] overflow-hidden">
                            {categories.map(cat => (
-                             <Link 
-                                key={cat.id} 
-                                to={`/products?category=${cat.id}`}
-                                className="block px-6 py-3 text-[10px] font-bold text-slate-500 hover:text-green-600 hover:bg-green-50 transition-all uppercase tracking-widest border-b border-slate-50 last:border-0"
-                             >
-                               {cat.name}
-                             </Link>
+                              <Link 
+                                 key={cat.id} 
+                                 to={`/categories#cat-${cat.id}`}
+                                 onClick={() => {
+                                   setIsCategoryOpen(false);
+                                   const el = document.getElementById(`cat-${cat.id}`);
+                                   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                 }}
+                                 className="block px-6 py-3 text-[10px] font-bold text-slate-500 hover:text-green-600 hover:bg-green-50 transition-all uppercase tracking-widest border-b border-slate-50 last:border-0"
+                              >
+                                {cat.name}
+                              </Link>
                            ))}
                         </div>
                      </div>
@@ -112,8 +117,21 @@ const Navbar = () => {
                    </Link>
                  ))}
                  <div className="w-12 h-1 bg-green-100 rounded-full my-4"></div>
-                 {categories.slice(0, 4).map(cat => (
-                    <Link key={cat.id} to={`/products?category=${cat.id}`} className="text-sm font-bold text-slate-400 uppercase tracking-widest hover:text-green-600">{cat.name}</Link>
+                 {categories.slice(0, 5).map(cat => (
+                    <Link 
+                       key={cat.id} 
+                       to={`/categories#cat-${cat.id}`} 
+                       onClick={() => {
+                         setIsOpen(false);
+                         setTimeout(() => {
+                           const el = document.getElementById(`cat-${cat.id}`);
+                           if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                         }, 100);
+                       }}
+                       className="text-sm font-bold text-slate-400 uppercase tracking-widest hover:text-green-600"
+                    >
+                       {cat.name}
+                    </Link>
                  ))}
               </div>
             </motion.div>

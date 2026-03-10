@@ -1,114 +1,94 @@
 import React from 'react';
-import { useData } from '../../data/DataContext';
-import { Warehouse, ShieldCheck, Truck, Clock, Droplets } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ShieldCheck, Warehouse } from 'lucide-react';
 
 const GodownPage = () => {
-  const { godowns } = useData();
-
   return (
-    <div className="pt-24 pb-16 bg-slate-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
-        <div className="text-center mb-16">
-          <motion.span 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-green-600 font-bold uppercase tracking-widest text-xs mb-4 block"
-          >
-            Logistics & Operations
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-black text-slate-900 italic tracking-tighter"
-          >
-            Storage & Distribution
-          </motion.h1>
-          <p className="text-slate-500 text-sm mt-4 uppercase tracking-[0.2em] font-medium">Efficient Supply Chain Solutions</p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          <div className="lg:col-span-2 space-y-8">
-             <div className="bg-white p-8 rounded-3xl shadow-sm border border-white">
-                <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-3">
-                   <Warehouse className="text-green-600" /> State-of-the-Art Facilities
-                </h2>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                   At <strong>Harito Crop Science Private Limited</strong>, we maintain a network of sophisticated storage facilities designed specifically for the safe and efficient handling of agricultural chemicals and fertilizers. Our storage protocols strictly adhere to international safety standards, ensuring that our products reach farmers in pristine condition.
-                </p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                   <div className="p-4 bg-slate-50 rounded-2xl flex items-start gap-3">
-                      <Clock className="text-green-600 shrink-0" size={20} />
-                      <div>
-                        <p className="text-xs font-bold text-slate-800 uppercase tracking-widest mb-1">Temperature Control</p>
-                        <p className="text-[10px] text-slate-500 font-medium">Monitoring systems to maintain optimal product efficacy.</p>
-                      </div>
-                   </div>
-                   <div className="p-4 bg-slate-50 rounded-2xl flex items-start gap-3">
-                      <ShieldCheck className="text-green-600 shrink-0" size={20} />
-                      <div>
-                        <p className="text-xs font-bold text-slate-800 uppercase tracking-widest mb-1">Safety Protocols</p>
-                        <p className="text-[10px] text-slate-500 font-medium">Advanced fire suppression and chemical spill management.</p>
-                      </div>
-                   </div>
-                   <div className="p-4 bg-slate-50 rounded-2xl flex items-start gap-3">
-                      <Droplets className="text-green-600 shrink-0" size={20} />
-                      <div>
-                        <p className="text-xs font-bold text-slate-800 uppercase tracking-widest mb-1">Moisture Control</p>
-                        <p className="text-[10px] text-slate-500 font-medium">Keeping fertilizers dry and effective in all seasons.</p>
-                      </div>
-                   </div>
-                   <div className="p-4 bg-slate-50 rounded-2xl flex items-start gap-3">
-                      <Truck className="text-green-600 shrink-0" size={20} />
-                      <div>
-                        <p className="text-xs font-bold text-slate-800 uppercase tracking-widest mb-1">Ready Inventory</p>
-                        <p className="text-[10px] text-slate-500 font-medium">Large-scale capacity to meet seasonal demands instantly.</p>
-                      </div>
-                   </div>
-                </div>
-             </div>
-
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-               <div className="rounded-3xl overflow-hidden shadow-lg h-64">
-                 <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Warehouse" className="w-full h-full object-cover" />
-               </div>
-               <div className="rounded-3xl overflow-hidden shadow-lg h-64">
-                 <img src="https://images.unsplash.com/photo-1585713181935-d5f622cc2415?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Supply Chain" className="w-full h-full object-cover" />
-               </div>
-             </div>
+    <div className="bg-[#1e3932] min-h-screen pt-36 pb-12 px-4 font-inter overflow-hidden relative text-white">
+      {/* Subtle organic texture/overlay matched with About page */}
+      <div className="absolute inset-0 bg-[url('/images/misty-green-bg.png')] opacity-10 pointer-events-none mix-blend-overlay"></div>
+      
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+          
+          {/* Left Column: Image Gallery (Facility Focused) */}
+          <div className="lg:col-span-7 grid grid-cols-2 gap-3 items-start">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              className="mt-2 md:mt-4"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" 
+                alt="Storage Facility" 
+                className="w-full h-[200px] md:h-[280px] object-cover rounded-none grayscale group-hover:grayscale-0 transition-all duration-700 shadow-2xl border border-white/5"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mt-6 md:mt-10"
+            >
+              <img 
+                src="/images/storage_facility_agri.png" 
+                alt="Manufacturing Logistics" 
+                className="w-full h-[240px] md:h-[340px] object-cover rounded-none shadow-2xl border border-white/5"
+              />
+            </motion.div>
           </div>
 
-          <div className="space-y-8">
-            <div className="bg-[#1E5D57] text-white p-8 rounded-3xl shadow-xl">
-               <h3 className="text-xl font-bold uppercase tracking-widest italic mb-6">Distribution Hubs</h3>
-               <div className="space-y-6">
-                 {godowns.map(godown => (
-                   <div key={godown.id} className="border-b border-white/10 pb-6 last:border-0 last:pb-0">
-                      <p className="text-teal-400 text-[10px] font-black uppercase tracking-[0.2em] mb-1">Primary Facility</p>
-                      <h4 className="text-lg font-bold mb-2 tracking-tight">{godown.name}</h4>
-                      <p className="text-white/60 text-xs font-medium mb-4">{godown.location}</p>
-                      <div className="flex flex-col gap-2">
-                        <div className="flex items-center gap-2 text-[10px] font-bold opacity-80">
-                           <ShieldCheck size={12} /> Capacity: {godown.capacity}
-                        </div>
-                        <div className="flex items-center gap-2 text-[10px] font-bold opacity-80">
-                           <Clock size={12} /> Operating 24/7
-                        </div>
-                      </div>
-                   </div>
-                 ))}
-               </div>
-            </div>
+          {/* Right Column: Text Content (Aggressively Compact) */}
+          <div className="lg:col-span-5 space-y-3 md:space-y-4">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-3"
+            >
+              <div className="flex items-center gap-1.5">
+                <ShieldCheck size={12} className="text-[#a4c639]" />
+                <span className="text-[#d4e9e2]/60 font-black uppercase tracking-[0.4em] text-[8px] md:text-[9px]">
+                   Certified Excellence
+                </span>
+              </div>
+              
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-tight tracking-tight uppercase font-inter">
+                 ISO 9001:2015 <br/>
+                 Quality Hub
+              </h2>
 
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-white text-center">
-               <Truck className="text-green-600 mx-auto mb-4" size={40} />
-               <h3 className="text-lg font-bold text-slate-800 uppercase tracking-tighter italic mb-2">Our Logistics Reach</h3>
-               <p className="text-slate-500 text-[11px] font-medium leading-relaxed">
-                  With our centralized hub in Bareilly, we ensure timely delivery of agricultural essentials across the northern belt of India, supporting thousands of retailers and farmers.
-               </p>
-            </div>
+              <div className="space-y-3 pt-2 border-t border-white/5">
+                 <p className="text-[#d4e9e2]/80 text-[10px] md:text-[11px] leading-relaxed font-bold">
+                    <strong>Harito Crop Science Private Limited</strong> is an independently certified Manufacturer and Trader of high-grade chemical fertilizers and pesticides.
+                 </p>
+                 
+                 <div className="grid grid-cols-2 gap-3 py-1">
+                    <div className="space-y-0.5">
+                       <p className="text-[7px] font-black uppercase tracking-widest text-white/30">Certificate No.</p>
+                       <p className="text-[9px] font-bold text-white uppercase">TSNUK39907</p>
+                    </div>
+                    <div className="space-y-0.5">
+                       <p className="text-[7px] font-black uppercase tracking-widest text-white/30">Issue Date</p>
+                       <p className="text-[9px] font-bold text-white uppercase">28/03/2025</p>
+                    </div>
+                 </div>
+
+                 <div className="bg-white/[0.03] p-3 border border-white/5 space-y-1.5">
+                    <p className="text-[8px] text-[#a4c639] font-black uppercase tracking-widest flex items-center gap-1.5">
+                       <Warehouse size={10} /> Registered Facility
+                    </p>
+                    <p className="text-[#d4e9e2]/70 text-[9px] leading-normal font-medium uppercase tracking-tight">
+                       Durga Nagar Back in Megha City, Nr Mandir & Suresh Sharma Nagar, Bareilly, UP-243006
+                    </p>
+                 </div>
+
+                 <button onClick={() => window.location.href='/contact'} className="inline-flex items-center bg-[#a4c639] text-[#1e3932] px-6 py-2.5 rounded-none font-black uppercase tracking-widest text-[8px] hover:bg-white transition-all shadow-xl active:scale-95 mt-2">
+                    Inquire About Trade
+                 </button>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

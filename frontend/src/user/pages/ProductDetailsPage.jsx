@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { useData } from '../../data/DataContext';
 import { ChevronLeft, Shield, Sparkles, Sprout, Mail, Info, Leaf, ShieldAlert, Package, Calendar, MapPin, Beaker } from 'lucide-react';
 
@@ -56,17 +57,29 @@ const ProductDetailsPage = () => {
     <div className="bg-[#f8faf8] min-h-screen pt-20 md:pt-26 pb-8 font-inter relative">
       <div className="max-w-5xl mx-auto px-4">
         {/* Navigation Breadcrumb */}
-        <Link 
-          to="/products"
-          className="inline-flex items-center gap-2 text-[#00704A] font-black text-[8px] md:text-[9px] uppercase tracking-[0.2em] mb-3 hover:-translate-x-1 transition-all relative z-[60] cursor-pointer"
+        <motion.div
+           initial={{ opacity: 0, x: -10 }}
+           animate={{ opacity: 1, x: 0 }}
+           transition={{ duration: 0.5 }}
         >
-          <ChevronLeft size={12} strokeWidth={3} />
-          Back to Catalog
-        </Link>
+          <Link 
+            to="/products"
+            className="inline-flex items-center gap-2 text-[#00704A] font-bold text-[8px] md:text-[9px] uppercase tracking-[0.2em] mb-3 hover:-translate-x-1 transition-all relative z-[60] cursor-pointer"
+          >
+            <ChevronLeft size={12} strokeWidth={3} />
+            Back to Catalog
+          </Link>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
           {/* Left Column: Image & Quick Specs */}
-          <div className="lg:col-span-4 space-y-3">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-4 space-y-3"
+          >
              <div className="bg-[#fcf8f1] rounded-none border border-[#eee8dc] p-4 flex justify-center items-center relative overflow-hidden group shadow-sm">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1e3932]/5 to-transparent pointer-events-none"></div>
                 <img 
@@ -77,8 +90,8 @@ const ProductDetailsPage = () => {
              </div>
 
              {/* Key Benefits (Compact Box) */}
-             <div className="bg-white rounded-none border border-slate-100 p-3 shadow-sm">
-                <h3 className="flex items-center gap-2 text-[#1e3932] font-black text-[9px] uppercase tracking-widest mb-2">
+             <div className="bg-[#f5f9f5] rounded-none border border-[#e2eee4] p-3 shadow-sm">
+                <h3 className="flex items-center gap-2 text-[#2A3324] font-bold text-[9px] uppercase tracking-widest mb-2 font-inter">
                    <Sparkles size={11} className="text-[#00704A]" /> Key Benefits
                 </h3>
                 <ul className="space-y-1.5">
@@ -90,14 +103,20 @@ const ProductDetailsPage = () => {
                    ))}
                 </ul>
              </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Main Info & Details */}
-          <div className="lg:col-span-8 space-y-3">
-            <div className="bg-white rounded-none border border-slate-100 p-3 md:p-4 shadow-sm">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-8 space-y-3"
+          >
+            <div className="bg-[#fcfdfd] rounded-none border border-[#eee] p-3 md:p-4 shadow-sm">
                <div className="flex items-start justify-between gap-3 mb-3">
                   <div>
-                    <h1 className="text-lg md:text-xl font-black text-[#1e3932] tracking-tighter leading-none mb-1">
+                    <h1 className="text-lg md:text-xl font-bold text-[#2A3324] tracking-tight leading-none mb-1 font-inter">
                       {product.name}
                     </h1>
                     <p className="text-[9px] md:text-[10px] text-slate-500 font-medium leading-normal max-w-lg">
@@ -113,25 +132,25 @@ const ProductDetailsPage = () => {
                <div className="grid grid-cols-2 md:grid-cols-3 gap-y-3 gap-x-2 pt-3 border-t border-slate-50">
                   {extraInfo.details.map((detail, idx) => (
                     <div key={idx} className="space-y-1">
-                       <span className="flex items-center gap-1.5 text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                       <span className="flex items-center gap-1.5 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
                           <detail.icon size={12} className="text-[#00704A]/60" /> {detail.label}
                        </span>
-                       <p className="text-[11px] text-[#1e3932] font-black">{detail.value}</p>
+                       <p className="text-[11px] text-[#2A3324] font-bold">{detail.value}</p>
                     </div>
                   ))}
                </div>
             </div>
 
-            {/* Usage & Application */}
+             {/* Usage & Application */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-               <div className="bg-white rounded-none border border-slate-100 p-3 shadow-sm">
-                  <h3 className="flex items-center gap-2 text-[#1e3932] font-black text-[9px] uppercase tracking-widest mb-2">
+               <div className="bg-[#f8fbf9] rounded-none border border-[#e8f0e9] p-3 shadow-sm">
+                  <h3 className="flex items-center gap-2 text-[#2A3324] font-bold text-[9px] uppercase tracking-widest mb-2 font-inter">
                      <Info size={11} className="text-[#00704A]" /> Application Steps
                   </h3>
                   <div className="space-y-2">
                      {extraInfo.usage.map((step, idx) => (
                        <div key={idx} className="flex gap-2">
-                          <span className="text-[8px] font-black text-[#00704A] bg-[#00704A]/5 w-3.5 h-3.5 rounded-none flex items-center justify-center shrink-0">
+                          <span className="text-[8px] font-bold text-[#00704A] bg-[#00704A]/5 w-3.5 h-3.5 rounded-none flex items-center justify-center shrink-0">
                              {idx + 1}
                           </span>
                           <p className="text-[9px] text-slate-500 font-bold leading-tight">{step}</p>
@@ -140,20 +159,20 @@ const ProductDetailsPage = () => {
                   </div>
                </div>
 
-               <div className="space-y-3">
+                <div className="space-y-3">
                   {/* Suitable Crops */}
                   <div className="bg-[#f0f4f0] rounded-none p-3 border border-[#e1eee1]">
-                     <h3 className="flex items-center gap-2 text-[#1e3932] font-black text-[9px] uppercase tracking-widest mb-1.5">
+                     <h3 className="flex items-center gap-2 text-[#2A3324] font-bold text-[9px] uppercase tracking-widest mb-1.5 font-inter">
                         <Sprout size={11} className="text-[#00704A]" /> Suitable Crops
                      </h3>
-                     <p className="text-[9px] text-[#1e3932] font-bold leading-tight">
+                     <p className="text-[9px] text-[#2A3324] font-bold leading-tight">
                         {extraInfo.crops}
                      </p>
                   </div>
 
                   {/* Safety Instructions */}
                   <div className="bg-[#fff1f1] rounded-none p-3 border border-[#fee2e2]">
-                     <h3 className="flex items-center gap-2 text-[#991b1b] font-black text-[9px] uppercase tracking-widest mb-1.5">
+                     <h3 className="flex items-center gap-2 text-[#991b1b] font-bold text-[9px] uppercase tracking-widest mb-1.5 font-inter">
                         <ShieldAlert size={11} className="text-[#dc2626]" /> Safety & Storage
                      </h3>
                      <p className="text-[9px] text-[#991b1b] font-bold leading-tight">
@@ -164,12 +183,17 @@ const ProductDetailsPage = () => {
             </div>
 
             {/* Informational Footer */}
-            <div className="pt-4 mt-auto">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="pt-4 mt-auto"
+            >
                <p className="text-center text-[8px] text-slate-400 font-black uppercase tracking-widest">
                   Website only for informational purpose • Harito Crop Science
                </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </div>
