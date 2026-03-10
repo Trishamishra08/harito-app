@@ -2,11 +2,21 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const DataContext = createContext();
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 
 export const DataProvider = ({ children }) => {
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([
+    { id: '1', name: 'Seeds', image: 'category_seeds.jpg' },
+    { id: '2', name: 'Fertilizers', image: 'category_fertilizers.jpg' },
+    { id: '3', name: 'Pesticides', image: 'category_pesticides.jpg' },
+    { id: '4', name: 'Equipment', image: 'category_equipment.jpg' }
+  ]);
+  const [products, setProducts] = useState([
+    { id: '1', name: 'Rizo Plus', image: 'rizo.png', description: 'Advanced bio-fertilizer for enhanced root growth.' },
+    { id: '2', name: 'Hira 70', image: 'hira-70.png', description: 'High-potency pesticide for crop protection.' },
+    { id: '3', name: 'Rider Plus', image: 'rider-plus.png', description: 'Professional grade growth promoter.' },
+    { id: '4', name: 'Vito M45', image: 'vito-m45.png', description: 'Broad-spectrum fungicide for healthy crops.' }
+  ]);
   const [carousel, setCarousel] = useState([
     {
       id: 1,
@@ -57,7 +67,9 @@ export const DataProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         console.log('Categories fetched:', data.length);
-        setCategories(data.map(cat => ({ ...cat, id: cat._id })));
+        if (data.length > 0) {
+          setCategories(data.map(cat => ({ ...cat, id: cat._id })));
+        }
       } else {
         console.error('Failed to fetch categories:', response.status);
       }
@@ -72,7 +84,9 @@ export const DataProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         console.log('Products fetched:', data.length);
-        setProducts(data.map(prod => ({ ...prod, id: prod._id })));
+        if (data.length > 0) {
+          setProducts(data.map(prod => ({ ...prod, id: prod._id })));
+        }
       } else {
         console.error('Failed to fetch products:', response.status);
       }
@@ -167,19 +181,21 @@ export const DataProvider = ({ children }) => {
 
     const getImageUrl = (path) => {
       if (!path) return '';
-      // 1. Absolute external URLs
+      
+      // 1. Absolute external URLs (like Unsplash)
       if (path.startsWith('http')) return path;
       
       // 2. Already prefixed with /images/ (Frontend Public)
-      if (path.startsWith('/images')) return path;
+      if (path.startsWith('/images/')) return path;
       
       // 3. Backend uploads (served from backend)
       if (path.startsWith('/uploads')) {
-        return `${API_BASE_URL.replace('/api', '')}${path}`;
+        const base = API_BASE_URL.replace('/api', '');
+        return `${base}${path}`;
       }
       
       // 4. Default fallback: assume it is a frontend public asset in /images/
-      // This handles database paths like "/rizo.png" or "rider-plus.png"
+      // This handles paths like "logo.png" or "/rizo.png"
       const cleanPath = path.startsWith('/') ? path : `/${path}`;
       return `/images${cleanPath}`;
     };
