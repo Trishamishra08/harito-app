@@ -2,10 +2,23 @@ import React from 'react';
 import { useData } from '../../data/DataContext';
 import { Sprout, Droplets, Leaf, Flower2, ShieldAlert, ArrowRight, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const CategoriesPage = () => {
   const { categories } = useData();
+  const location = useLocation();
+
+  React.useEffect(() => {
+    if (location.hash) {
+      setTimeout(() => {
+        const id = location.hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 300);
+    }
+  }, [location, categories]);
 
   const getCatIcon = (name) => {
     const n = name.toLowerCase();
