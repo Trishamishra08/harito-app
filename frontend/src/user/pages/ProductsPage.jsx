@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useData } from '../../data/DataContext';
-import { Search, Filter, Layers, Info, ChevronRight, LayoutGrid, List, Leaf, ShieldCheck, Zap } from 'lucide-react';
+import { Search, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ProductsPage = () => {
+  const navigate = useNavigate();
   const { products, categories, getImageUrl } = useData();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
@@ -24,135 +26,117 @@ const ProductsPage = () => {
   });
 
   return (
-    <div className="bg-slate-50 min-h-screen pb-24">
-      {/* Page Header Segment */}
-      <div className="bg-slate-900 pt-40 md:pt-52 pb-12 md:pb-20 text-white text-center shadow-xl relative overflow-hidden border-b-4 border-green-600">
-        <div className="max-w-7xl mx-auto px-4 relative z-10 space-y-2">
-          <span className="text-green-500 font-black uppercase tracking-[0.4em] text-[10px] opacity-80">Scientific Crop Protection</span>
-          <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase italic leading-none">Crop Solutions</h1>
-          <p className="text-[10px] md:text-xs text-slate-400 max-w-2xl mx-auto font-medium uppercase tracking-widest pt-4 opacity-70 leading-relaxed">
-            Harito Crop Science Private Limited delivers ISO 9001:2015 certified fertilizers and pesticides engineered to optimize nutrient uptake and maximize farm profitability.
-          </p>
-          
-          {/* Benefits Icons */}
-          <div className="flex flex-wrap justify-center gap-6 mt-10">
-             <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-green-600/20 flex items-center justify-center text-green-500 border border-green-500/20"><Leaf size={14} /></div>
-                <span className="text-[9px] font-black uppercase tracking-widest">High Yield</span>
-             </div>
-             <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-green-600/20 flex items-center justify-center text-green-500 border border-green-500/20"><ShieldCheck size={14} /></div>
-                <span className="text-[9px] font-black uppercase tracking-widest">Eco-Safe</span>
-             </div>
-             <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-green-600/20 flex items-center justify-center text-green-500 border border-green-500/20"><Zap size={14} /></div>
-                <span className="text-[9px] font-black uppercase tracking-widest">Fast Action</span>
-             </div>
-          </div>
+    <div className="bg-[#f8faf8] min-h-screen pb-24 font-inter">
+      {/* Page Header Segment - Dark Combo */}
+      <div className="bg-[#1e3932] pt-20 md:pt-24 pb-10 md:pb-14 text-white text-center relative overflow-hidden">
+        {/* Decorative elements for dark background */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] bg-[#00704A]/20 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 relative z-10 flex flex-col items-center justify-center text-center">
+           <div className="w-full max-w-2xl mx-auto space-y-3">
+              <span className="text-[#d4e9e2] font-black uppercase tracking-[0.3em] text-[10px]">
+                 Scientific Crop Protection
+              </span>
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter text-white">
+                 The highest yields of the year
+              </h1>
+           </div>
         </div>
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-800 -skew-x-12 translate-x-12 border-l border-white/5 pointer-events-none"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Unified Search & Toolbar */}
-        <div className="mt-12 bg-white p-3 rounded-[1.5rem] shadow-sm border border-slate-100 mb-8 flex flex-col lg:flex-row gap-3 items-center">
-          <div className="relative flex-grow w-full">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
-            <input 
-              type="text" 
-              placeholder="SEARCH CROP SOLUTIONS..." 
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-slate-50 border-none rounded-xl py-3 pl-11 pr-6 focus:ring-2 focus:ring-green-500/50 outline-none font-black text-[9px] text-slate-900 uppercase tracking-widest"
-            />
-          </div>
-          <div className="flex gap-2 w-full lg:w-auto">
-             <div className="flex bg-slate-100 p-1 rounded-xl">
-               <button className="bg-white p-2.5 rounded-lg shadow-sm text-green-600 border border-slate-100"><LayoutGrid size={14} /></button>
-               <button className="p-2.5 rounded-lg text-slate-400 hover:text-slate-600 transition-colors"><List size={14} /></button>
-             </div>
-             <button className="bg-slate-900 text-white px-6 py-3 rounded-xl text-[9px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl hover:bg-green-600 transition-all active:scale-95">
-               <Filter size={12} /> FILTER CATALOG
+      <div className="max-w-7xl mx-auto px-4 relative mt-10 z-20">
+        {/* Horizontal Category Filters - Compact */}
+        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-10">
+           <button 
+             onClick={() => {setSelectedCategory('All'); setActiveSub('All');}}
+             className={`px-3 py-1 rounded-none text-[8px] md:text-[9px] font-black uppercase tracking-wider transition-all shadow-sm border ${selectedCategory === 'All' ? 'bg-[#00704A] text-white border-[#00704A] shadow-md' : 'bg-white text-slate-500 border-white hover:text-[#00704A] hover:bg-slate-50 hover:shadow-md'}`}
+           >
+             All Solutions
+           </button>
+           {categories.map(cat => (
+             <button 
+               key={cat.id} 
+               onClick={() => {setSelectedCategory(cat.name); setActiveSub('All');}}
+               className={`px-3 py-1 rounded-none text-[8px] md:text-[9px] font-black uppercase tracking-wider transition-all shadow-sm border ${selectedCategory === cat.name ? 'bg-[#00704A] text-white border-[#00704A] shadow-md' : 'bg-white text-slate-500 border-white hover:text-[#00704A] hover:bg-slate-50 hover:shadow-md'}`}
+             >
+               {cat.name}
              </button>
-          </div>
+           ))}
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Refined Sidebar Navigation */}
-          <aside className="lg:w-60 shrink-0 space-y-8">
-            <div className="group">
-              <h3 className="text-[8px] font-black text-slate-400 uppercase tracking-[0.3em] mb-4 flex items-center gap-2">
-                <div className="w-4 h-px bg-slate-200 group-hover:bg-green-500 transition-colors"></div> Sector Classes
-              </h3>
-              <div className="space-y-1 text-left">
-                <button 
-                  onClick={() => {setSelectedCategory('All'); setActiveSub('All');}}
-                  className={`w-full text-left px-5 py-3 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${selectedCategory === 'All' ? 'bg-slate-900 text-white shadow-xl' : 'bg-transparent text-slate-400 hover:bg-white hover:text-green-600 border border-transparent hover:border-slate-100'}`}
-                >
-                  GLOBAL INDEX
-                </button>
-                {categories.map(cat => (
-                  <button 
-                    key={cat.id} 
-                    onClick={() => {setSelectedCategory(cat.name); setActiveSub('All');}}
-                    className={`w-full text-left px-5 py-3 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${selectedCategory === cat.name ? 'bg-slate-900 text-white shadow-xl' : 'bg-transparent text-slate-400 hover:bg-white hover:text-green-600 border border-transparent hover:border-slate-100'}`}
-                  >
-                    {cat.name}
-                  </button>
-                ))}
-              </div>
-            </div>
+        {selectedCategory !== 'All' && subcategories.length > 1 && (
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-8 animate-fade-in pb-1">
+             {subcategories.map(sub => (
+               <button 
+                 key={sub} 
+                 onClick={() => setActiveSub(sub)}
+                 className={`px-3 py-1 rounded-none text-[8px] font-black transition-colors uppercase tracking-widest border ${activeSub === sub ? 'border-[#00704A] text-[#00704A] bg-[#00704A]/5' : 'border-slate-200 text-slate-400 hover:border-slate-300 hover:text-slate-600'}`}
+               >
+                 {sub}
+               </button>
+             ))}
+          </div>
+        )}
 
-            {selectedCategory !== 'All' && (
-              <div className="animate-fade-in group">
-                <h3 className="text-[8px] font-black text-slate-400 uppercase tracking-[0.3em] mb-4 flex items-center gap-2">
-                  <div className="w-4 h-px bg-slate-200 group-hover:bg-green-500 transition-colors"></div> Structural Sub-Units
-                </h3>
-                <div className="space-y-0.5">
-                   {subcategories.map(sub => (
-                     <button 
-                       key={sub} 
-                       onClick={() => setActiveSub(sub)}
-                       className={`w-full text-left px-4 py-2.5 rounded-lg text-[8px] font-black uppercase tracking-2em flex items-center justify-between transition-colors ${activeSub === sub ? 'text-green-600 bg-green-50' : 'text-slate-400 hover:text-slate-900'}`}
-                     >
-                       {sub}
-                       <ChevronRight size={10} className={`transition-transform ${activeSub === sub ? 'translate-x-1' : 'opacity-0'}`} />
-                     </button>
-                   ))}
-                </div>
-              </div>
-            )}
-          </aside>
-
-          {/* High-Density Grid */}
-          <main className="flex-grow">
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="flex flex-col">
+          {/* Starbucks-Style 3D Product Grid - Full Width */}
+          <main className="flex-grow w-full mt-6 md:mt-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 lg:gap-x-8 gap-y-24 pt-4 pb-16">
               {filteredProducts.map(product => (
-                <div key={product.id} className="premium-card group flex flex-col">
-                  <div className="relative h-52 overflow-hidden m-3 rounded-[1.2rem] bg-slate-100 border border-slate-100">
-                    <img src={getImageUrl(product.image)} alt={product.name} className="w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
-                    <div className="absolute top-2.5 right-2.5 bg-slate-900 text-white px-2 py-0.5 rounded-full text-[7px] font-black uppercase tracking-[0.2em] border border-white/5 shadow-xl">{product.category}</div>
+                <div 
+                  key={product.id} 
+                  onClick={() => navigate(`/products/${product._id || product.id}`)}
+                  className="relative group cursor-pointer perspective-1000 mt-8 md:mt-0"
+                >
+                  
+                  {/* Product Image Popping Out (3D Effect) - Balanced */}
+                  <div className="absolute -top-10 md:-top-12 left-1/2 -translate-x-1/2 z-20 w-24 h-24 md:w-28 md:h-28 transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-110 group-hover:-translate-y-2 filter drop-shadow-2xl">
+                    <img 
+                      src={getImageUrl(product.image)} 
+                      alt={product.name} 
+                      className="w-full h-full object-contain" 
+                    />
                   </div>
-                  <div className="p-5 pt-0 space-y-3 flex-grow flex flex-col">
-                    <div className="space-y-0.5">
-                      <p className="text-green-600 font-black text-[8px] uppercase tracking-widest leading-none mb-1.5">{product.brand}</p>
-                      <h4 className="text-[14px] font-black text-slate-900 tracking-tight uppercase leading-tight line-clamp-1">{product.name}</h4>
+
+                  {/* Card Background Container - Balanced Compact Version */}
+                  <div className="bg-[#fcf8f1] group-hover:bg-[#1e3932] rounded-none p-3 pt-16 md:pt-18 pb-4 transition-all duration-500 shadow-sm border border-[#eee8dc] group-hover:border-[#1e3932] hover:shadow-xl relative z-10 flex flex-col items-center text-center h-[200px] md:h-[230px]">
+                    
+                    {/* Arrows indicator visible on hover */}
+                    <div className="absolute top-1/4 left-2 text-white opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-500 hidden md:block">
+                      <ChevronRight className="rotate-180" size={12} />
                     </div>
-                    <p className="text-slate-400 text-[10px] font-medium italic line-clamp-2 opacity-80 leading-relaxed mb-4">"{product.description}"</p>
-                    <div className="flex flex-wrap gap-1 mt-auto">
-                       <span className="bg-slate-50 text-slate-500 px-2 py-1 rounded-md text-[7px] font-black uppercase tracking-tighter flex items-center gap-1 border border-slate-100 transition-colors group-hover:border-green-100"><Layers size={9} className="text-green-500" /> {product.subcategory}</span>
+                    <div className="absolute top-1/4 right-2 text-white opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0 transition-all duration-500 hidden md:block">
+                      <ChevronRight size={12} />
                     </div>
-                    <button className="w-full bg-slate-50 group-hover:bg-slate-900 group-hover:text-white text-slate-400 py-3 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] mt-4 transition-all flex items-center justify-center gap-2 border border-slate-100 group-hover:border-slate-900 shadow-sm group-hover:shadow-green-500/10 active:scale-95">
-                       SPECIFICATIONS <Info size={12} />
-                    </button>
+
+                    {/* Title */}
+                    <h3 className="text-[#1e3932] group-hover:text-white font-black text-xs md:text-sm mb-2 transition-colors duration-500 line-clamp-2 leading-tight min-h-[2.5rem] flex items-center justify-center">
+                       {product.name}
+                    </h3>
+                    
+                    {/* Detailed Specs area - Balanced */}
+                    <div className="w-full space-y-1.5 mt-auto mb-1 text-left transition-all duration-500">
+                       {/* Row 1 */}
+                       <div className="flex justify-between items-center border-b border-black/5 group-hover:border-white/10 pb-1 transition-colors">
+                          <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[8px] md:text-[9px] font-bold">Category</span>
+                          <span className="text-slate-800 group-hover:text-white text-[9px] md:text-[10px] font-black">{product.category}</span>
+                       </div>
+                       {/* Row 2 */}
+                       <div className="flex justify-between items-center border-b border-black/5 group-hover:border-white/10 pb-1 transition-colors">
+                          <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[8px] md:text-[9px] font-bold">Brand</span>
+                          <span className="text-slate-800 group-hover:text-white text-[9px] md:text-[10px] font-black">{product.brand}</span>
+                       </div>
+                    </div>
+
                   </div>
                 </div>
               ))}
             </div>
+            
             {filteredProducts.length === 0 && (
-               <div className="text-center py-20 bg-white rounded-[2.5rem] border border-slate-100 animate-fade-in shadow-sm">
-                  <Search size={32} className="mx-auto text-slate-200 mb-4" />
-                  <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em]">NO MATCHING SOLUTIONS FOUND</p>
+               <div className="text-center py-20 bg-[#f2f0ea] rounded-[2.5rem] mt-16 animate-fade-in shadow-sm">
+                  <Search size={32} className="mx-auto text-slate-300 mb-4" />
+                  <p className="text-xs font-black text-slate-400 uppercase tracking-[0.4em]">No solutions found</p>
                </div>
             )}
           </main>

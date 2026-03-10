@@ -173,9 +173,9 @@ const HomePage = () => {
         </div>
 
         {/* 2-Column About layout */}
-        <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center pt-16 md:pt-20">
+        <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center pt-10 md:pt-14">
            {/* Left Image Column */}
-           <div className="relative mx-auto w-full max-w-[320px] md:max-w-[380px]">
+           <div className="relative mx-auto w-full max-w-[280px] md:max-w-[340px]">
               <div className="relative rounded-2xl bg-white p-2 shadow-xl rotate-[-2deg] transition-transform hover:rotate-0 duration-500">
                  <img 
                     src="/images/about_farm.png" 
@@ -184,37 +184,37 @@ const HomePage = () => {
                  />
                  
                  {/* Top Left Badge */}
-                 <div className="absolute -left-4 md:-left-6 -top-4 md:-top-6 bg-[#3A5A38] rounded-full w-20 h-20 md:w-24 md:h-24 border-[4px] border-white shadow-lg flex flex-col items-center justify-center text-white z-10 rotate-[10deg] hover:rotate-0 transition-transform duration-300">
-                    <Sprout size={24} className="mb-1 hidden md:block" />
-                    <Sprout size={18} className="mb-1 md:hidden" />
-                    <span className="text-[9px] md:text-[10px] font-black uppercase text-center leading-tight px-1 tracking-wider">Harito<br/>Certified</span>
+                 <div className="absolute -left-4 md:-left-6 -top-4 md:-top-6 bg-[#3A5A38] rounded-full w-16 h-16 md:w-20 md:h-20 border-[4px] border-white shadow-lg flex flex-col items-center justify-center text-white z-10 rotate-[10deg] hover:rotate-0 transition-transform duration-300">
+                    <Sprout size={20} className="mb-0.5 hidden md:block" />
+                    <Sprout size={16} className="mb-0.5 md:hidden" />
+                    <span className="text-[8px] md:text-[9px] font-black uppercase text-center leading-tight px-1 tracking-wider">Harito<br/>Certified</span>
                  </div>
 
                  {/* Bottom Right Badge */}
-                 <div className="absolute -right-3 md:-right-5 -bottom-3 md:-bottom-5 bg-[#E37A53] rounded-full w-14 h-14 md:w-16 md:h-16 border-[4px] border-white shadow-lg flex items-center justify-center text-white z-10 rotate-[-15deg] hover:rotate-0 transition-transform duration-300">
-                    <Leaf size={20} className="fill-current text-[#FAF9F6] hidden md:block" />
-                    <Leaf size={16} className="fill-current text-[#FAF9F6] md:hidden" />
+                 <div className="absolute -right-3 md:-right-5 -bottom-3 md:-bottom-5 bg-[#E37A53] rounded-full w-12 h-12 md:w-14 md:h-14 border-[4px] border-white shadow-lg flex items-center justify-center text-white z-10 rotate-[-15deg] hover:rotate-0 transition-transform duration-300">
+                    <Leaf size={16} className="fill-current text-[#FAF9F6] hidden md:block" />
+                    <Leaf size={14} className="fill-current text-[#FAF9F6] md:hidden" />
                  </div>
               </div>
            </div>
 
            {/* Right Text Column */}
-           <div className="space-y-4 md:pl-2 text-center md:text-left">
-              <h2 className="text-3xl md:text-4xl lg:text-[40px] font-bold text-[#2A3324] leading-[1.1] font-inter">
+           <div className="space-y-3 md:pl-2 text-center md:text-left">
+              <h2 className="text-2xl md:text-3xl lg:text-[36px] font-bold text-[#2A3324] leading-[1.15] font-inter">
                  Welcome to Harito Crop Science!
               </h2>
               
-              <p className="text-slate-500 text-[13px] md:text-sm leading-relaxed font-medium">
+              <p className="text-slate-500 text-xs md:text-[13px] leading-relaxed font-medium">
                  An ISO 9001:2015 certified manufacturer committed to elite fertilizers and pesticides. We empower farmers with sustainable science and high-yield solutions, bringing innovation directly to your fields.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center gap-5 pt-2 justify-center md:justify-start">
-                 <Link to="/about" className="bg-[#3A5A38] hover:bg-[#2D472B] text-white px-6 py-2.5 rounded-full font-semibold text-[13px] flex items-center gap-2 transition-all shadow-md group">
-                    <MapPin size={16} className="group-hover:-translate-y-1 transition-transform" />
+              <div className="flex flex-col sm:flex-row items-center gap-4 pt-2 justify-center md:justify-start">
+                 <Link to="/about" className="bg-[#3A5A38] hover:bg-[#2D472B] text-white px-5 py-2.5 rounded-full font-semibold text-xs flex items-center gap-2 transition-all shadow-md group">
+                    <MapPin size={14} className="group-hover:-translate-y-1 transition-transform" />
                     Read Our Full Story
                  </Link>
                  
-                 <Link to="/contact" className="text-slate-600 font-bold text-[13px] hover:text-[#3A5A38] transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-[#3A5A38] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
+                 <Link to="/contact" className="text-slate-600 font-bold text-xs hover:text-[#3A5A38] transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-[#3A5A38] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
                     Contact Us Today
                  </Link>
               </div>
@@ -229,9 +229,9 @@ const HomePage = () => {
       <FeaturedProducts />
       
       {/* Logistics Section - Redesigned to be more compact with fresh background */}
-      <section id="logistics" className="py-10 md:py-16 bg-[#EAF1EB] overflow-hidden">
+      <section id="logistics" className="py-8 md:py-12 bg-[#F1F8F1] overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 relative">
-          <div className="flex flex-col md:flex-row items-center gap-8 relative">
+          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8 relative">
             
             {/* Left Image Component */}
             <div className="w-full md:w-5/12 relative">
@@ -239,7 +239,7 @@ const HomePage = () => {
                 <img 
                   src="/images/storage_facility_agri.png" 
                   alt="Harito Logistics Facility" 
-                  className="w-full h-[220px] md:h-[320px] object-cover"
+                  className="w-full h-[200px] md:h-[280px] object-cover"
                 />
               </div>
               <div className="absolute -left-6 -bottom-6 w-24 h-24 bg-green-100 rounded-full blur-2xl opacity-60"></div>
@@ -247,30 +247,30 @@ const HomePage = () => {
 
             {/* Right Content Component */}
             <div className="w-full md:w-7/12 relative z-20">
-              <span className="text-[#1E5D57] font-bold uppercase tracking-[0.3em] text-[9px] mb-3 block">
+              <span className="text-[#1E5D57] font-bold uppercase tracking-[0.3em] text-[8px] md:text-[9px] mb-2 block">
                 Logistics & Supply
               </span>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#2A3324] font-inter leading-tight mb-6">
+              <h2 className="text-xl md:text-2xl font-bold text-[#2A3324] font-inter leading-tight mb-4">
                 Precision <span className="text-[#E37A53]">Storage</span> & <br/>
                 Fast Supply Chain
               </h2>
 
               {/* Overlapping Card */}
-              <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg shadow-slate-200/40 border border-slate-50 relative md:-ml-16 mt-2">
-                <div className="absolute -top-5 left-8 w-10 h-10 bg-[#E37A53] rounded-full flex items-center justify-center text-white shadow-md">
-                   <MapPin size={20} />
+              <div className="bg-[#F6F9F6] p-5 md:p-6 rounded-xl shadow-lg shadow-slate-200/40 border border-[#E2EDE2] relative md:-ml-12 mt-1">
+                <div className="absolute -top-4 left-6 w-8 h-8 bg-[#E37A53] rounded-full flex items-center justify-center text-white shadow-md">
+                   <MapPin size={16} />
                 </div>
                 
-                <p className="text-slate-500 text-xs md:text-sm leading-relaxed mb-6 font-medium italic">
+                <p className="text-slate-600 text-[11px] md:text-xs leading-relaxed mb-4 font-medium italic">
                   "Located in Bareilly, our state-of-the-art facilities ensure safe handling and rapid distribution of all agricultural products."
                 </p>
 
-                <div className="flex items-center justify-between border-t border-slate-100 pt-4">
+                <div className="flex items-center justify-between border-t border-slate-100 pt-3">
                   <div>
-                    <h4 className="text-[#2A3324] font-bold text-xs md:text-sm">Regional Hub</h4>
-                    <p className="text-slate-400 text-[10px] md:text-xs">Uttar Pradesh, Bareilly</p>
+                    <h4 className="text-[#2A3324] font-bold text-[11px] md:text-xs">Regional Hub</h4>
+                    <p className="text-slate-400 text-[9px] md:text-[10px]">Uttar Pradesh, Bareilly</p>
                   </div>
-                  <Link to="/godown" className="bg-[#1E5D57] hover:bg-[#132c20] text-white px-5 py-2 rounded-full font-bold text-[11px] tracking-wide transition-all shadow-sm">
+                  <Link to="/godown" className="bg-[#1E5D57] hover:bg-[#132c20] text-white px-4 py-1.5 rounded-full font-bold text-[10px] tracking-wide transition-all shadow-sm">
                     Explore Godown
                   </Link>
                 </div>
@@ -281,28 +281,28 @@ const HomePage = () => {
       </section>
 
       {/* Final Contact Section - Redesigned to be more compact */}
-      <section id="contact-hook" className="py-12 md:py-20 bg-white overflow-hidden">
+      <section id="contact-hook" className="py-10 md:py-16 bg-white overflow-hidden">
         <div className="max-w-5xl mx-auto px-4">
-          <div className="flex flex-col-reverse md:flex-row items-center gap-12 relative">
+          <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-10 relative">
             
             {/* Left Content Component */}
             <div className="w-full md:w-7/12 relative z-20">
-              <span className="text-green-700 font-bold uppercase tracking-[0.3em] text-[9px] mb-3 block">
+              <span className="text-green-700 font-bold uppercase tracking-[0.3em] text-[9px] mb-2 block">
                 Start Your Journey
               </span>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#2A3324] font-inter leading-tight mb-8">
+              <h2 className="text-xl md:text-3xl font-bold text-[#2A3324] font-inter leading-tight mb-6">
                 Ready to <span className="text-green-600">Grow?</span> <br/>
                 Talk to Our Experts Today.
               </h2>
 
               {/* Overlapping Card */}
-              <div className="bg-white p-6 md:p-10 rounded-[1.5rem] shadow-xl shadow-green-900/5 border border-slate-100 relative md:-mr-10 z-30">
-                <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 font-medium">
+              <div className="bg-white p-5 md:p-8 rounded-2xl shadow-xl shadow-green-900/5 border border-slate-100 relative md:-mr-10 z-30">
+                <p className="text-slate-600 text-xs md:text-sm leading-relaxed mb-5 font-medium">
                   Sustainable science for high-yield results is just a conversation away. Our consultants are ready to help you optimize your crop production.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4">
-                  <Link to="/contact" className="bg-[#3A5A38] hover:bg-[#2D472B] text-white px-8 py-3.5 rounded-full font-bold text-xs tracking-widest transition-all shadow-lg active:scale-95 text-center w-full sm:w-auto">
+                  <Link to="/contact" className="bg-[#3A5A38] hover:bg-[#2D472B] text-white px-6 py-2.5 rounded-full font-bold text-[11px] tracking-widest transition-all shadow-lg active:scale-95 text-center w-full sm:w-auto">
                     GET IN TOUCH NOW
                   </Link>
                 </div>
@@ -311,16 +311,16 @@ const HomePage = () => {
 
             {/* Right Image Component */}
             <div className="w-full md:w-5/12 relative">
-              <div className="relative rounded-[2rem] overflow-hidden shadow-xl z-10 border-[6px] border-slate-50 rotate-[1deg] hover:rotate-0 transition-transform duration-700">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl z-10 border-[4px] border-slate-50 rotate-[1deg] hover:rotate-0 transition-transform duration-700">
                 <img 
                   src="/images/happy_farmer_consultant.png" 
                   alt="Agricultural Consultant" 
-                  className="w-full h-[280px] md:h-[380px] object-cover"
+                  className="w-full h-[220px] md:h-[300px] object-cover"
                 />
               </div>
               {/* Decorative Circle */}
-              <div className="absolute -right-4 -top-4 w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center text-white shadow-md rotate-12 z-20">
-                 <Flower2 size={28} className="animate-pulse" />
+              <div className="absolute -right-3 -top-3 w-12 h-12 bg-orange-400 rounded-full flex items-center justify-center text-white shadow-md rotate-12 z-20">
+                 <Flower2 size={24} className="animate-pulse" />
               </div>
             </div>
           </div>

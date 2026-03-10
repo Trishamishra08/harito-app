@@ -8,6 +8,9 @@ import AboutPage from './user/pages/AboutPage.jsx';
 import CategoriesPage from './user/pages/CategoriesPage.jsx';
 import GodownPage from './user/pages/GodownPage.jsx';
 import ContactPage from './user/pages/ContactPage.jsx';
+import PrivacyPolicyPage from './user/pages/PrivacyPolicyPage.jsx';
+import TermsAndConditionsPage from './user/pages/TermsAndConditionsPage.jsx';
+import ProductDetailsPage from './user/pages/ProductDetailsPage.jsx';
 
 // Admin Imports
 import AdminLayout from './admin/AdminLayout.jsx';
@@ -34,6 +37,9 @@ function App() {
             <Route path="categories" element={<CategoriesPage />} />
             <Route path="godown" element={<GodownPage />} />
             <Route path="contact" element={<ContactPage />} />
+            <Route path="privacy" element={<PrivacyPolicyPage />} />
+            <Route path="terms" element={<TermsAndConditionsPage />} />
+            <Route path="products/:id" element={<ProductDetailsPage />} />
           </Route>
 
           {/* Admin Dashboard */}
