@@ -21,21 +21,21 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="bg-[#f8faf8] min-h-screen pb-24 font-inter">
+    <div className="bg-[#f8faf8] min-h-screen pb-12 font-inter">
       {/* Page Header Segment - Dark Combo (Matched with other pages) */}
-      <div className="bg-[#1e3932] pt-20 md:pt-24 pb-10 md:pb-14 text-white text-center relative overflow-hidden">
+      <div className="bg-[#1e3932] pt-12 md:pt-16 pb-6 md:pb-8 text-white text-center relative overflow-hidden">
         {/* Decorative elements for dark background */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] bg-[#00704A]/20 rounded-full blur-3xl pointer-events-none"></div>
         
         <div className="max-w-7xl mx-auto px-4 relative z-10 flex flex-col items-center justify-center text-center">
            <div className="w-full max-w-2xl mx-auto space-y-3">
-              <motion.span 
+              <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-[#d4e9e2] font-black uppercase tracking-[0.3em] text-[10px]"
+                className="text-[#d4e9e2] font-black uppercase tracking-[0.3em] text-[10px] block mb-2"
               >
                  Get in Touch
-              </motion.span>
+              </motion.div>
               <motion.h1 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -50,30 +50,30 @@ const ContactPage = () => {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 relative z-20 mt-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <div className="max-w-4xl mx-auto px-4 relative z-20 mt-6 md:mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           
           {/* Left Column: Official Details (Sharp & Compact) */}
-          <div className="lg:col-span-5 space-y-4">
+          <div className="lg:col-span-5 space-y-3">
             <motion.div 
                initial={{ opacity: 0, x: -20 }}
                whileInView={{ opacity: 1, x: 0 }}
                transition={{ duration: 0.6 }}
-               className="bg-[#1e3932] text-white p-6 md:p-8 shadow-2xl relative overflow-hidden rounded-none border border-white/5"
+               className="bg-[#1e3932] text-white p-4 md:p-5 shadow-2xl relative overflow-hidden rounded-none border border-white/5"
             >
               <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
                  <Globe size={80} />
               </div>
               
-              <div className="relative z-10 space-y-8">
-                <div className="space-y-1.5 border-b border-white/10 pb-4">
-                  <h3 className="text-lg md:text-xl font-black tracking-tight uppercase">Official Channels</h3>
-                  <div className="flex items-center gap-1.5 text-[8px] font-bold text-[#a4c639] uppercase tracking-[0.3em]">
-                    <ShieldCheck size={10} /> Certified Communication
+              <div className="relative z-10 space-y-4">
+                <div className="space-y-1 border-b border-white/10 pb-2.5">
+                  <h3 className="text-base md:text-lg font-black tracking-tight uppercase">Official Channels</h3>
+                  <div className="flex items-center gap-1 text-[7px] font-bold text-[#a4c639] uppercase tracking-[0.2em]">
+                    <ShieldCheck size={9} /> Certified Communication
                   </div>
                 </div>
                 
-                <div className="space-y-6">
+                <div className="space-y-3">
                   <div className="flex items-start gap-4">
                     <div className="w-9 h-9 bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
                        <MapPin size={16} className="text-[#a4c639]" />
@@ -117,7 +117,7 @@ const ContactPage = () => {
                initial={{ opacity: 0, x: -20 }}
                whileInView={{ opacity: 1, x: 0 }}
                transition={{ duration: 0.6, delay: 0.2 }}
-               className="bg-white border border-slate-100 p-5 rounded-none flex items-center justify-between group cursor-pointer hover:border-[#1e3932] transition-all shadow-sm"
+               className="bg-white border border-slate-100 p-3.5 rounded-none flex items-center justify-between group cursor-pointer hover:border-[#1e3932] transition-all shadow-sm"
             >
                <div>
                  <p className="text-[10px] font-black text-slate-800 uppercase tracking-tight">Corporate Relations</p>
@@ -135,7 +135,7 @@ const ContactPage = () => {
                initial={{ opacity: 0, x: 20 }}
                whileInView={{ opacity: 1, x: 0 }}
                transition={{ duration: 0.6 }}
-               className="bg-white p-6 md:p-10 rounded-none border border-slate-100 shadow-xl relative overflow-hidden"
+               className="bg-white p-4 md:p-5 rounded-none border border-slate-100 shadow-xl relative overflow-hidden"
              >
                 {submitted ? (
                   <motion.div 
@@ -151,51 +151,51 @@ const ContactPage = () => {
                      <button onClick={() => setSubmitted(false)} className="text-[9px] font-black uppercase tracking-[0.2em] text-[#1e3932] hover:bg-slate-50 border border-slate-100 px-8 py-3 transition-all">New Communication</button>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                       <div className="space-y-1.5">
-                          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+                  <form onSubmit={handleSubmit} className="space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                       <div className="space-y-1">
+                          <label className="text-[8px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
                           <input 
                             type="text" required value={formState.name}
                             onChange={(e) => setFormState({...formState, name: e.target.value})}
                             placeholder="Type name here..."
-                            className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-3.5 px-5 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[11px] placeholder:text-slate-200 placeholder:font-medium"
+                            className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-2 px-3 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[10px] placeholder:text-slate-200 placeholder:font-medium"
                           />
                        </div>
-                       <div className="space-y-1.5">
-                          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Work Email</label>
+                       <div className="space-y-1">
+                          <label className="text-[8px] font-black text-slate-400 uppercase tracking-widest ml-1">Work Email</label>
                           <input 
                             type="email" required value={formState.email}
                             onChange={(e) => setFormState({...formState, email: e.target.value})}
                             placeholder="email@example.com"
-                            className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-3.5 px-5 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[11px] placeholder:text-slate-200 placeholder:font-medium"
+                            className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-2 px-3 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[10px] placeholder:text-slate-200 placeholder:font-medium"
                           />
                        </div>
                     </div>
                     
-                    <div className="space-y-1.5">
-                       <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Inquiry Subject</label>
+                    <div className="space-y-1">
+                       <label className="text-[8px] font-black text-slate-400 uppercase tracking-widest ml-1">Inquiry Subject</label>
                        <input 
                          type="text" required value={formState.subject}
                          onChange={(e) => setFormState({...formState, subject: e.target.value})}
                          placeholder="e.g. Bulk Pesticide Inquiry"
-                         className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-3.5 px-5 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[11px] placeholder:text-slate-200 placeholder:font-medium"
+                         className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-2 px-3 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[10px] placeholder:text-slate-200 placeholder:font-medium"
                        />
                     </div>
 
-                    <div className="space-y-1.5">
-                       <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Inquiry Details</label>
+                    <div className="space-y-1">
+                       <label className="text-[8px] font-black text-slate-400 uppercase tracking-widest ml-1">Inquiry Details</label>
                        <textarea 
-                         rows="4" required value={formState.message}
+                         rows="3" required value={formState.message}
                          onChange={(e) => setFormState({...formState, message: e.target.value})}
                          placeholder="Please describe your requirements..."
-                         className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-3.5 px-5 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[11px] leading-relaxed placeholder:text-slate-200 placeholder:font-medium"
+                         className="w-full bg-[#fcfdfc] border border-slate-100 rounded-none py-2 px-3 focus:border-[#1e3932] outline-none text-[#1e3932] transition-all font-bold text-[10px] leading-relaxed placeholder:text-slate-200 placeholder:font-medium"
                        ></textarea>
                     </div>
 
                     <button 
                        type="submit" disabled={isSubmitting}
-                       className="w-full bg-[#1e3932] hover:bg-[#a4c639] text-white hover:text-[#1e3932] font-black uppercase tracking-[0.2em] text-[10px] py-4 rounded-none transition-all active:scale-[0.98] shadow-xl flex items-center justify-center gap-3 disabled:opacity-70 group"
+                       className="w-full bg-[#1e3932] hover:bg-[#a4c639] text-white hover:text-[#1e3932] font-black uppercase tracking-[0.2em] text-[9px] py-2.5 rounded-none transition-all active:scale-[0.98] shadow-xl flex items-center justify-center gap-2 disabled:opacity-70 group"
                     >
                        {isSubmitting ? 'TRANSMITTING...' : <>Initialize Communication <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" /></>}
                     </button>

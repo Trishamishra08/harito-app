@@ -51,10 +51,19 @@ const Carousel = () => {
                  <motion.h1 
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-3xl md:text-5xl font-extrabold text-white leading-tight tracking-tight drop-shadow-2xl max-w-md mb-10 capitalize"
+                    className="text-3xl md:text-5xl font-extrabold text-white leading-tight tracking-tight drop-shadow-2xl max-w-md mb-4 capitalize"
                  >
                     {slide.title || slide.subtitle}
                  </motion.h1>
+
+                 <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="text-sm md:text-base text-white/90 font-medium drop-shadow-md max-w-sm mb-8 line-clamp-2"
+                 >
+                    {slide.description || "Empowering farmers with high-quality fertilizers and innovative crop protection solutions for sustainable agriculture."}
+                 </motion.p>
 
                  <motion.div
                     initial={{ opacity: 0, y: 20 }}

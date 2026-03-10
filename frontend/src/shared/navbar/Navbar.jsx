@@ -87,9 +87,9 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-3">
-             <button className="hidden sm:flex bg-green-800 text-white px-6 py-2 btn-pill text-[9px]">
+             <Link to="/contact" className="hidden sm:flex bg-green-800 hover:bg-green-700 text-white px-6 py-2 btn-pill text-[9px]">
                 GET UPDATES
-             </button>
+             </Link>
              <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-slate-900">
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
              </button>
