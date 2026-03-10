@@ -22,7 +22,10 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.CORS_ORIGIN || 'http://localhost:5173' || 'https://harito-app-2.vercel.app' || 'harito-app-2.vercel.app/',
+  credentials: true
+}));
 app.use(helmet({
   crossOriginResourcePolicy: false, // Allow loading images from different domains
 }));
