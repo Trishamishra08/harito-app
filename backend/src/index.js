@@ -23,7 +23,11 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173' || 'https://harito-app-2.vercel.app' || 'harito-app-2.vercel.app/',
+  origin: [
+    process.env.CORS_ORIGIN,
+    'http://localhost:5173',
+    'https://harito-app-2.vercel.app'
+  ].filter(Boolean),
   credentials: true
 }));
 app.use(helmet({
