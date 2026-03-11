@@ -1,38 +1,14 @@
-import User from '../models/User.js';
-
 /**
- * Register a new user/admin
+ * Static Admin Credentials
  */
-export const register = async (req, res) => {
-  try {
-    const { name, email, phone, password } = req.body;
-
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: 'Name, email and password are required.' });
-    }
-
-    // Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'A user with this email already exists.' });
-    }
-
-    const user = new User({ name, email, phone, password });
-    await user.save();
-
-    res.status(201).json({ 
-      success: true, 
-      message: 'Account created successfully. You can now login.',
-      user: { name: user.name, email: user.email, phone: user.phone || '' }
-    });
-  } catch (error) {
-    console.error('Registration Error:', error);
-    res.status(500).json({ success: false, message: 'Server error during registration.', error: error.message });
-  }
+const STATIC_ADMIN = {
+  email: 'admin@gmail.com',
+  password: 'admin123',
+  name: 'Harito Admin'
 };
 
 /**
- * Login with Email and Password
+ * Login with Static Credentials
  */
 export const login = async (req, res) => {
   try {
@@ -42,29 +18,29 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: 'Email and password are required.' });
     }
 
-    // Find the user
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found. Please register first.' });
+    // Check against static credentials
+    if (email === STATIC_ADMIN.email && password === STATIC_ADMIN.password) {
+      return res.status(200).json({ 
+        success: true, 
+        message: 'Login successful!',
+        token: 'harito-static-token-' + Date.now(),
+        user: { name: STATIC_ADMIN.name, email: STATIC_ADMIN.email }
+      });
+    } else {
+      return res.status(401).json({ message: 'Invalid admin credentials.' });
     }
-
-    // Basic password check (Replace with bcrypt if available)
-    if (user.password !== password) {
-      return res.status(401).json({ message: 'Invalid credentials.' });
-    }
-
-    res.status(200).json({ 
-      success: true, 
-      message: 'Login successful!',
-      token: 'mock-jwt-token-' + Date.now(),
-      user: { name: user.name, email: user.email, phone: user.phone || '' }
-    });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server error during login.', error: error.message });
   }
 };
 
-// Compatibility exports to avoid breaking other routes until updated
+/**
+ * Placeholder for registration (Disabled)
+ */
+export const register = async (req, res) => {
+  res.status(403).json({ message: 'Registration is disabled. Use static credentials.' });
+};
+
+// Compatibility exports
 export const sendOtp = login;
 export const verifyOtp = login;
-
