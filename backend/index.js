@@ -26,7 +26,8 @@ app.use(cors({
   origin: [
     process.env.FRONTEND_URL,
     'http://localhost:5173',
-    'https://harito-app-2.vercel.app'
+    'https://harito-app.vercel.app',
+    'harito-app.vercel.app'
   ].filter(Boolean),
   credentials: true
 }));
