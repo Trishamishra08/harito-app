@@ -9,21 +9,27 @@ const seedUser = async () => {
   try {
     await connectDB();
     
+    const adminEmail = 'admin@gmail.com';
+    const adminPassword = 'admin123';
+    
     // Check if user already exists
-    const existingUser = await User.findOne({ email: 'trishamishra@gmail.com' });
+    const existingUser = await User.findOne({ email: adminEmail });
     
     if (!existingUser) {
       const user = new User({
-        name: 'Trisha Mishra',
-        email: 'trishamishra@gmail.com',
-        phone: '6260491554',
-        password: 'admin',
+        name: 'Harito Admin',
+        email: adminEmail,
+        phone: '1234567890',
+        password: adminPassword,
         role: 'admin'
       });
       await user.save();
-      console.log('✅ Admin user trishamishra@gmail.com created successfully!');
+      console.log(`✅ Admin user ${adminEmail} created successfully! (password: ${adminPassword})`);
     } else {
-      console.log('ℹ️ Admin user trishamishra@gmail.com already exists.');
+      // Update existing admin password to what was requested
+      existingUser.password = adminPassword;
+      await existingUser.save();
+      console.log(`ℹ️ Admin user ${adminEmail} updated with new password.`);
     }
     
     process.exit();

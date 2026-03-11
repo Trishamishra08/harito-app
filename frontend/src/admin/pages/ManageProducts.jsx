@@ -196,8 +196,8 @@ const ProductManagement = () => {
               {filteredProducts.map((product) => (
                 <tr key={product.id} className="group hover:bg-white/50 transition-all duration-200 border-b border-teal-900/5 last:border-0">
                   <td className="py-1.5 px-3">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-7 h-7 rounded-none bg-white border border-teal-900/5 p-0.5 overflow-hidden shrink-0 flex items-center justify-center">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-white border border-teal-900/5 p-1 overflow-hidden shrink-0 flex items-center justify-center shadow-sm">
                         <img src={getImageUrl(product.image)} alt={product.name} className="h-full object-contain" />
                       </div>
                       <div>
@@ -327,7 +327,7 @@ const ProductManagement = () => {
                     <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-1">Product Image</label>
                     <div className="flex items-center gap-4">
                       {formData.image && (
-                        <div className="w-16 h-16 bg-slate-50 border border-slate-200 overflow-hidden flex items-center justify-center shrink-0">
+                        <div className="w-24 h-24 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden flex items-center justify-center shrink-0 shadow-inner">
                           <img src={getImageUrl(formData.image)} alt="Preview" className="h-full object-contain" />
                         </div>
                       )}

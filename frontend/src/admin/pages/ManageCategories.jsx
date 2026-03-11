@@ -113,9 +113,13 @@ const CategoryManagement = () => {
             {/* Ornament for each card */}
             <div className="absolute -top-8 -right-8 w-16 h-16 rounded-full bg-[#1E5D57]/10 pointer-events-none transition-transform group-hover:scale-125 focus-within:scale-125" />
             
-            <div className="relative z-10 flex items-center gap-3 mb-3">
-              <div className="h-8 w-8 flex items-center justify-center text-teal-600 bg-white group-hover:bg-[#1E5D57] group-hover:text-white transition-all duration-500 shadow-sm border border-teal-900/5">
-                 {getCategoryIcon(category.name, 18)}
+            <div className="relative z-10 flex items-center gap-4 mb-4">
+              <div className="h-12 w-12 flex items-center justify-center text-teal-600 bg-white group-hover:bg-[#1E5D57] group-hover:text-white transition-all duration-500 shadow-sm border border-teal-900/5 overflow-hidden rounded-xl">
+                 {category.image ? (
+                   <img src={getImageUrl(category.image)} alt="" className="w-full h-full object-cover" />
+                 ) : (
+                   getCategoryIcon(category.name, 20)
+                 )}
               </div>
               <div className="flex-grow">
                  <h3 className="text-[10px] font-bold text-slate-800 uppercase tracking-widest leading-none">{category.name}</h3>
@@ -184,8 +188,8 @@ const CategoryManagement = () => {
                       <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-1">Category Image</label>
                       <div className="flex items-center gap-4">
                         {formData.image && (
-                          <div className="w-16 h-16 bg-slate-50 border border-slate-200 overflow-hidden flex items-center justify-center shrink-0">
-                             <img src={getImageUrl(formData.image)} alt="Preview" className="h-full object-contain" />
+                          <div className="w-24 h-24 bg-slate-50 border border-slate-200 rounded-xl overflow-hidden flex items-center justify-center shrink-0 shadow-inner">
+                             <img src={getImageUrl(formData.image)} alt="Preview" className="h-full object-cover" />
                           </div>
                         )}
                         <div className="flex-1 relative">

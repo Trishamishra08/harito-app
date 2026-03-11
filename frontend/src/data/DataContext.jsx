@@ -20,11 +20,11 @@ export const DataProvider = ({ children }) => {
     { id: '3', name: 'Rider Plus', image: 'rider-plus.png', description: 'Professional grade growth promoter.' },
     { id: '4', name: 'Vito M45', image: 'vito-m45.png', description: 'Broad-spectrum fungicide for healthy crops.' }
   ]);
-  const [carousel, setCarousel] = useState([
+  const [carousel] = useState([
     {
       id: 1,
       title: "SMART AGRICULTURE",
-      subtitle: "NURTURING NATURE WITH PRECISION SCIENCE",
+      subtitle: "NURTURING NATURE WITH PRECISION",
       description: "ISO 9001:2015 Certified manufacturer providing high-yield solutions for the modern farmer.",
       image: "carousel-1.png",
       link: "/products"
@@ -40,9 +40,9 @@ export const DataProvider = ({ children }) => {
     {
       id: 3,
       title: "BAREILLY PRECISION",
-      subtitle: "EFFICIENT SUPPLY CHAIN SOLUTIONS",
-      description: "Safe storage and nationwide distribution of agricultural chemicals from our Uttar Pradesh facility.",
-      image: "carousel-1.png",
+      subtitle: "EFFICIENT SUPPLY SOLUTIONS",
+      description: "Safe storage and nationwide distribution of agricultural chemicals from our central facility.",
+      image: "storage_facility_agri.png",
       link: "/godown"
     }
   ]);
@@ -69,10 +69,7 @@ export const DataProvider = ({ children }) => {
       const response = await fetch(`${API_BASE_URL}/categories`);
       if (response.ok) {
         const data = await response.json();
-        console.log('Categories fetched:', data.length);
         setCategories(data.map(cat => ({ ...cat, id: cat._id })));
-      } else {
-        console.error('Failed to fetch categories:', response.status);
       }
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -84,144 +81,61 @@ export const DataProvider = ({ children }) => {
       const response = await fetch(`${API_BASE_URL}/products`);
       if (response.ok) {
         const data = await response.json();
-        console.log('Products fetched from API:', data);
         setProducts(data.map(prod => ({ ...prod, id: prod._id })));
-      } else {
-        console.error('Failed to fetch products:', response.status);
       }
     } catch (error) {
       console.error('Error fetching products:', error);
     }
   };
 
-  const fetchCarousel = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/carousel`);
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Carousel fetched:', data.length);
-        if (data.length === 0) {
-          // Seed defaults
-          await fetch(`${API_BASE_URL}/carousel/seed`, { method: 'POST' });
-          const seeded = await fetch(`${API_BASE_URL}/carousel`);
-          if (seeded.ok) {
-            const seedData = await seeded.json();
-            setCarousel(seedData.map(s => ({ ...s, id: s._id })));
-          }
-        } else {
-          setCarousel(data.map(s => ({ ...s, id: s._id })));
-        }
-      } else {
-        console.error('Failed to fetch carousel:', response.status);
-      }
-    } catch (error) {
-      console.error('Error fetching carousel:', error);
-    }
-  };
-
-  // Carousel CRUD helpers
-  const addCarouselSlide = async (slideData) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/carousel`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(slideData)
-      });
-      if (response.ok) {
-        await fetchCarousel();
-        return true;
-      }
-    } catch (error) {
-      console.error('Error adding carousel slide:', error);
-    }
-    return false;
-  };
-
-  const updateCarouselSlide = async (id, slideData) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/carousel/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(slideData)
-      });
-      if (response.ok) {
-        await fetchCarousel();
-        return true;
-      }
-    } catch (error) {
-      console.error('Error updating carousel slide:', error);
-    }
-    return false;
-  };
-
-  const deleteCarouselSlide = async (id) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/carousel/${id}`, {
-        method: 'DELETE'
-      });
-      if (response.ok) {
-        await fetchCarousel();
-        return true;
-      }
-    } catch (error) {
-      console.error('Error deleting carousel slide:', error);
-    }
-    return false;
-  };
-
   useEffect(() => {
     const initData = async () => {
       setLoading(true);
-      await Promise.all([fetchCategories(), fetchProducts(), fetchCarousel()]);
+      await Promise.all([fetchCategories(), fetchProducts()]);
       setLoading(false);
     };
     initData();
   }, []);
 
-    const getImageUrl = (path) => {
-      if (!path) return '';
-      
-      // Override legacy Unsplash seeds to local images
-      if (path.includes('unsplash.com')) {
-        if (path.includes('1500382017468') || path.includes('1523348837708')) return '/images/carousel-1.png';
-        if (path.includes('1464226184884')) return '/images/carousel-2.png';
-      }
+  const getImageUrl = (path) => {
+    if (!path) return '';
+    
+    // Override legacy Unsplash seeds to local images
+    if (path.includes('unsplash.com')) {
+      if (path.includes('1500382017468') || path.includes('1523348837708')) return '/images/carousel-1.png';
+      if (path.includes('1464226184884')) return '/images/carousel-2.png';
+    }
 
-      // 1. Absolute external URLs
-      if (path.startsWith('http')) return path;
-      
-      // 2. Handle paths that already start with /images/ or images/
-      if (path.startsWith('/images/')) return path;
-      if (path.startsWith('images/')) return `/${path}`;
-      
-      // 3. Handle paths starting with public/images/
-      if (path.startsWith('public/images/')) return `/${path.replace('public/', '')}`;
-      if (path.startsWith('/public/images/')) return path.replace('/public/', '/');
-      
-      // 4. Backend uploads
-      if (path.startsWith('/uploads')) {
-        // Correctly isolate the server root (e.g., https://harito-app.onrender.com)
-        const base = API_BASE_URL.replace(/\/api$/, '');
-        return `${base}${path}`;
-      }
-      
-      // 5. Default fallback: assume it is a filename in /images/
-      const cleanPath = path.startsWith('/') ? path : `/${path}`;
-      return `/images${cleanPath}`;
-    };
+    // 1. Absolute external URLs
+    if (path.startsWith('http')) return path;
+    
+    // 2. Handle paths that already start with /images/ or images/
+    if (path.startsWith('/images/')) return path;
+    if (path.startsWith('images/')) return `/${path}`;
+    
+    // 3. Handle paths starting with public/images/
+    if (path.startsWith('public/images/')) return `/${path.replace('public/', '')}`;
+    if (path.startsWith('/public/images/')) return path.replace('/public/', '/');
+    
+    // 4. Backend uploads
+    if (path.startsWith('/uploads')) {
+      const base = API_BASE_URL.replace(/\/api$/, '');
+      return `${base}${path}`;
+    }
+    
+    // 5. Default fallback: assume it is a filename in /images/
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    return `/images${cleanPath}`;
+  };
 
-    return (
+  return (
     <DataContext.Provider value={{
       categories, setCategories,
       products, setProducts,
-      carousel, setCarousel,
+      carousel,
       godowns, setGodowns,
       fetchCategories,
       fetchProducts,
-      fetchCarousel,
-      addCarouselSlide,
-      updateCarouselSlide,
-      deleteCarouselSlide,
       getImageUrl,
       siteName, setSiteName,
       adminEmail, setAdminEmail,
@@ -247,10 +161,7 @@ export const useData = () => {
       setGodowns: () => {},
       fetchCategories: () => {},
       fetchProducts: () => {},
-      fetchCarousel: () => {},
-      addCarouselSlide: () => {},
-      updateCarouselSlide: () => {},
-      deleteCarouselSlide: () => {},
+      getImageUrl: () => {},
       siteName: '',
       setSiteName: () => {},
       adminEmail: '',
@@ -260,4 +171,3 @@ export const useData = () => {
   }
   return context;
 };
-

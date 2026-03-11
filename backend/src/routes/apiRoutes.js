@@ -35,10 +35,8 @@ router.put('/carousel/:id', carouselController.updateCarouselSlide);
 router.delete('/carousel/:id', carouselController.deleteCarouselSlide);
 router.post('/carousel/seed', carouselController.seedCarousel);
 
-/**
- * Auth Routes
- */
-router.post('/auth/register', authController.register);
+// Auth Routes
+// router.post('/auth/register', authController.register); // Public registration disabled
 router.post('/auth/login', authController.login);
 router.post('/auth/send-otp', authController.sendOtp);
 router.post('/auth/verify-otp', authController.verifyOtp);

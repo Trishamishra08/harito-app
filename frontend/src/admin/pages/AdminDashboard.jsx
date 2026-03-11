@@ -99,8 +99,8 @@ const AdminDashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard title="Total Products" value={products.length} icon={Package} trend="up" trendValue="12" color="#1E5D57" to="/admin/products" />
         <StatCard title="Product Types" value={categories.length} icon={Tags} trend="up" trendValue="5" color="#3B82F6" to="/admin/categories" />
-        <StatCard title="Active Campaigns" value={carousel.length} icon={Zap} trend="up" trendValue="0" color="#FBBF24" to="/admin/carousel" />
         <StatCard title="Total Facilities" value={godowns.length} icon={Warehouse} trend="up" trendValue="2" color="#10B981" to="/admin/godown" />
+        <StatCard title="Active Systems" value="Live" icon={Zap} trend="up" trendValue="0" color="#FBBF24" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -175,8 +175,8 @@ const AdminDashboard = () => {
             <h3 className="text-sm font-bold text-slate-800 tracking-tight uppercase mb-4">
               Inventory Distribution
             </h3>
-   <div className="h-[150px] w-full relative">
-                <ResponsiveContainer width="100%" height="100%">
+   <div className="h-[150px] w-full relative min-h-0">
+                <ResponsiveContainer width="99%" height="150">
                   <PieChart>
                     <Pie
                       data={categoryDistribution}
@@ -228,8 +228,8 @@ const AdminDashboard = () => {
                  <Link to="/admin/godown" className="flex items-center justify-center h-9 rounded-none bg-white text-slate-900 text-[11px] font-medium hover:bg-teal-50 transition-all shadow-sm">
                    Storage
                  </Link>
-                 <Link to="/admin/carousel" className="flex items-center justify-center h-9 rounded-none bg-white/10 text-white border border-white/10 text-[11px] font-medium hover:bg-white/20 transition-all">
-                   Banners
+                 <Link to="/admin/products" className="flex items-center justify-center h-9 rounded-none bg-white/10 text-white border border-white/10 text-[11px] font-medium hover:bg-white/20 transition-all">
+                   Catalog
                  </Link>
               </div>
             </div>

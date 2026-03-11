@@ -101,25 +101,29 @@ const AdminLogin = () => {
                  
                  <div className="space-y-4 pt-1">
                     <div className="space-y-1">
-                       <label className="text-[11px] font-medium text-white/70 ml-1">Email Address</label>
+                       <label htmlFor="email" className="text-[11px] font-medium text-white/70 ml-1">Email Address</label>
                        <div className="bg-black/20 rounded-2xl overflow-hidden px-4">
                           <input 
+                             id="email"
+                             name="email"
                              type="email" required value={email} 
                              onChange={e => setEmail(e.target.value)}
-                              placeholder="trishamishra@gmail.com" 
-                             className="w-full bg-transparent border-none py-3 text-white text-[13px] outline-none placeholder:text-white/10"
+                             placeholder="admin@gmail.com" 
+                             className="w-full bg-transparent border-none py-3 text-white text-[13px] outline-none placeholder:text-white/20"
                           />
                        </div>
                     </div>
 
                     <div className="space-y-1">
-                       <label className="text-[11px] font-medium text-white/70 ml-1">Password</label>
+                       <label htmlFor="password" className="text-[11px] font-medium text-white/70 ml-1">Password</label>
                        <div className="bg-black/20 rounded-2xl overflow-hidden px-4">
                           <input 
+                             id="password"
+                             name="password"
                              type="password" required value={password} 
                              onChange={e => setPassword(e.target.value)}
                              placeholder="••••••••" 
-                             className="w-full bg-transparent border-none py-3 text-white text-[13px] outline-none placeholder:text-white/10"
+                             className="w-full bg-transparent border-none py-3 text-white text-[13px] outline-none placeholder:text-white/20"
                           />
                        </div>
                     </div>
@@ -134,8 +138,8 @@ const AdminLogin = () => {
                     </button>
 
                     <div className="text-center pt-1">
-                       <p className="text-white/50 text-[10px] font-medium">
-                          Don't have an account? <Link to="/admin/register" className="text-white underline underline-offset-4 decoration-white/20 ml-1">Register Now</Link>
+                       <p className="text-white/30 text-[9px] font-medium uppercase tracking-widest">
+                          Authorized Access Only
                        </p>
                     </div>
                  </div>

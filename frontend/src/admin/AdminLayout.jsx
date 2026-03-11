@@ -51,7 +51,7 @@ const SidebarLink = ({ to, icon: Icon, children, current, isOpen }) => (
 );
 
 const AdminLayout = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(window.innerWidth > 1024);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
@@ -95,11 +95,29 @@ const AdminLayout = () => {
 
   return (
     <div className={`flex h-screen overflow-hidden bg-[#F8FAFC] text-slate-900 font-sans`}>
+      {/* Sidebar Backdrop (Mobile only) */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 bg-black/60 z-[45] lg:hidden backdrop-blur-sm"
+          />
+        )}
+      </AnimatePresence>
+
       {/* Sidebar */}
       <motion.aside 
         initial={false}
-        animate={{ width: isOpen ? 260 : 88 }}
-        className={`bg-[#0F172A] fixed lg:relative z-50 h-screen flex flex-col border-none`}
+        animate={{ 
+          x: isOpen ? 0 : (window.innerWidth < 1024 ? -260 : 0),
+          width: isOpen ? 260 : (window.innerWidth < 1024 ? 260 : 88),
+          opacity: 1
+        }}
+        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+        className={`bg-[#0F172A] fixed lg:relative z-50 h-screen flex flex-col border-none overflow-hidden`}
       >
         {/* Logo Section */}
         <div className={`p-6 flex items-center gap-3 border-b border-white/5 ${!isOpen && 'justify-center'}`}>
@@ -121,7 +139,6 @@ const AdminLayout = () => {
           <SidebarLink to="/admin/products" icon={Package} current={location.pathname === '/admin/products'} isOpen={isOpen}>Products</SidebarLink>
           <SidebarLink to="/admin/categories" icon={Tags} current={location.pathname === '/admin/categories'} isOpen={isOpen}>Categories</SidebarLink>
           <SidebarLink to="/admin/godown" icon={Warehouse} current={location.pathname === '/admin/godown'} isOpen={isOpen}>Storage</SidebarLink>
-          <SidebarLink to="/admin/carousel" icon={ImageIcon} current={location.pathname === '/admin/carousel'} isOpen={isOpen}>Marketing</SidebarLink>
           <SidebarLink to="/admin/assets" icon={Upload} current={location.pathname === '/admin/assets'} isOpen={isOpen}>Assets</SidebarLink>
           <SidebarLink to="/admin/settings" icon={Settings} current={location.pathname === '/admin/settings'} isOpen={isOpen}>Settings</SidebarLink>
         </nav>

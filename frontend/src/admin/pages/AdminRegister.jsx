@@ -123,16 +123,31 @@ const AdminRegister = () => {
               <form onSubmit={handleSubmit} className="space-y-4 pt-1">
                  <div className="space-y-4">
                     <div className="space-y-1">
-                       <label className="text-[10px] font-medium text-white/70 ml-1">Full Name</label>
-                       <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="First Last" autoComplete="off" className="w-full bg-black/20 border-none rounded-xl px-4 py-2.5 text-white text-[12px] outline-none placeholder:text-white/10" required />
+                       <label htmlFor="reg-name" className="text-[10px] font-medium text-white/70 ml-1">Full Name</label>
+                       <input 
+                         id="reg-name"
+                         type="text" name="name" value={formData.name} onChange={handleChange} 
+                         placeholder="First Last" autoComplete="name" 
+                         className="w-full bg-black/20 border-none rounded-xl px-4 py-2.5 text-white text-[12px] outline-none placeholder:text-white/10" required 
+                       />
                     </div>
                     <div className="space-y-1">
-                       <label className="text-[10px] font-medium text-white/70 ml-1">Email</label>
-                       <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="trishamishra@gmail.com" autoComplete="off" className="w-full bg-black/20 border-none rounded-xl px-4 py-2.5 text-white text-[12px] outline-none placeholder:text-white/10" required />
+                       <label htmlFor="reg-email" className="text-[10px] font-medium text-white/70 ml-1">Email</label>
+                       <input 
+                         id="reg-email"
+                         type="email" name="email" value={formData.email} onChange={handleChange} 
+                         placeholder="trishamishra@gmail.com" autoComplete="email" 
+                         className="w-full bg-black/20 border-none rounded-xl px-4 py-2.5 text-white text-[12px] outline-none placeholder:text-white/10" required 
+                       />
                     </div>
                     <div className="space-y-1">
-                       <label className="text-[10px] font-medium text-white/70 ml-1">Passcode</label>
-                       <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="••••••••" autoComplete="new-password" className="w-full bg-black/20 border-none rounded-xl px-4 py-2.5 text-white text-[12px] outline-none placeholder:text-white/10" required />
+                       <label htmlFor="reg-password" className="text-[10px] font-medium text-white/70 ml-1">Passcode</label>
+                       <input 
+                         id="reg-password"
+                         type="password" name="password" value={formData.password} onChange={handleChange} 
+                         placeholder="••••••••" autoComplete="new-password" 
+                         className="w-full bg-black/20 border-none rounded-xl px-4 py-2.5 text-white text-[12px] outline-none placeholder:text-white/10" required 
+                       />
                     </div>
                  </div>
                  {error && <p className="text-red-400 text-[10px] font-medium ml-1 italic">{error}</p>}
