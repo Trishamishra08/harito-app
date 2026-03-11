@@ -52,7 +52,7 @@ const ProductManagement = () => {
     name: '',
     category: '',
     subcategory: '',
-    brand: 'Harito',
+    brand: 'Hirato',
     description: '',
     image: ''
   });
@@ -81,7 +81,7 @@ const ProductManagement = () => {
         name: '',
         category: categories[0]?.name || '',
         subcategory: '',
-        brand: 'Harito',
+        brand: 'Hirato',
         description: '',
         image: ''
       });
@@ -212,7 +212,7 @@ const ProductManagement = () => {
                           {getCategoryIcon(product.category, 10)}
                           <span className="text-[9px] font-bold uppercase tracking-widest leading-none">{product.category}</span>
                        </div>
-                       <p className="font-medium text-slate-300 text-[8px] pl-4 uppercase tracking-widest">{product.brand || 'Harito'}</p>
+                       <p className="font-medium text-slate-300 text-[8px] pl-4 uppercase tracking-widest">{product.brand || 'Hirato'}</p>
                      </div>
                    </td>
                   <td className="py-1.5 px-3">
@@ -318,7 +318,7 @@ const ProductManagement = () => {
                     <input 
                       type="text" required value={formData.brand}
                       onChange={(e) => setFormData({...formData, brand: e.target.value})}
-                      placeholder="E.G. HARITO"
+                      placeholder="E.G. HIRATO"
                       className="w-full bg-slate-50 border-none rounded-xl py-3 px-5 focus:ring-2 focus:ring-teal-500/20 focus:bg-white outline-none text-slate-700 transition-all font-bold text-xs"
                     />
                   </div>

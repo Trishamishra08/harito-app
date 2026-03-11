@@ -66,9 +66,9 @@ const AdminLogin = () => {
         <div className="md:w-[50%] flex flex-col p-6 md:p-8 relative z-20">
            <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 flex items-center justify-center bg-white rounded-lg shadow-sm border border-slate-100">
-                 <img src="/images/logo.png" alt="Harito" className="h-5 w-5" />
+                 <img src="/images/logo.png" alt="Hirato" className="h-5 w-5" />
               </div>
-              <h1 className="text-xl font-black text-[#1E5D57] tracking-tighter italic">Harito</h1>
+              <h1 className="text-xl font-black text-[#1E5D57] tracking-tighter italic">Hirato</h1>
            </div>
 
            <div className="flex-1 flex flex-col justify-center items-center py-4">
@@ -146,7 +146,7 @@ const AdminLogin = () => {
               </form>
            </div>
            <div className="mt-auto flex justify-end items-center pt-4 border-t border-white/5">
-              <div className="flex items-center gap-1.5 text-[8px] font-semibold text-white/30 uppercase tracking-widest italic font-black"><ShieldCheck size={9}/> Harito Module</div>
+              <div className="flex items-center gap-1.5 text-[8px] font-semibold text-white/30 uppercase tracking-widest italic font-black"><ShieldCheck size={9}/> Hirato Module</div>
            </div>
         </div>
       </motion.div>

@@ -43,7 +43,7 @@ const Navbar = () => {
              <div className="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center text-white shadow-sm overflow-hidden shrink-0">
                 <img src="/images/logo.png" alt="H" className="w-full h-full object-contain p-1.5" />
              </div>
-             <span className="font-black text-xl text-slate-900 tracking-tighter uppercase group-hover:text-green-600 transition-colors">Harito</span>
+             <span className="font-black text-xl text-slate-900 tracking-tighter uppercase group-hover:text-green-600 transition-colors">Hirato</span>
           </Link>
 
           {/* Desktop Nav */}

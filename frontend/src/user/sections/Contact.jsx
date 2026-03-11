@@ -17,14 +17,14 @@ const Contact = () => {
                 Get In <span className="text-[#3ed0a5]">Touch</span>
               </h2>
               <p className="text-white/60 text-[11px] font-medium max-w-[300px] mx-auto lg:mx-0 leading-relaxed italic">
-                Harito experts are ready to assist with your queries.
+                Hirato experts are ready to assist with your queries.
               </p>
             </div>
             
             <div className="space-y-3 pt-4">
               {[
                 { icon: Phone, label: "Hotline", val: "+92 (210) 420-0890" },
-                { icon: Mail, label: "Comms", val: "INFO@HARITO-AGRI.COM" },
+                { icon: Mail, label: "Comms", val: "INFO@HIRATO-AGRI.COM" },
                 { icon: MapPin, label: "Hub", val: "UNIT 123, SECTOR-A" }
               ].map((item, id) => (
                 <div key={id} className="flex items-center gap-3 group justify-center lg:justify-start">

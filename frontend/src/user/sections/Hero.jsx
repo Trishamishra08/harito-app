@@ -15,7 +15,7 @@ const Hero = () => {
           <div className="flex-1 space-y-8 animate-fade-in text-center lg:text-left">
             <div className="inline-flex items-center gap-3 bg-slate-900 shadow-xl shadow-green-500/10 text-white px-4 py-2 rounded-xl font-black text-[9px] tracking-[0.3em] uppercase transition-all">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-              Harito Crop Science Private Limited
+              Hirato Crop Science Private Limited
             </div>
             
             <h1 className="text-4xl md:text-7xl font-black text-slate-900 leading-[1] uppercase tracking-tighter italic">

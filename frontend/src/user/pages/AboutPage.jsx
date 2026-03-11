@@ -23,7 +23,7 @@ const AboutPage = () => {
               >
                 <img 
                   src="/images/happy_farmer_consultant.png" 
-                  alt="Harito Professional" 
+                  alt="Hirato Professional" 
                   className="w-full h-[250px] md:h-[350px] object-cover rounded-none grayscale group-hover:grayscale-0 transition-all duration-700 shadow-2xl border border-white/5"
                 />
               </motion.div>
@@ -53,10 +53,10 @@ const AboutPage = () => {
                    Scientific Agriculture Excellence
                 </span>
                 <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight uppercase font-inter">
-                   About Harito<br/>Crop Science
+                   About Hirato<br/>Crop Science
                 </h1>
                 <p className="text-[#d4e9e2] text-[11px] md:text-xs leading-relaxed font-medium max-w-lg opacity-80">
-                  <strong>Harito Crop Science Private Limited</strong> is an <strong>ISO 9001:2015 Certified</strong> (Certificate No: TSNUK39907) manufacturer and trader dedicated to supporting modern agriculture by providing high-quality fertilizers and crop protection solutions. Our goal is to help farmers improve crop productivity while maintaining soil health and sustainable farming practices.
+                  <strong>Hirato Crop Science Private Limited</strong> is an <strong>ISO 9001:2015 Certified</strong> (Certificate No: TSNUK39907) manufacturer and trader dedicated to supporting modern agriculture by providing high-quality fertilizers and crop protection solutions. Our goal is to help farmers improve crop productivity while maintaining soil health and sustainable farming practices.
                 </p>
                 <p className="text-[#d4e9e2] text-[11px] md:text-xs leading-relaxed font-medium max-w-lg opacity-70">
                   With a strong commitment to quality and innovation, we focus on developing effective agricultural solutions that enhance plant growth and protect crops from pests and diseases — contributing to better yield and healthier crops across India.
@@ -88,7 +88,7 @@ const AboutPage = () => {
 
               <div className="text-slate-500 leading-relaxed font-bold text-[11px]">
                 <p>
-                  Harito Crop Science operates with a focus on reliability, quality assurance, and customer satisfaction. The company follows standardized processes and is committed to delivering agricultural products that meet industry standards and support the agricultural community.
+                  Hirato Crop Science operates with a focus on reliability, quality assurance, and customer satisfaction. The company follows standardized processes and is committed to delivering agricultural products that meet industry standards and support the agricultural community.
                 </p>
               </div>
 
@@ -129,7 +129,7 @@ const AboutPage = () => {
                 <Award size={100} />
               </div>
 
-              <h3 className="text-[10px] font-black uppercase tracking-widest border-b border-white/10 pb-3 mb-4">Why Choose Harito</h3>
+              <h3 className="text-[10px] font-black uppercase tracking-widest border-b border-white/10 pb-3 mb-4">Why Choose Hirato</h3>
 
               <ul className="space-y-3">
                 {[

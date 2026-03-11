@@ -122,11 +122,11 @@ const AdminLayout = () => {
         {/* Logo Section */}
         <div className={`p-6 flex items-center gap-3 border-b border-white/5 ${!isOpen && 'justify-center'}`}>
            <div className="w-10 h-10 flex items-center justify-center bg-white rounded-xl shadow-sm border border-white/10 shrink-0 p-1.5">
-              <img src="/images/logo.png" alt="Harito" className="w-full h-full object-contain" />
+              <img src="/images/logo.png" alt="Hirato" className="w-full h-full object-contain" />
            </div>
            {isOpen && (
              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-               <h1 className="text-xl font-black text-white tracking-tighter italic">Harito</h1>
+               <h1 className="text-xl font-black text-white tracking-tighter italic">Hirato</h1>
                <p className="text-[8px] text-teal-400 font-black uppercase tracking-[0.2em] leading-none opacity-60">Admin Portal</p>
              </motion.div>
            )}

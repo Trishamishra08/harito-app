@@ -4,7 +4,7 @@ const DataContext = createContext();
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 
   (window.location.hostname.includes('vercel.app') 
-    ? 'https://harito-app.onrender.com/api' 
+    ? 'https://hirato-app.onrender.com/api' 
     : 'http://localhost:5000/api');
 
 export const DataProvider = ({ children }) => {
@@ -47,15 +47,15 @@ export const DataProvider = ({ children }) => {
     }
   ]);
   const [godowns, setGodowns] = useState([
-    { id: 1, name: 'Harito Central Godown', location: 'Bareilly, Uttar Pradesh', capacity: '10,000 MT', storedProducts: 'Fertilizers, Pesticides, Growth Promoters', contactDetails: '+91 62604 91554' },
+    { id: 1, name: 'Hirato Central Godown', location: 'Bareilly, Uttar Pradesh', capacity: '10,000 MT', storedProducts: 'Fertilizers, Pesticides, Growth Promoters', contactDetails: '+91 62604 91554' },
   ]);
   const [loading, setLoading] = useState(true);
 
   // Settings state
-  const [siteName, setSiteName] = useState('Harito Crop Science Private Limited');
+  const [siteName, setSiteName] = useState('Hirato Crop Science Private Limited');
   const [adminEmail, setAdminEmail] = useState('trishamishra@gmail.com');
   const [companyInfo, setCompanyInfo] = useState({
-    fullName: 'Harito Crop Science Private Limited',
+    fullName: 'Hirato Crop Science Private Limited',
     certification: 'ISO 9001:2015 Certified Manufacturer and Trader',
     location: 'Bareilly, Uttar Pradesh, India',
     address: 'Durga Nagar Back in Megha City, Near Mandir & Suresh Sharma Nagar, Mahanagar, Bareilly, Uttar Pradesh – 243006, India',
@@ -88,10 +88,23 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  const fetchSettings = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/settings`);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.siteName) setSiteName(data.siteName);
+        if (data.adminEmail) setAdminEmail(data.adminEmail);
+      }
+    } catch (error) {
+      console.error('Error fetching settings:', error);
+    }
+  };
+
   useEffect(() => {
     const initData = async () => {
       setLoading(true);
-      await Promise.all([fetchCategories(), fetchProducts()]);
+      await Promise.all([fetchCategories(), fetchProducts(), fetchSettings()]);
       setLoading(false);
     };
     initData();

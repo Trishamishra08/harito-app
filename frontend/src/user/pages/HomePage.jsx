@@ -180,7 +180,7 @@ const HomePage = () => {
               <div className="relative rounded-2xl bg-white p-2 shadow-xl rotate-[-2deg] transition-transform hover:rotate-0 duration-500">
                  <img 
                     src="/images/about_farm.png" 
-                    alt="Harito Crop Science Facility" 
+                    alt="Hirato Crop Science Facility" 
                     className="w-full h-auto aspect-[4/3] object-cover rounded-xl"
                  />
                  
@@ -188,7 +188,7 @@ const HomePage = () => {
                  <div className="absolute -left-4 md:-left-6 -top-4 md:-top-6 bg-[#3A5A38] rounded-full w-16 h-16 md:w-20 md:h-20 border-[4px] border-white shadow-lg flex flex-col items-center justify-center text-white z-10 rotate-[10deg] hover:rotate-0 transition-transform duration-300">
                     <Sprout size={20} className="mb-0.5 hidden md:block" />
                     <Sprout size={16} className="mb-0.5 md:hidden" />
-                    <span className="text-[8px] md:text-[9px] font-black uppercase text-center leading-tight px-1 tracking-wider">Harito<br/>Certified</span>
+                    <span className="text-[8px] md:text-[9px] font-black uppercase text-center leading-tight px-1 tracking-wider">Hirato<br/>Certified</span>
                  </div>
 
                  {/* Bottom Right Badge */}
@@ -202,7 +202,7 @@ const HomePage = () => {
            {/* Right Text Column */}
            <div className="space-y-3 md:pl-2 text-center md:text-left">
               <h2 className="text-2xl md:text-3xl lg:text-[36px] font-bold text-[#2A3324] leading-[1.15] font-inter">
-                 Welcome to Harito Crop Science!
+                 Welcome to Hirato Crop Science!
               </h2>
               
               <p className="text-slate-500 text-xs md:text-[13px] leading-relaxed font-medium">
@@ -239,7 +239,7 @@ const HomePage = () => {
               <div className="relative rounded-xl overflow-hidden shadow-xl z-10 border-[4px] border-white">
                 <img 
                   src="/images/storage_facility_agri.png" 
-                  alt="Harito Logistics Facility" 
+                  alt="Hirato Logistics Facility" 
                   className="w-full h-[200px] md:h-[280px] object-cover"
                 />
               </div>

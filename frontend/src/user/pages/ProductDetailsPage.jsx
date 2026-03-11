@@ -83,7 +83,7 @@ const ProductDetailsPage = () => {
   const packSizes = ['1 Litre', '5 Litre', '25 kg Bag'];
 
   const extraInfo = {
-    shortDesc: product.description || "High-performance agricultural solution by Harito Crop Science for optimal crop health and maximized yield potential.",
+    shortDesc: product.description || "High-performance agricultural solution by Hirato Crop Science for optimal crop health and maximized yield potential.",
     benefits: [
       "Enhances root development and nutrient uptake efficiency",
       "Improves crop resilience against environmental stress",
@@ -174,7 +174,7 @@ const ProductDetailsPage = () => {
               {/* Meta */}
               <div className="space-y-1.5">
                 {[
-                  { label: 'Manufacturer', value: 'Harito Crop Science Pvt. Ltd.' },
+                  { label: 'Manufacturer', value: 'Hirato Crop Science Pvt. Ltd.' },
                   { label: 'Certification', value: 'ISO 9001:2015 · TSNUK39907' },
                   { label: 'Shelf Life', value: '2 Years from Manufacturing' },
                   { label: 'Product Form', value: 'Liquid / Granule Formulation' },
@@ -196,7 +196,7 @@ const ProductDetailsPage = () => {
                   Enquire About This Product <ChevronRight size={11} />
                 </Link>
                 <p className="text-center text-[8px] text-slate-400 mt-1.5 font-normal">
-                  For informational purpose only · Harito Crop Science
+                  For informational purpose only · Hirato Crop Science
                 </p>
               </div>
             </div>

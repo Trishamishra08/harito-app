@@ -13,13 +13,13 @@ const initialCategories = [
 ];
 
 const initialProducts = [
-  { name: 'GLYVID-71\nHerbicide', category: 'Pesticides', subcategory: 'Herbicide', brand: 'Harito', description: 'Ammonium Salt of Glyphosate 71% SG. Effective weed control.', image: '/images/glyvid-71.png' },
-  { name: 'VITO-M45\nFungicide', category: 'Pesticides', subcategory: 'Fungicide', brand: 'Harito', description: 'Mancozeb 75% WP. Protection against fungal diseases.', image: '/images/vito-m45.png' },
-  { name: 'RIDER PLUS\nInsecticide', category: 'Pesticides', subcategory: 'Insecticide', brand: 'Harito', description: 'Fipronil 0.6 W/W GR. Advanced protection for crops.', image: '/images/rider-plus.png' },
-  { name: 'HIRA-70\nFungicide', category: 'Pesticides', subcategory: 'Fungicide', brand: 'Harito', description: 'Thiophanate Methyl 70% W.P. Trusted plant health.', image: '/images/hira-70.png' },
-  { name: 'RIZO\nBio Fertilizer', category: 'Fertilizers', subcategory: 'Bio Fertilizer', brand: 'Harito', description: 'Vesicular Arbuscular Mycorrhizal Bio Fertilizer. Keeps roots stronger.', image: '/images/rizo.png' },
-  { name: 'HILDAN-90\nFertilizer', category: 'Fertilizers', subcategory: 'Fertilizer', brand: 'Harito', description: 'Sulphur 90% WDG. Essential sulphur nutrition for crops.', image: '/images/hildan-90.png' },
-  { name: 'GLYVID\nSG Herbicide', category: 'Pesticides', subcategory: 'Herbicide', brand: 'Harito', description: 'Next-gen SG formulation for superior weed management.', image: '/images/glyvid-new.png' }
+  { name: 'GLYVID-71\nHerbicide', category: 'Pesticides', subcategory: 'Herbicide', brand: 'Hirato', description: 'Ammonium Salt of Glyphosate 71% SG. Effective weed control.', image: '/images/glyvid-71.png' },
+  { name: 'VITO-M45\nFungicide', category: 'Pesticides', subcategory: 'Fungicide', brand: 'Hirato', description: 'Mancozeb 75% WP. Protection against fungal diseases.', image: '/images/vito-m45.png' },
+  { name: 'RIDER PLUS\nInsecticide', category: 'Pesticides', subcategory: 'Insecticide', brand: 'Hirato', description: 'Fipronil 0.6 W/W GR. Advanced protection for crops.', image: '/images/rider-plus.png' },
+  { name: 'HIRA-70\nFungicide', category: 'Pesticides', subcategory: 'Fungicide', brand: 'Hirato', description: 'Thiophanate Methyl 70% W.P. Trusted plant health.', image: '/images/hira-70.png' },
+  { name: 'RIZO\nBio Fertilizer', category: 'Fertilizers', subcategory: 'Bio Fertilizer', brand: 'Hirato', description: 'Vesicular Arbuscular Mycorrhizal Bio Fertilizer. Keeps roots stronger.', image: '/images/rizo.png' },
+  { name: 'HILDAN-90\nFertilizer', category: 'Fertilizers', subcategory: 'Fertilizer', brand: 'Hirato', description: 'Sulphur 90% WDG. Essential sulphur nutrition for crops.', image: '/images/hildan-90.png' },
+  { name: 'GLYVID\nSG Herbicide', category: 'Pesticides', subcategory: 'Herbicide', brand: 'Hirato', description: 'Next-gen SG formulation for superior weed management.', image: '/images/glyvid-new.png' }
 ];
 
 const seedDB = async () => {

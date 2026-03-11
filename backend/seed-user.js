@@ -17,7 +17,7 @@ const seedUser = async () => {
     
     if (!existingUser) {
       const user = new User({
-        name: 'Harito Admin',
+        name: 'Hirato Admin',
         email: adminEmail,
         phone: '1234567890',
         password: adminPassword,

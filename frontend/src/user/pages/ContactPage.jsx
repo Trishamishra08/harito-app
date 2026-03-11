@@ -41,7 +41,7 @@ const ContactPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white font-inter uppercase"
               >
-                 Contact Harito Team
+                 Contact Hirato Team
               </motion.h1>
               <p className="text-[#d4e9e2]/60 text-[10px] md:text-xs uppercase tracking-[0.25em] font-medium max-w-lg mx-auto leading-relaxed">
                 Connect with our agriculture experts for high-quality product support.
@@ -90,7 +90,7 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <p className="text-[8px] font-black text-[#d4e9e2]/40 uppercase tracking-widest mb-1.5 leading-none">Email Support</p>
-                      <p className="text-xs font-bold tracking-tight">contact@haritocrop.com</p>
+                      <p className="text-xs font-bold tracking-tight">contact@hiratocrop.com</p>
                     </div>
                   </div>
 

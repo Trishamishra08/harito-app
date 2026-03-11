@@ -4,6 +4,7 @@ import * as categoryController from '../controllers/categoryController.js';
 import * as productController from '../controllers/productController.js';
 import * as carouselController from '../controllers/carouselController.js';
 import * as authController from '../controllers/authController.js';
+import * as settingsController from '../controllers/settingsController.js';
 
 const router = express.Router();
 
@@ -37,5 +38,10 @@ router.post('/carousel/seed', carouselController.seedCarousel);
 
 // Auth Routes
 router.post('/auth/login', authController.login);
+router.put('/auth/update-profile', authController.updateProfile);
+
+// Settings Routes
+router.get('/settings', settingsController.getSettings);
+router.put('/settings', settingsController.updateSettings);
 
 export default router;

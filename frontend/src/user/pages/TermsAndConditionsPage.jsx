@@ -12,7 +12,7 @@ const TermsAndConditionsPage = () => {
         <h1 className="text-3xl md:text-4xl font-bold text-[#2A3324] font-inter mb-8">Terms & Conditions</h1>
         <div className="bg-white p-6 md:p-10 rounded-2xl shadow-sm border border-slate-100 text-slate-600 leading-relaxed space-y-6 text-sm">
           <p>
-            Welcome to Harito Agriculture. By accessing and using this website, you agree to comply with and be bound by the following terms and conditions.
+            Welcome to Hirato Agriculture. By accessing and using this website, you agree to comply with and be bound by the following terms and conditions.
           </p>
           <h2 className="text-lg md:text-xl font-bold text-[#2A3324]">Use of Website</h2>
           <p>
@@ -24,7 +24,7 @@ const TermsAndConditionsPage = () => {
           </p>
           <h2 className="text-lg md:text-xl font-bold text-[#2A3324]">Limitation of Liability</h2>
           <p>
-            Harito Agriculture shall not be liable for any direct, indirect, incidental, or consequential damages arising out of or in any way connected with the use of our website or the purchase of our products.
+            Hirato Agriculture shall not be liable for any direct, indirect, incidental, or consequential damages arising out of or in any way connected with the use of our website or the purchase of our products.
           </p>
           <h2 className="text-lg md:text-xl font-bold text-[#2A3324]">Governing Law</h2>
           <p>

@@ -61,7 +61,7 @@ const GodownPage = () => {
 
               <div className="space-y-3 pt-2 border-t border-white/5">
                  <p className="text-[#d4e9e2]/80 text-[10px] md:text-[11px] leading-relaxed font-bold">
-                    <strong>Harito Crop Science Private Limited</strong> is an independently certified Manufacturer and Trader of high-grade chemical fertilizers and pesticides.
+                    <strong>Hirato Crop Science Private Limited</strong> is an independently certified Manufacturer and Trader of high-grade chemical fertilizers and pesticides.
                  </p>
                  
                  <div className="grid grid-cols-2 gap-3 py-1">

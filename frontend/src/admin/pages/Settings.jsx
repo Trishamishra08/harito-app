@@ -52,14 +52,50 @@ const Settings = () => {
     }
   }, []);
 
-  const handleSave = () => {
-    if (adminUser) {
-      localStorage.setItem('adminUser', JSON.stringify(adminUser));
-      // Update sidebar by triggering a potential re-render or notification if needed
-      // For now, local storage is the source of truth
+  const handleSave = async () => {
+    try {
+      const apiBase = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
+      
+      // 1. Update Profile (User record - Email/Password)
+      const profilePayload = {
+        userId: adminUser?.id || adminUser?._id,
+        email: adminEmail, 
+        name: adminUser?.name,
+        password: adminUser?.password,
+        newEmail: adminEmail 
+      };
+
+      const profileRes = await fetch(`${apiBase}/auth/update-profile`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profilePayload)
+      });
+
+      // 2. Update General Settings (Site name, etc)
+      const settingsPayload = {
+        siteName: siteName,
+        adminEmail: adminEmail
+      };
+
+      const settingsRes = await fetch(`${apiBase}/settings`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(settingsPayload)
+      });
+
+      if (profileRes.ok && settingsRes.ok) {
+        const profileData = await profileRes.json();
+        localStorage.setItem('adminUser', JSON.stringify(profileData.user));
+        setAdminUser(profileData.user);
+        setSaved(true);
+        setTimeout(() => setSaved(false), 2000);
+      } else {
+        alert('Some changes could not be saved. Check console.');
+      }
+    } catch (error) {
+      console.error('Error saving settings:', error);
+      alert('Failed to save settings. Check console for details.');
     }
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
   };
 
   const handleUserChange = (field, value) => {

@@ -66,7 +66,7 @@ app.use('/api', apiRoutes);
 // Root route
 app.get('/', (req, res) => {
   res.status(200).json({
-    message: 'Welcome to Harito API',
+    message: 'Welcome to Hirato API',
     status: 'Running'
   });
 });

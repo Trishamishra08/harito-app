@@ -19,9 +19,9 @@ const Footer = () => {
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-white">
                <div className="h-9 w-9 flex items-center justify-center overflow-hidden rounded-xl shrink-0">
-                  <img src="/images/logo.png" alt="Harito Logo" className="h-full w-full object-contain" />
+                  <img src="/images/logo.png" alt="Hirato Logo" className="h-full w-full object-contain" />
                </div>
-               <span className="font-semibold text-base tracking-tight leading-tight">Harito</span>
+               <span className="font-semibold text-base tracking-tight leading-tight">Hirato</span>
             </div>
             <p className="text-slate-500 leading-relaxed text-[11px] font-normal">
               ISO 9001:2015 Certified manufacturer and trader of chemical fertilizers and pesticides.
@@ -70,7 +70,7 @@ const Footer = () => {
 
         <div className="mt-6 pt-4 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-2">
           <p className="text-[11px] font-normal text-slate-600">
-            © {new Date().getFullYear()} Harito Crop Science Pvt. Ltd. All rights reserved.
+            © {new Date().getFullYear()} Hirato Crop Science Pvt. Ltd. All rights reserved.
           </p>
           <div className="flex gap-4 text-[11px] font-normal text-slate-600">
              <Link to="/privacy" onClick={handleScrollToTop} className="hover:text-green-400 transition-colors">Privacy Policy</Link>
