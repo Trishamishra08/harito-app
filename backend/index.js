@@ -26,11 +26,11 @@ app.use(cors({
   origin: function (origin, callback) {
     // allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    
+
     const allowedOrigins = [
       process.env.FRONTEND_URL,
       'http://localhost:5173',
-      'https://harito-app.vercel.app'
+      'https://hirato-app.vercel.app'
     ].filter(Boolean);
 
     if (allowedOrigins.indexOf(origin) !== -1 || origin.endsWith('.vercel.app')) {
