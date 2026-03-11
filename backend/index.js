@@ -3,10 +3,10 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import helmet from 'helmet';
-import connectDB from './config/db.js';
-import apiRoutes from './routes/apiRoutes.js';
+import connectDB from './src/config/db.js';
+import apiRoutes from './src/routes/apiRoutes.js';
 
-import upload from './middlewares/upload.js';
+import upload from './src/middlewares/upload.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -24,7 +24,7 @@ const app = express();
 // Middleware
 app.use(cors({
   origin: [
-    process.env.CORS_ORIGIN,
+    process.env.FRONTEND_URL,
     'http://localhost:5173',
     'https://harito-app-2.vercel.app'
   ].filter(Boolean),
@@ -38,7 +38,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the 'public' directory
-app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 // Upload endpoint
 app.post('/api/upload', upload.single('image'), (req, res) => {
