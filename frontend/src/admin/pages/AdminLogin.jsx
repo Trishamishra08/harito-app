@@ -19,11 +19,17 @@ const AdminLogin = () => {
   ];
 
   useEffect(() => {
+    // Check if user is already logged in
+    const token = localStorage.getItem('adminToken');
+    if (token) {
+      navigate('/admin', { replace: true });
+    }
+
     const timer = setInterval(() => {
       setCurrentImg((prev) => (prev + 1) % images.length);
     }, 4500);
     return () => clearInterval(timer);
-  }, []);
+  }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
