@@ -35,7 +35,7 @@ const CategoryManagement = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Delete this category? This might leave products unassigned.')) {
       try {
-        const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+        const apiBase = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
         const response = await fetch(`${apiBase}/categories/${id}`, {
           method: 'DELETE',
         });
@@ -55,7 +55,7 @@ const CategoryManagement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const apiBase = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
       const url = editingCategory 
         ? `${apiBase}/categories/${editingCategory.id || editingCategory._id}` 
         : `${apiBase}/categories`;
@@ -200,7 +200,7 @@ const CategoryManagement = () => {
                               formDataToUpload.append('image', file);
                               
                               try {
-                                 const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+                                 const apiBase = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
                                  const response = await fetch(`${apiBase}/upload`, {
                                    method: 'POST',
                                    body: formDataToUpload

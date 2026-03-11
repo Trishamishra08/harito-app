@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const DataContext = createContext();
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
 
 export const DataProvider = ({ children }) => {
   const [categories, setCategories] = useState([
@@ -197,7 +197,8 @@ export const DataProvider = ({ children }) => {
       
       // 4. Backend uploads
       if (path.startsWith('/uploads')) {
-        const base = API_BASE_URL.replace('/api', '');
+        // Correctly isolate the server root (e.g., https://harito-app.onrender.com)
+        const base = API_BASE_URL.replace(/\/api$/, '');
         return `${base}${path}`;
       }
       

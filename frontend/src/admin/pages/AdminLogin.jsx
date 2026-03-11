@@ -36,7 +36,7 @@ const AdminLogin = () => {
     setError('');
     setIsLoading(true);
     try {
-      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const apiBase = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
       const response = await axios.post(`${apiBase}/auth/login`, { email, password });
       if (response.data.success) {
         localStorage.setItem('adminToken', response.data.token);

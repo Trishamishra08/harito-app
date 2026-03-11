@@ -33,7 +33,7 @@ const AdminRegister = () => {
     setError('');
     setIsLoading(true);
     try {
-      const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const apiBase = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
       const submitData = { ...formData };
       if (submitData.name) submitData.name = submitData.name.toUpperCase();
       
