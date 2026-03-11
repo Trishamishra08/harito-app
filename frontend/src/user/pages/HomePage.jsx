@@ -138,7 +138,7 @@ const HomePage = () => {
         <div 
            id="search-pill-container"
            ref={searchContainerRef}
-           className="absolute left-0 right-0 top-0 -translate-y-1/2 z-30 px-4"
+           className="absolute left-0 right-0 top-0 -translate-y-1/2 z-30 px-4 pointer-events-none"
         >
            <div className="max-w-4xl mx-auto pointer-events-auto">
               <div className="bg-[#A4BC8E] rounded-[3rem] p-2 shadow-xl border border-white/20 flex flex-col md:flex-row items-center gap-2">
