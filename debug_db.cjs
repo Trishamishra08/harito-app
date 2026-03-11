@@ -1,0 +1,35 @@
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const path = require('path');
+
+// Load .env from backend folder
+dotenv.config({ path: path.join(__dirname, 'backend/.env') });
+
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/harito';
+
+async function checkProducts() {
+  try {
+    await mongoose.connect(MONGO_URI);
+    console.log('Connected to MongoDB');
+    
+    const products = await mongoose.connection.db.collection('products').find({}).toArray();
+    console.log('\n--- PRODUCTS IN DB ---');
+    console.log('Count:', products.length);
+    products.forEach(p => {
+      console.log(`ID: ${p._id} | Name: ${p.name} | Image: ${p.image}`);
+    });
+    
+    const categories = await mongoose.connection.db.collection('categories').find({}).toArray();
+    console.log('\n--- CATEGORIES IN DB ---');
+    console.log('Count:', categories.length);
+    categories.forEach(c => {
+      console.log(`ID: ${c._id} | Name: ${c.name} | Image: ${c.image}`);
+    });
+    
+    await mongoose.connection.close();
+  } catch (err) {
+    console.error('Error:', err.message);
+  }
+}
+
+checkProducts();
