@@ -19,7 +19,7 @@ async function checkProducts() {
     console.log('\n--- PRODUCTS IN DB ---');
     console.log('Count:', products.length);
     products.forEach(p => {
-      console.log(`ID: ${p._id} | Name: ${p.name} | Cat: ${p.category} | Image: ${p.image}`);
+      console.dir(p);
     });
     
     const categories = await mongoose.connection.db.collection('categories').find({}).toArray();

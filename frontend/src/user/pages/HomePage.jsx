@@ -56,8 +56,9 @@ const FeaturedProducts = () => {
             className="flex flex-nowrap overflow-x-auto no-scrollbar gap-x-4 md:gap-x-6 pb-6 scroll-smooth items-stretch"
           >
             {products.map((item) => (
-              <div 
+              <Link 
                 key={item.id} 
+                to={`/products/${item._id || item.id}`}
                 className="bg-white rounded-sm shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col group min-w-[150px] md:min-w-[190px] max-w-[190px]"
               >
                 {/* Image top half - strictly edge-to-edge square/rectangle, sharp corners */}
@@ -79,7 +80,7 @@ const FeaturedProducts = () => {
                       {item.description || "Premium agricultural solutions to enhance growth."}
                    </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
