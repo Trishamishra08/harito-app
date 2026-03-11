@@ -39,16 +39,16 @@ const FeaturedProducts = () => {
           {/* Scroll Buttons */}
           <button 
             onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 z-30 bg-white/10 hover:bg-white/30 text-white p-4 rounded-full border border-white/30 backdrop-blur-md transition-all opacity-0 group-hover/scroll:opacity-100 hidden md:flex items-center justify-center shadow-2xl"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 z-30 bg-white hover:bg-green-50 text-green-900 p-3 rounded-full border border-slate-200 transition-all hidden md:flex items-center justify-center shadow-lg"
           >
-            <ArrowRight size={24} className="rotate-180" />
+            <ArrowRight size={20} className="rotate-180" />
           </button>
           
           <button 
             onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 z-30 bg-white/10 hover:bg-white/30 text-white p-4 rounded-full border border-white/30 backdrop-blur-md transition-all opacity-0 group-hover/scroll:opacity-100 hidden md:flex items-center justify-center shadow-2xl"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 z-30 bg-white hover:bg-green-50 text-green-900 p-3 rounded-full border border-slate-200 transition-all hidden md:flex items-center justify-center shadow-lg"
           >
-            <ArrowRight size={24} />
+            <ArrowRight size={20} />
           </button>
 
           <div 

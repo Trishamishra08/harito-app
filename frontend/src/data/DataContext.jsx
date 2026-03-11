@@ -81,7 +81,7 @@ export const DataProvider = ({ children }) => {
       const response = await fetch(`${API_BASE_URL}/products`);
       if (response.ok) {
         const data = await response.json();
-        console.log('Products fetched:', data.length);
+        console.log('Products fetched from API:', data);
         setProducts(data.map(prod => ({ ...prod, id: prod._id })));
       } else {
         console.error('Failed to fetch products:', response.status);

@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useData } from '../../data/DataContext';
 import { Search, ChevronRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const ProductsPage = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { products, categories, getImageUrl } = useData();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [activeSub, setActiveSub] = useState('All');
+
+  // Handle category from URL search params
+  useEffect(() => {
+    const categoryId = searchParams.get('category');
+    if (categoryId && categories.length > 0) {
+      const category = categories.find(c => c.id === categoryId || c._id === categoryId);
+      if (category) {
+        setSelectedCategory(category.name);
+      }
+    }
+  }, [searchParams, categories]);
 
   // Derive subcategories based on products in selected category
   const subcategories = ['All', ...new Set(

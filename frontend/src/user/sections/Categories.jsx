@@ -1,6 +1,7 @@
 import React from 'react';
 import { useData } from '../../data/DataContext';
 import { ArrowRight, Layers } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Categories = () => {
   const { categories, getImageUrl } = useData();
@@ -68,9 +69,9 @@ const Categories = () => {
             style={{ WebkitOverflowScrolling: 'touch' }}
           >
             {categories.map((item) => (
-              <div 
+              <Link 
                 key={item.id} 
-                id={`category-${item.name.toLowerCase().replace(/\s+/g, '-')}`}
+                to={`/products?category=${item.id}`}
                 className="group flex flex-col cursor-pointer shrink-0 transition-all duration-500 w-[140px] md:w-[190px] bg-white rounded-xl shadow-lg border border-white/20 overflow-hidden"
               >
                 {/* Header at Top */}
@@ -89,7 +90,7 @@ const Categories = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

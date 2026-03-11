@@ -91,7 +91,6 @@ const ContactPage = () => {
                     <div>
                       <p className="text-[8px] font-black text-[#d4e9e2]/40 uppercase tracking-widest mb-1.5 leading-none">Email Support</p>
                       <p className="text-xs font-bold tracking-tight">contact@haritocrop.com</p>
-                      <p className="text-[10px] text-white/50 font-medium">trishamishra@gmail.com</p>
                     </div>
                   </div>
 
@@ -102,7 +101,16 @@ const ContactPage = () => {
                     <div>
                       <p className="text-[8px] font-black text-[#d4e9e2]/40 uppercase tracking-widest mb-1.5 leading-none">Inquiry Hotline</p>
                       <p className="text-xs font-bold tracking-tight">+91 62604 91554</p>
-                      <p className="text-[10px] text-white/50 font-medium">+91 91316 26127</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-9 h-9 bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
+                       <MessageSquare size={16} className="text-[#a4c639]" />
+                    </div>
+                    <div>
+                      <p className="text-[8px] font-black text-[#d4e9e2]/40 uppercase tracking-widest mb-1.5 leading-none">WhatsApp Support</p>
+                      <p className="text-xs font-bold tracking-tight">+91 91316 26127</p>
                     </div>
                   </div>
                 </div>
@@ -113,20 +121,7 @@ const ContactPage = () => {
               </div>
             </motion.div>
 
-            <motion.div 
-               initial={{ opacity: 0, x: -20 }}
-               whileInView={{ opacity: 1, x: 0 }}
-               transition={{ duration: 0.6, delay: 0.2 }}
-               className="bg-white border border-slate-100 p-3.5 rounded-none flex items-center justify-between group cursor-pointer hover:border-[#1e3932] transition-all shadow-sm"
-            >
-               <div>
-                 <p className="text-[10px] font-black text-slate-800 uppercase tracking-tight">Corporate Relations</p>
-                 <p className="text-[9px] text-slate-400 font-medium mt-0.5">Explore our scientific partnership divisions</p>
-               </div>
-               <div className="w-8 h-8 rounded-none bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-[#1e3932] group-hover:text-white transition-all">
-                  <ArrowRight size={14} />
-               </div>
-            </motion.div>
+
           </div>
 
           {/* Right Column: Contact Form (Sharp & Premium) */}
