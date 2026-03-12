@@ -57,13 +57,14 @@ const Settings = () => {
     try {
       const apiBase = API_BASE_URL;
       
-      // 1. Update Profile (User record - Email/Password)
+      // 1. Update Profile (User record - Name/Email/Password)
+      // We use the ID for reliability, fallback to the current email
       const profilePayload = {
         userId: adminUser?.id || adminUser?._id,
-        email: adminEmail, 
+        email: adminUser?.email, // Old email for lookup if ID is missing
         name: adminUser?.name,
         password: adminUser?.password,
-        newEmail: adminEmail 
+        newEmail: adminEmail // This is the email from the "Edit Email" field
       };
 
       const profileRes = await fetch(`${apiBase}/auth/update-profile`, {
@@ -86,16 +87,22 @@ const Settings = () => {
 
       if (profileRes.ok && settingsRes.ok) {
         const profileData = await profileRes.json();
-        localStorage.setItem('adminUser', JSON.stringify(profileData.user));
-        setAdminUser(profileData.user);
+        const updatedUser = profileData.user;
+        
+        // Update local storage and current state so login stays valid
+        localStorage.setItem('adminUser', JSON.stringify(updatedUser));
+        setAdminUser(updatedUser);
+        setAdminEmail(updatedUser.email);
+        
         setSaved(true);
         setTimeout(() => setSaved(false), 2000);
       } else {
-        alert('Some changes could not be saved. Check console.');
+        const err = await profileRes.json();
+        alert(`Failed to save: ${err.message || 'Check console'}`);
       }
     } catch (error) {
       console.error('Error saving settings:', error);
-      alert('Failed to save settings. Check console for details.');
+      alert('Failed to save settings. Check if your backend is running.');
     }
   };
 
