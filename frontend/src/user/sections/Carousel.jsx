@@ -71,7 +71,7 @@ const Carousel = () => {
                     transition={{ delay: 0.2 }}
                  >
                       <Link 
-                        to={slide.link || '/products'} 
+                        to={slide.link || '/categories'} 
                         className="bg-green-600 hover:bg-white hover:text-green-800 text-white transition-all px-8 py-3 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] shadow-xl flex items-center gap-3 relative z-[100] cursor-pointer"
                       >
                         EXPLORE CATALOG <ArrowRight size={18} />

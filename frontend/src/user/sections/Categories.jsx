@@ -96,9 +96,12 @@ const Categories = () => {
         </div>
 
         <div className="mt-14">
-           <button className="bg-[#1E5D57] hover:bg-[#132c20] text-white px-10 py-3 rounded-none text-[10px] font-black uppercase tracking-[0.3em] transition-all shadow-xl flex items-center gap-2 mx-auto active:scale-95">
+           <Link 
+             to="/categories"
+             className="bg-[#1E5D57] hover:bg-[#132c20] text-white px-10 py-3 rounded-none text-[10px] font-black uppercase tracking-[0.3em] transition-all shadow-xl flex items-center gap-2 mx-auto active:scale-95 w-fit"
+           >
              EXPLORE CATALOG <ArrowRight size={14} />
-           </button>
+           </Link>
         </div>
       </div>
     </section>
