@@ -70,15 +70,12 @@ const Carousel = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                  >
-                     <Link 
+                      <Link 
                         to={slide.link || '/products'} 
-                        className="bg-green-600 hover:bg-white hover:text-green-800 text-white transition-all px-6 py-2.5 rounded-full font-bold text-[9px] uppercase tracking-[0.2em] shadow-xl flex items-center gap-3 group/btn relative z-50 cursor-pointer pointer-events-auto"
-                        onClick={(e) => {
-                          console.log('Explore Catalog clicked');
-                        }}
-                     >
-                        EXPLORE CATALOG <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-                     </Link>
+                        className="bg-green-600 hover:bg-white hover:text-green-800 text-white transition-all px-8 py-3 rounded-full font-bold text-[10px] uppercase tracking-[0.2em] shadow-xl flex items-center gap-3 relative z-[100] cursor-pointer"
+                      >
+                        EXPLORE CATALOG <ArrowRight size={18} />
+                      </Link>
                  </motion.div>
               </div>
             </motion.div>

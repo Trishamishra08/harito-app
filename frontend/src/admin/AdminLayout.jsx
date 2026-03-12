@@ -22,9 +22,14 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { useData } from '../data/DataContext';
 
-const SidebarLink = ({ to, icon: Icon, children, current, isOpen }) => (
+const SidebarLink = ({ to, icon: Icon, children, current, isOpen, setIsOpen }) => (
   <Link
     to={to}
+    onClick={() => {
+      if (window.innerWidth < 1024) {
+        setIsOpen(false);
+      }
+    }}
     className={`flex items-center ${isOpen ? 'mx-4 px-4' : 'justify-center mx-2'} py-3 transition-all duration-300 relative group rounded-none ${
       current 
         ? 'bg-[#1E5D57] text-white' 
@@ -133,14 +138,13 @@ const AdminLayout = () => {
         </div>
 
 
-        {/* Navigation */}
         <nav className="flex-grow space-y-2 overflow-y-auto no-scrollbar">
-          <SidebarLink to="/admin" icon={LayoutDashboard} current={location.pathname === '/admin'} isOpen={isOpen}>Dashboard</SidebarLink>
-          <SidebarLink to="/admin/products" icon={Package} current={location.pathname === '/admin/products'} isOpen={isOpen}>Products</SidebarLink>
-          <SidebarLink to="/admin/categories" icon={Tags} current={location.pathname === '/admin/categories'} isOpen={isOpen}>Categories</SidebarLink>
-          <SidebarLink to="/admin/godown" icon={Warehouse} current={location.pathname === '/admin/godown'} isOpen={isOpen}>Storage</SidebarLink>
-          <SidebarLink to="/admin/assets" icon={Upload} current={location.pathname === '/admin/assets'} isOpen={isOpen}>Assets</SidebarLink>
-          <SidebarLink to="/admin/settings" icon={Settings} current={location.pathname === '/admin/settings'} isOpen={isOpen}>Settings</SidebarLink>
+          <SidebarLink to="/admin" icon={LayoutDashboard} current={location.pathname === '/admin'} isOpen={isOpen} setIsOpen={setIsOpen}>Dashboard</SidebarLink>
+          <SidebarLink to="/admin/products" icon={Package} current={location.pathname === '/admin/products'} isOpen={isOpen} setIsOpen={setIsOpen}>Products</SidebarLink>
+          <SidebarLink to="/admin/categories" icon={Tags} current={location.pathname === '/admin/categories'} isOpen={isOpen} setIsOpen={setIsOpen}>Categories</SidebarLink>
+          <SidebarLink to="/admin/godown" icon={Warehouse} current={location.pathname === '/admin/godown'} isOpen={isOpen} setIsOpen={setIsOpen}>Storage</SidebarLink>
+          <SidebarLink to="/admin/assets" icon={Upload} current={location.pathname === '/admin/assets'} isOpen={isOpen} setIsOpen={setIsOpen}>Assets</SidebarLink>
+          <SidebarLink to="/admin/settings" icon={Settings} current={location.pathname === '/admin/settings'} isOpen={isOpen} setIsOpen={setIsOpen}>Settings</SidebarLink>
         </nav>
 
         {/* Bottom Section */}

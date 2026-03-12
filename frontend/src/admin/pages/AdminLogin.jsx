@@ -73,7 +73,7 @@ const AdminLogin = () => {
            </div>
 
            <div className="flex-1 flex flex-col justify-center items-center py-4">
-              <div className="relative w-full aspect-video md:aspect-square max-w-[160px] mb-6">
+              <div className="relative w-full aspect-video md:aspect-square max-w-[200px] md:max-w-[160px] mb-6">
                  <AnimatePresence mode="wait">
                    <motion.img 
                       key={currentImg}
