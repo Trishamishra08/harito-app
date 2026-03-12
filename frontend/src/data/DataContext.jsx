@@ -2,10 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const DataContext = createContext();
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 
-  (window.location.hostname.includes('vercel.app') 
-    ? 'https://hirato-app.onrender.com/api' 
-    : 'http://localhost:5000/api');
+import { API_BASE_URL, getImageUrl as getImageUrlHelper } from '../api/config';
 
 export const DataProvider = ({ children }) => {
   const [categories, setCategories] = useState([
@@ -111,34 +108,12 @@ export const DataProvider = ({ children }) => {
   }, []);
 
   const getImageUrl = (path) => {
-    if (!path) return '';
-    
-    // Override legacy Unsplash seeds to local images
-    if (path.includes('unsplash.com')) {
+    // Keep internal legacy overrides if needed, then fallback to helper
+    if (path && path.includes('unsplash.com')) {
       if (path.includes('1500382017468') || path.includes('1523348837708')) return '/images/carousel-1.png';
       if (path.includes('1464226184884')) return '/images/carousel-2.png';
     }
-
-    // 1. Absolute external URLs
-    if (path.startsWith('http')) return path;
-    
-    // 2. Handle paths that already start with /images/ or images/
-    if (path.startsWith('/images/')) return path;
-    if (path.startsWith('images/')) return `/${path}`;
-    
-    // 3. Handle paths starting with public/images/
-    if (path.startsWith('public/images/')) return `/${path.replace('public/', '')}`;
-    if (path.startsWith('/public/images/')) return path.replace('/public/', '/');
-    
-    // 4. Backend uploads
-    if (path.startsWith('/uploads')) {
-      const base = API_BASE_URL.replace(/\/api$/, '');
-      return `${base}${path}`;
-    }
-    
-    // 5. Default fallback: assume it is a filename in /images/
-    const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    return `/images${cleanPath}`;
+    return getImageUrlHelper(path);
   };
 
   return (

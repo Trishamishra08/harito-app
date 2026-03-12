@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, ArrowUpRight, ChevronLeft, Globe, ShieldCheck, Sprout } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE_URL } from '../../api/config';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -36,7 +37,7 @@ const AdminLogin = () => {
     setError('');
     setIsLoading(true);
     try {
-      const apiBase = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
+      const apiBase = API_BASE_URL;
       const response = await axios.post(`${apiBase}/auth/login`, { email, password });
       if (response.data.success) {
         localStorage.setItem('adminToken', response.data.token);

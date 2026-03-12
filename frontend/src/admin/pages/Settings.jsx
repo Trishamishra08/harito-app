@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useData } from '../../data/DataContext';
+import { API_BASE_URL } from '../../api/config';
 
 const SettingSection = ({ title, description, icon: Icon, children }) => (
   <div className="rounded-none p-3 border border-teal-900/5 shadow-sm relative overflow-hidden group">
@@ -54,7 +55,7 @@ const Settings = () => {
 
   const handleSave = async () => {
     try {
-      const apiBase = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
+      const apiBase = API_BASE_URL;
       
       // 1. Update Profile (User record - Email/Password)
       const profilePayload = {

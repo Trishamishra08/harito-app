@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useData } from '../../data/DataContext';
+import { API_BASE_URL } from '../../api/config';
 import { 
   Plus, 
   Trash2, 
@@ -92,7 +93,7 @@ const ProductManagement = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Delete this product? This action cannot be undone.')) {
       try {
-        const url = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
+        const url = `${API_BASE_URL}/products/${id}`;
         const response = await fetch(`${url}/products/${id}`, {
           method: 'DELETE',
         });
@@ -111,7 +112,7 @@ const ProductManagement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const apiBase = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
+      const apiBase = API_BASE_URL;
       const url = editingProduct 
         ? `${apiBase}/products/${editingProduct.id || editingProduct._id}` 
         : `${apiBase}/products`;
@@ -343,7 +344,7 @@ const ProductManagement = () => {
                             formDataToUpload.append('image', file);
                             
                             try {
-                              const apiBase = import.meta.env.VITE_API_URL || (window.location.protocol === 'https:' ? 'https://localhost:5000/api' : 'http://localhost:5000/api');
+                              const apiBase = API_BASE_URL;
                               const response = await fetch(`${apiBase}/upload`, {
                                 method: 'POST',
                                 body: formDataToUpload
