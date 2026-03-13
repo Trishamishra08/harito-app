@@ -70,14 +70,14 @@ const FeaturedProducts = () => {
                   />
                 </div>
 
-                {/* Text bottom half - clean white space like reference */}
-                <div className="p-3 md:p-4 text-left flex flex-col flex-1 bg-white border-t border-slate-50">
-                   <h3 className="text-[13px] md:text-[14px] font-bold text-[#2A3324] font-inter mb-1 line-clamp-1">
+                {/* Text bottom half - centered like reference */}
+                <div className="p-3 md:p-4 text-center flex flex-col flex-1 bg-white border-t border-slate-50 items-center justify-center">
+                   <h3 className="text-[13px] md:text-[14px] font-bold text-[#2A3324] font-inter mb-1 line-clamp-1 uppercase tracking-tight">
                       {item.name}
                    </h3>
                    
-                   <p className="text-[10px] md:text-[11px] text-slate-500 font-medium line-clamp-2 leading-tight">
-                      {item.description || "Premium agricultural solutions to enhance growth."}
+                   <p className="text-[10px] md:text-[11px] text-slate-500 font-medium line-clamp-2 leading-tight uppercase tracking-widest opacity-60">
+                      {item.category || "Premium Solution"}
                    </p>
                 </div>
               </Link>

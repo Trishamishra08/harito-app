@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Info, Gavel, AlertCircle, MapPin } from 'lucide-react';
+import { Gavel, Info, AlertCircle, Shield } from 'lucide-react';
 
 const TermsAndConditionsPage = () => {
   useEffect(() => {
@@ -8,83 +8,68 @@ const TermsAndConditionsPage = () => {
   }, []);
 
   return (
-    <div className="bg-[#f8faf8] min-h-screen pt-28 pb-16 font-inter">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <div className="bg-[#fcfdfc] min-h-[60vh] pt-28 pb-12 font-inter">
+      <div className="max-w-5xl mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
-          {/* Left: Content Card */}
+          {/* Main Legal Content - Compact */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="lg:col-span-7 bg-white p-6 md:p-10 shadow-xl border border-slate-100 rounded-none relative overflow-hidden"
+            initial={{ opacity: 0, x: -15 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="lg:col-span-8 bg-white p-6 md:p-8 shadow-sm border border-slate-100 rounded-none relative flex flex-col justify-center"
           >
-            <div className="absolute top-0 left-0 w-1.5 h-full bg-[#1e3932]"></div>
+            <div className="absolute top-0 left-0 w-1 h-full bg-[#1e3932]"></div>
             
-            <header className="mb-8">
-              <span className="text-[#a4c639] font-black uppercase tracking-[0.3em] text-[10px] block mb-2">Legal Framework</span>
-              <h1 className="text-2xl md:text-3xl font-black text-[#1e3932] uppercase tracking-tight">Terms & Conditions</h1>
+            <header className="mb-6 border-b border-slate-50 pb-4">
+              <span className="text-[#a4c639] font-black uppercase tracking-[0.2em] text-[9px] block mb-1">Legal Framework</span>
+              <h1 className="text-xl md:text-2xl font-black text-[#1e3932] uppercase tracking-tight">Terms & Conditions</h1>
             </header>
 
-            <div className="space-y-8 text-slate-600">
-              <section className="space-y-3">
-                <div className="flex items-center gap-3 text-[#1e3932]">
-                  <Info size={18} />
-                  <h2 className="text-sm font-black uppercase tracking-widest">Usage Agreement</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-600">
+              <section className="space-y-1.5">
+                <div className="flex items-center gap-2 text-[#1e3932]">
+                  <Info size={14} />
+                  <h2 className="text-[10px] font-black uppercase tracking-widest">Usage Agreement</h2>
                 </div>
-                <p className="text-[11px] leading-relaxed font-bold">
-                  By accessing Hirato Crop Science platforms, you agree to comply with all regional agricultural regulations and intellectual property laws related to our brand and biological solutions.
-                </p>
+                <p className="text-[10px] leading-relaxed font-bold opacity-80">By using our services, you agree to comply with Indian agricultural regulations and our brand's intellectual property rights.</p>
               </section>
 
-              <section className="space-y-3">
-                <div className="flex items-center gap-3 text-[#1e3932]">
-                  <AlertCircle size={18} />
-                  <h2 className="text-sm font-black uppercase tracking-widest">Product Warranty</h2>
+              <section className="space-y-1.5">
+                <div className="flex items-center gap-2 text-[#1e3932]">
+                  <AlertCircle size={14} />
+                  <h2 className="text-[10px] font-black uppercase tracking-widest">Efficacy & Liability</h2>
                 </div>
-                <p className="text-[11px] leading-relaxed font-bold">
-                  Product efficacy is dependent on environmental factors and application methods. Hirato provides high-grade formulations but is not liable for outcomes beyond controlled manufacturing standards.
-                </p>
+                <p className="text-[10px] leading-relaxed font-bold opacity-80">Product performance depends on farming methods. Hirato is liable only for manufacturing standards, not external application outcomes.</p>
               </section>
 
-              <section className="space-y-3">
-                <div className="flex items-center gap-3 text-[#1e3932]">
-                  <Gavel size={18} />
-                  <h2 className="text-sm font-black uppercase tracking-widest">Governing Law</h2>
+              <section className="space-y-1.5 md:col-span-2 pt-3 border-t border-slate-50 mt-2">
+                <div className="flex items-center gap-2 text-[#1e3932]">
+                  <Gavel size={14} />
+                  <h2 className="text-[10px] font-black uppercase tracking-widest">Governing Law</h2>
                 </div>
-                <p className="text-[11px] leading-relaxed font-bold">
-                  These terms are governed by the laws of <span className="text-[#1e3932] font-black underline">Bareilly, Uttar Pradesh, India</span>. All legal proceedings shall fall under the jurisdiction of Bareilly courts.
-                </p>
+                <p className="text-[10px] leading-relaxed font-bold opacity-80">Jurisdiction: <span className="text-[#1e3932]">Bareilly, Uttar Pradesh, India</span>. All disputes shall be settled in local courts.</p>
               </section>
             </div>
           </motion.div>
 
-          {/* Right: Certificate Sidebar */}
+          {/* Mini Certificate Sidebar - Compact */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="lg:col-span-5 space-y-4"
+            initial={{ opacity: 0, x: 15 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 }}
+            className="lg:col-span-4 bg-[#1e3932] p-6 text-white text-center flex flex-col items-center justify-center shadow-lg"
           >
-            <div className="bg-[#1e3932] p-6 text-white text-center shadow-2xl">
-              <div className="flex justify-center gap-4 mb-4">
-                 <MapPin size={32} className="text-[#a4c639]" />
-                 <div className="w-px h-8 bg-white/10"></div>
-                 <div className="w-8 h-8 flex items-center justify-center">
-                    <img src="/images/logo.png" alt="Logo" className="w-full h-full object-contain brightness-0 invert" />
-                 </div>
-              </div>
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-4">Certified Manufacturer</h3>
-              <div className="border-[6px] border-white/5 shadow-inner bg-white p-2">
-                <img 
-                  src="/images/iso_certificate.png" 
-                  alt="Hirato ISO Certificate" 
-                  className="w-full h-auto"
-                />
-              </div>
-              <p className="text-[9px] mt-4 font-bold text-[#d4e9e2]/60 uppercase tracking-widest">
-                Registered in Bareilly, Uttar Pradesh
-              </p>
+            <Shield size={24} className="mb-3 text-[#a4c639]" />
+            <h3 className="text-[9px] font-black uppercase tracking-[0.2em] mb-4">ISO 9001:2015 Verified</h3>
+            <div className="bg-white p-1 shadow-2xl border border-white/10 w-full max-w-[180px]">
+              <img 
+                src="/images/iso_certificate.png" 
+                alt="ISO Cert" 
+                className="w-full h-auto cursor-zoom-in"
+                onClick={() => window.open('/images/iso_certificate.png', '_blank')}
+              />
             </div>
+            <p className="text-[8px] mt-4 font-bold text-[#d4e9e2]/40 uppercase tracking-widest">TSNUK39907</p>
           </motion.div>
 
         </div>

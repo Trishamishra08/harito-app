@@ -82,7 +82,7 @@ const ProductsPage = () => {
               <span className="text-[#d4e9e2] font-black uppercase tracking-[0.3em] text-[10px]">
                  Scientific Crop Protection
               </span>
-              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white font-inter">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white font-inter uppercase">
                  The highest yields of the year
               </h1>
            </div>
@@ -105,7 +105,7 @@ const ProductsPage = () => {
             </button>
             {categories.map(cat => (
               <button 
-                key={cat.id} 
+                key={cat.id || cat._id} 
                 onClick={() => {
                    setSelectedCategory(cat.name); 
                    setActiveSub('All');
@@ -139,7 +139,7 @@ const ProductsPage = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 lg:gap-x-8 gap-y-24 pt-4 pb-16">
                {filteredProducts.map((product, index) => (
                  <motion.div 
-                   key={product.id} 
+                   key={product.id || product._id} 
                    initial={{ opacity: 0, y: 30 }}
                    whileInView={{ opacity: 1, y: 0 }}
                    viewport={{ once: true, margin: "-50px" }}
@@ -147,14 +147,15 @@ const ProductsPage = () => {
                    onClick={() => navigate(`/products/${product._id || product.id}`)}
                    className="relative group cursor-pointer perspective-1000 mt-8 md:mt-0"
                  >
-                   
-                    {/* Product Image Popping Out (3D Effect) - Centered */}
-                    <div className="absolute -top-10 md:-top-12 inset-x-0 z-20 pointer-events-none px-2">
+                    {/* Product Image Popping Out (3D Effect) - Absolute Center Pro */}
+                    <div className="absolute -top-10 md:-top-12 inset-x-0 z-20 flex justify-center pointer-events-none">
+                      <div className="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
                         <img 
                           src={getImageUrl(product.image)} 
                           alt={product.name} 
-                          className="w-full h-24 md:h-32 object-contain mx-auto transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-110 group-hover:-translate-y-2 filter drop-shadow-2xl" 
+                          className="max-h-full max-w-full object-contain filter drop-shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-110 group-hover:-translate-y-2" 
                         />
+                      </div>
                     </div>
 
                    {/* Card Background Container - Balanced Compact Version */}
@@ -168,32 +169,29 @@ const ProductsPage = () => {
                        <ChevronRight size={12} />
                      </div>
 
-                     {/* Title */}
-                     <h3 className="text-[#2A3324] group-hover:text-white font-bold text-[13px] md:text-[14px] mb-2 transition-colors duration-500 line-clamp-2 leading-tight min-h-[2.5rem] flex items-center justify-center font-inter">
+                     {/* Title - Centered */}
+                     <h3 className="text-[#2A3324] group-hover:text-white font-bold text-[13px] md:text-[14px] mb-2 transition-colors duration-500 line-clamp-2 leading-tight min-h-[2.5rem] flex items-center justify-center font-inter uppercase text-center">
                         {product.name}
                      </h3>
                      
-                     {/* Detailed Specs area - Balanced */}
-                     <div className="w-full space-y-1.5 mt-auto mb-1 text-left transition-all duration-500">
-                        {/* Row 1 */}
-                        <div className="flex justify-between items-center border-b border-black/5 group-hover:border-white/10 pb-1 transition-colors">
-                           <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[9px] font-bold uppercase tracking-wider">Category</span>
-                           <span className="text-slate-800 group-hover:text-white text-[10px] font-bold">{product.category}</span>
+                     {/* Detailed Specs area - Centered Balanced */}
+                     <div className="w-full space-y-2 mt-auto mb-1 text-center transition-all duration-500">
+                        <div className="flex flex-col items-center border-b border-black/5 group-hover:border-white/10 pb-1.5 transition-colors">
+                           <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[8px] font-bold uppercase tracking-[0.2em] mb-0.5">Category</span>
+                           <span className="text-slate-800 group-hover:text-white text-[10px] font-black uppercase tracking-tight line-clamp-1">{product.category}</span>
                         </div>
-                        {/* Row 2 */}
-                        <div className="flex justify-between items-center border-b border-black/5 group-hover:border-white/10 pb-1 transition-colors">
-                           <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[9px] font-bold uppercase tracking-wider">Brand</span>
-                           <span className="text-slate-800 group-hover:text-white text-[10px] font-bold">{product.brand}</span>
+                        <div className="flex flex-col items-center border-b border-black/5 group-hover:border-white/10 pb-1.5 transition-colors">
+                           <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[8px] font-bold uppercase tracking-[0.2em] mb-0.5">Brand</span>
+                           <span className="text-slate-800 group-hover:text-white text-[10px] font-black uppercase tracking-tight">{product.brand || 'Hirato'}</span>
                         </div>
                      </div>
-
                    </div>
                  </motion.div>
                ))}
             </div>
             
             {filteredProducts.length === 0 && (
-               <div className="text-center py-20 bg-[#f2f0ea] rounded-[2.5rem] mt-16 animate-fade-in shadow-sm">
+               <div className="text-center py-20 bg-[#fefefe] border border-slate-100 mt-16 animate-fade-in shadow-sm">
                   <Search size={32} className="mx-auto text-slate-300 mb-4" />
                   <p className="text-xs font-black text-slate-400 uppercase tracking-[0.4em]">No solutions found</p>
                </div>

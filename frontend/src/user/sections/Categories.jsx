@@ -74,14 +74,7 @@ const Categories = () => {
                 to={`/products?category=${item.id}`}
                 className="group flex flex-col cursor-pointer shrink-0 transition-all duration-500 w-[140px] md:w-[190px] bg-white rounded-xl shadow-lg border border-white/20 overflow-hidden"
               >
-                {/* Header at Top */}
-                <div className="bg-white py-3 md:py-4 px-2 border-b border-slate-50 text-center overflow-hidden flex items-center justify-center min-h-[50px] md:min-h-[60px]">
-                  <h3 className="text-[9px] md:text-[11px] font-bold text-[#2A3324] font-inter uppercase tracking-wide group-hover:text-green-700 transition-colors whitespace-nowrap px-1">
-                    {item.name}
-                  </h3>
-                </div>
-
-                {/* Image at Bottom */}
+                {/* Image at Top */}
                 <div className="relative aspect-[4/3] md:aspect-square overflow-hidden bg-white">
                   <img 
                     src={getImageUrl(item.image)} 
@@ -89,6 +82,13 @@ const Categories = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+
+                {/* Header at Bottom */}
+                <div className="bg-white py-3 md:py-4 px-2 border-t border-slate-50 text-center overflow-hidden flex items-center justify-center min-h-[50px] md:min-h-[60px]">
+                  <h3 className="text-[9px] md:text-[11px] font-bold text-[#2A3324] font-inter uppercase tracking-wide group-hover:text-green-700 transition-colors whitespace-nowrap px-1">
+                    {item.name}
+                  </h3>
                 </div>
               </Link>
             ))}
