@@ -12,11 +12,23 @@ const ProductsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeSub, setActiveSub] = useState('All');
 
-  // Handle category from URL search params
+  // Handle search and category from URL search params
   useEffect(() => {
     const categoryId = searchParams.get('category');
+    const categoryName = searchParams.get('category_name');
+    const search = searchParams.get('search');
+
+    if (search) {
+      setSearchTerm(search);
+    }
+
     if (categoryId && categories.length > 0) {
       const category = categories.find(c => c.id === categoryId || c._id === categoryId);
+      if (category) {
+        setSelectedCategory(category.name);
+      }
+    } else if (categoryName && categories.length > 0) {
+      const category = categories.find(c => c.name.toLowerCase().includes(categoryName.toLowerCase()));
       if (category) {
         setSelectedCategory(category.name);
       }

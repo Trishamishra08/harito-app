@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Carousel from '../sections/Carousel.jsx';
 import Hero from '../sections/Hero.jsx';
 import About from '../sections/About.jsx';
@@ -90,9 +90,35 @@ const FeaturedProducts = () => {
 };
 
 const HomePage = () => {
-  const searchContainerRef = React.useRef(null);
+  const { products } = useData();
+  const navigate = useNavigate();
+  const searchContainerRef = useRef(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [categoryQuery, setCategoryQuery] = useState('');
 
-  React.useEffect(() => {
+  const handleExplore = () => {
+    if (!searchQuery && !categoryQuery) {
+      navigate('/products');
+      return;
+    }
+    
+    // Check for exact product name match if only search query is provided
+    if (searchQuery && !categoryQuery) {
+       const exactProduct = products.find(p => p.name.toLowerCase() === searchQuery.toLowerCase());
+       if (exactProduct) {
+          navigate(`/products/${exactProduct._id || exactProduct.id}`);
+          return;
+       }
+    }
+
+    const params = new URLSearchParams();
+    if (searchQuery) params.append('search', searchQuery);
+    if (categoryQuery) params.append('category_name', categoryQuery);
+    
+    navigate(`/products?${params.toString()}`);
+  };
+
+  useEffect(() => {
     let ticking = false;
 
     const updateOpacity = () => {
@@ -148,17 +174,23 @@ const HomePage = () => {
                  <input 
                     type="text" 
                     placeholder="Search products..." 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     className="flex-1 bg-transparent border-none outline-none text-slate-700 text-[13px] placeholder-slate-400 font-medium min-w-[120px]"
+                    onKeyDown={(e) => e.key === 'Enter' && handleExplore()}
                  />
                  <div className="h-5 w-px bg-slate-200 mx-3 hidden md:block"></div>
                  <input 
                     type="text" 
                     placeholder="Categories..." 
+                    value={categoryQuery}
+                    onChange={(e) => setCategoryQuery(e.target.value)}
                     className="flex-1 bg-transparent border-none outline-none text-slate-700 text-[13px] placeholder-slate-400 font-medium min-w-[120px] mb-2 md:mb-0 hidden md:block"
+                    onKeyDown={(e) => e.key === 'Enter' && handleExplore()}
                  />
                  <div className="flex items-center gap-3 ml-auto">
                     <User size={16} className="text-slate-400 hover:text-green-600 cursor-pointer transition-colors" />
-                    <Search size={16} className="text-slate-400 hover:text-green-600 cursor-pointer transition-colors" />
+                    <Search size={16} className="text-slate-400 hover:text-green-600 cursor-pointer transition-colors" onClick={handleExplore} />
                     <div className="bg-green-700 text-white w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-black pointer-events-none">
                        1
                     </div>
@@ -166,7 +198,10 @@ const HomePage = () => {
               </div>
 
               {/* Action Button */}
-              <button className="bg-[#3A5A38] hover:bg-[#2D472B] text-white px-6 py-2.5 rounded-full font-bold text-[13px] tracking-wide transition-all w-full md:w-auto shadow-md">
+              <button 
+                 onClick={handleExplore}
+                 className="bg-[#3A5A38] hover:bg-[#2D472B] text-white px-6 py-2.5 rounded-full font-bold text-[13px] tracking-wide transition-all w-full md:w-auto shadow-md"
+              >
                  Explore
               </button>
            </div>
