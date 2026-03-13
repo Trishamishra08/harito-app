@@ -22,7 +22,7 @@ export const DataProvider = ({ children }) => {
       id: 1,
       title: "SMART AGRICULTURE",
       subtitle: "NURTURING NATURE WITH PRECISION",
-      description: "ISO 9001:2015 Certified manufacturer providing high-yield solutions for the modern farmer.",
+      description: "ISO 9001:2015 Certified company, Marketing By Hirato providing high-yield solutions for the modern farmer.",
       image: "carousel-tractor.png",
       link: "/products"
     },
@@ -30,7 +30,7 @@ export const DataProvider = ({ children }) => {
       id: 2,
       title: "ISO 9001:2015 CERTIFIED",
       subtitle: "QUALITY YOU CAN TRUST",
-      description: "High-grade chemical fertilizers and pesticides manufactured with international safety standards.",
+      description: "High-grade chemical fertilizers and pesticides marketed with international safety standards.",
       image: "carousel-2.png",
       link: "/about"
     },
@@ -53,7 +53,7 @@ export const DataProvider = ({ children }) => {
   const [adminEmail, setAdminEmail] = useState('trishamishra@gmail.com');
   const [companyInfo, setCompanyInfo] = useState({
     fullName: 'Hirato Crop Science Private Limited',
-    certification: 'ISO 9001:2015 Certified Manufacturer and Trader',
+    certification: 'ISO 9001:2015 Certified Marketing By and Trader',
     location: 'Bareilly, Uttar Pradesh, India',
     address: 'Durga Nagar Back in Megha City, Near Mandir & Suresh Sharma Nagar, Mahanagar, Bareilly, Uttar Pradesh – 243006, India',
     tagline: 'Empowering Farmers with Quality Agricultural Solutions',

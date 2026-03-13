@@ -227,7 +227,7 @@ const HomePage = () => {
               </h2>
               
               <p className="text-slate-500 text-xs md:text-[13px] leading-relaxed font-medium">
-                 An ISO 9001:2015 certified manufacturer committed to elite fertilizers and pesticides. We empower farmers with sustainable science and high-yield solutions, bringing innovation directly to your fields.
+                 An ISO 9001:2015 certified marketing partner committed to elite fertilizers and pesticides. We empower farmers with sustainable science and high-yield solutions, bringing innovation directly to your fields.
               </p>
               
               <div className="flex flex-col sm:flex-row items-center gap-4 pt-2 justify-center md:justify-start">

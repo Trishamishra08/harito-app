@@ -56,7 +56,7 @@ const AboutPage = () => {
                    About Hirato<br/>Crop Science
                 </h1>
                 <p className="text-[#d4e9e2] text-[11px] md:text-xs leading-relaxed font-medium max-w-lg opacity-80">
-                  <strong>Hirato Crop Science Private Limited</strong> is an <strong>ISO 9001:2015 Certified</strong> (Certificate No: TSNUK39907) manufacturer and trader dedicated to supporting modern agriculture by providing high-quality fertilizers and crop protection solutions. Our goal is to help farmers improve crop productivity while maintaining soil health and sustainable farming practices.
+                  <strong>Hirato Crop Science Private Limited</strong> is an <strong>ISO 9001:2015 Certified</strong> (Certificate No: TSNUK39907) Marketing By and Trader dedicated to supporting modern agriculture by providing high-quality fertilizers and crop protection solutions. Our goal is to help farmers improve crop productivity while maintaining soil health and sustainable farming practices.
                 </p>
                 <p className="text-[#d4e9e2] text-[11px] md:text-xs leading-relaxed font-medium max-w-lg opacity-70">
                   With a strong commitment to quality and innovation, we focus on developing effective agricultural solutions that enhance plant growth and protect crops from pests and diseases — contributing to better yield and healthier crops across India.

@@ -24,7 +24,7 @@ const Footer = () => {
                <span className="font-semibold text-base tracking-tight leading-tight">Hirato</span>
             </div>
             <p className="text-slate-500 leading-relaxed text-[11px] font-normal">
-              ISO 9001:2015 Certified manufacturer and trader of chemical fertilizers and pesticides.
+              ISO 9001:2015 Certified Marketing By and Trader of chemical fertilizers and pesticides.
             </p>
           </div>
 

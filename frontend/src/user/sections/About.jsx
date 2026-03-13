@@ -53,7 +53,7 @@ const About = () => {
                  More About Our Work
               </h2>
               <p className="text-[#d4e9e2] text-[11px] md:text-xs leading-relaxed font-medum max-w-lg opacity-80">
-                <strong>Hirato Crop Science Private Limited</strong> is an <strong>ISO 9001:2015 Certified</strong> (Certificate No: TSNUK39907) manufacturer and trader specialized in chemical fertilizers and pesticides. Based in Bareilly, Uttar Pradesh, we provide innovative crop protection solutions that serve as a cornerstone for sustainable agriculture, maximizing yields to ensure food security across India.
+                <strong>Hirato Crop Science Private Limited</strong> is an <strong>ISO 9001:2015 Certified</strong> (Certificate No: TSNUK39907) Marketing By and Trader specialized in chemical fertilizers and pesticides. Based in Bareilly, Uttar Pradesh, we provide innovative crop protection solutions that serve as a cornerstone for sustainable agriculture, maximizing yields to ensure food security across India.
               </p>
             </motion.div>
           </div>

@@ -183,7 +183,7 @@ const ProductDetailsPage = () => {
               {/* Meta */}
               <div className="space-y-1.5">
                 {[
-                  { label: 'Manufacturer', value: 'Hirato Crop Science Pvt. Ltd.' },
+                  { label: 'Marketing By', value: 'Hirato Crop Science Pvt. Ltd.' },
                   { label: 'Certification', value: 'ISO 9001:2015 · TSNUK39907' },
                   { label: 'Shelf Life', value: '2 Years from Manufacturing' },
                   { label: 'Product Form', value: 'Liquid / Granule Formulation' },
