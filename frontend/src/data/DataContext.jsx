@@ -23,7 +23,7 @@ export const DataProvider = ({ children }) => {
       title: "SMART AGRICULTURE",
       subtitle: "NURTURING NATURE WITH PRECISION",
       description: "ISO 9001:2015 Certified manufacturer providing high-yield solutions for the modern farmer.",
-      image: "carousel-1.png",
+      image: "carousel-tractor.png",
       link: "/products"
     },
     {
