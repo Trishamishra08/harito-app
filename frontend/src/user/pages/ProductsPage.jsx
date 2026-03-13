@@ -42,12 +42,27 @@ const ProductsPage = () => {
       .map(p => p.subcategory)
   )];
 
-  const filteredProducts = products.filter(p => {
-    const matchesCategory = selectedCategory === 'All' || (p.category && p.category === selectedCategory);
+   const filteredProducts = products.filter(p => {
+    // Categorization logic - more flexible case-insensitive check
+    const matchesCategory = selectedCategory === 'All' || 
+      (p.category && p.category.toLowerCase() === selectedCategory.toLowerCase());
+    
+    // Subcategory check
     const matchesSub = activeSub === 'All' || (p.subcategory && p.subcategory === activeSub);
-    const matchesSearch = (p.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) || 
-                          (p.brand?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
-                          (p.description?.toLowerCase() || '').includes(searchTerm.toLowerCase());
+    
+    // Search logic - split query into words to be more flexible
+    const searchWords = searchTerm.toLowerCase().split(' ').filter(word => word.length > 0);
+    
+    const matchesSearch = searchWords.length === 0 || searchWords.every(word => {
+      const nameMatch = (p.name?.toLowerCase() || '').includes(word);
+      const brandMatch = (p.brand?.toLowerCase() || '').includes(word);
+      const descMatch = (p.description?.toLowerCase() || '').includes(word);
+      const catMatch = (p.category?.toLowerCase() || '').includes(word);
+      const subMatch = (p.subcategory?.toLowerCase() || '').includes(word);
+      
+      return nameMatch || brandMatch || descMatch || catMatch || subMatch;
+    });
+
     return matchesCategory && matchesSub && matchesSearch;
   });
 
