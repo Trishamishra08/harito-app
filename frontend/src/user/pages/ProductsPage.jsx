@@ -149,12 +149,14 @@ const ProductsPage = () => {
                  >
                    
                     {/* Product Image Popping Out (3D Effect) - Centered */}
-                    <div className="absolute -top-10 md:-top-12 left-1/2 -translate-x-1/2 z-20 w-24 h-24 md:w-28 md:h-28 transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-110 group-hover:-translate-y-2 filter drop-shadow-2xl flex items-center justify-center overflow-visible">
-                      <img 
-                        src={getImageUrl(product.image)} 
-                        alt={product.name} 
-                        className="max-w-full max-h-full object-contain pointer-events-none" 
-                      />
+                    <div className="absolute -top-10 md:-top-12 inset-x-0 z-20 flex justify-center pointer-events-none">
+                      <div className="w-24 h-24 md:w-28 md:h-28 transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-110 group-hover:-translate-y-2 filter drop-shadow-2xl flex items-center justify-center">
+                        <img 
+                          src={getImageUrl(product.image)} 
+                          alt={product.name} 
+                          className="max-w-full max-h-full object-contain" 
+                        />
+                      </div>
                     </div>
 
                    {/* Card Background Container - Balanced Compact Version */}
