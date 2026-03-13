@@ -96,27 +96,13 @@ const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryQuery, setCategoryQuery] = useState('');
 
-  const handleExplore = () => {
-    if (!searchQuery && !categoryQuery) {
-      navigate('/products');
-      return;
-    }
-    
-    // Check for exact product name match if only search query is provided
-    if (searchQuery && !categoryQuery) {
-       const exactProduct = products.find(p => p.name.toLowerCase() === searchQuery.toLowerCase());
-       if (exactProduct) {
-          navigate(`/products/${exactProduct._id || exactProduct.id}`);
-          return;
-       }
-    }
-
-    const params = new URLSearchParams();
-    if (searchQuery) params.append('search', searchQuery);
-    if (categoryQuery) params.append('category_name', categoryQuery);
-    
-    navigate(`/products?${params.toString()}`);
-  };
+   const handleExplore = () => {
+     const params = new URLSearchParams();
+     if (searchQuery) params.append('search', searchQuery);
+     if (categoryQuery) params.append('category_name', categoryQuery);
+     
+     navigate(`/products?${params.toString()}`);
+   };
 
   useEffect(() => {
     let ticking = false;

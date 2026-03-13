@@ -43,10 +43,11 @@ const ProductsPage = () => {
   )];
 
   const filteredProducts = products.filter(p => {
-    const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory;
-    const matchesSub = activeSub === 'All' || p.subcategory === activeSub;
-    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          p.brand.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'All' || (p.category && p.category === selectedCategory);
+    const matchesSub = activeSub === 'All' || (p.subcategory && p.subcategory === activeSub);
+    const matchesSearch = (p.name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) || 
+                          (p.brand?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
+                          (p.description?.toLowerCase() || '').includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSub && matchesSearch;
   });
 
