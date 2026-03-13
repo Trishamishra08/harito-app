@@ -62,11 +62,11 @@ const FeaturedProducts = () => {
                 className="bg-white rounded-sm shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col group min-w-[150px] md:min-w-[190px] max-w-[190px]"
               >
                 {/* Image top half - strictly edge-to-edge square/rectangle, sharp corners */}
-                <div className="h-36 md:h-44 w-full relative bg-white overflow-hidden p-2">
+                <div className="h-36 md:h-44 w-full relative bg-white overflow-hidden p-2 flex items-center justify-center">
                   <img 
                     src={getImageUrl(item.image)} 
                     alt={item.name} 
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" 
+                    className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500" 
                   />
                 </div>
 

@@ -148,14 +148,14 @@ const ProductsPage = () => {
                    className="relative group cursor-pointer perspective-1000 mt-8 md:mt-0"
                  >
                    
-                   {/* Product Image Popping Out (3D Effect) - Balanced */}
-                   <div className="absolute -top-10 md:-top-12 left-1/2 -translate-x-1/2 z-20 w-24 h-24 md:w-28 md:h-28 transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-110 group-hover:-translate-y-2 filter drop-shadow-2xl text-center">
-                     <img 
-                       src={getImageUrl(product.image)} 
-                       alt={product.name} 
-                       className="w-full h-full object-contain mx-auto" 
-                     />
-                   </div>
+                    {/* Product Image Popping Out (3D Effect) - Centered */}
+                    <div className="absolute -top-10 md:-top-12 left-1/2 -translate-x-1/2 z-20 w-24 h-24 md:w-28 md:h-28 transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-110 group-hover:-translate-y-2 filter drop-shadow-2xl flex items-center justify-center overflow-visible">
+                      <img 
+                        src={getImageUrl(product.image)} 
+                        alt={product.name} 
+                        className="max-w-full max-h-full object-contain pointer-events-none" 
+                      />
+                    </div>
 
                    {/* Card Background Container - Balanced Compact Version */}
                    <div className="bg-[#fcf8f1] group-hover:bg-[#1e3932] rounded-none p-3 pt-16 md:pt-18 pb-4 transition-all duration-500 shadow-sm border border-[#eee8dc] group-hover:border-[#1e3932] hover:shadow-xl relative z-10 flex flex-col items-center text-center h-[200px] md:h-[230px]">
