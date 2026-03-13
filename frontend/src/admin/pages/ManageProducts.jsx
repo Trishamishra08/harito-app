@@ -90,21 +90,38 @@ const ProductManagement = () => {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (productId) => {
+    // Determine the actual ID to use (could be _id or id)
+    const idToDelete = productId;
+    
+    if (!idToDelete) {
+      alert("Error: Product ID is missing. Cannot delete.");
+      return;
+    }
+
     if (window.confirm('Delete this product? This action cannot be undone.')) {
       try {
-        const url = `${API_BASE_URL}/products/${id}`;
-        const response = await fetch(`${url}/products/${id}`, {
+        const url = `${API_BASE_URL}/products/${idToDelete}`;
+        console.log(`Attempting to delete product at: ${url}`);
+        
+        const response = await fetch(url, {
           method: 'DELETE',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
         });
+        
         if (response.ok) {
-          fetchProducts();
+          await fetchProducts();
+          // Optional: alert('Product deleted successfully');
         } else {
           const errorData = await response.json();
-          alert(`Error: ${errorData.message}`);
+          alert(`Failed to delete: ${errorData.message || 'Unknown server error'}`);
         }
       } catch (error) {
         console.error('Error deleting product:', error);
+        alert(`Network Error: ${error.message}. Please ensure the backend is running.`);
       }
     }
   };
@@ -195,7 +212,7 @@ const ProductManagement = () => {
             </thead>
             <tbody className="">
               {filteredProducts.map((product) => (
-                <tr key={product.id} className="group hover:bg-white/50 transition-all duration-200 border-b border-teal-900/5 last:border-0">
+                <tr key={product.id || product._id} className="group hover:bg-white/50 transition-all duration-200 border-b border-teal-900/5 last:border-0">
                   <td className="py-1.5 px-3">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-xl bg-white border border-teal-900/5 p-1 overflow-hidden shrink-0 flex items-center justify-center shadow-sm">
@@ -222,12 +239,12 @@ const ProductManagement = () => {
                         <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">In Catalog</span>
                      </div>
                   </td>
-                  <td className="py-1.5 px-3 text-right">
+                   <td className="py-1.5 px-3 text-right">
                     <div className="flex justify-end gap-1.5 text-slate-400">
                        <button onClick={() => handleOpenModal(product)} className="w-6 h-6 flex items-center justify-center rounded-none bg-transparent hover:text-teal-600 hover:bg-white transition-all border border-transparent hover:border-teal-900/5">
                          <Edit3 size={12} />
                        </button>
-                       <button onClick={() => handleDelete(product.id)} className="w-6 h-6 flex items-center justify-center rounded-none bg-transparent hover:text-red-500 hover:bg-white transition-all border border-transparent hover:border-teal-900/5">
+                       <button onClick={() => handleDelete(product.id || product._id)} className="w-6 h-6 flex items-center justify-center rounded-none bg-transparent hover:text-red-500 hover:bg-white transition-all border border-transparent hover:border-teal-900/5">
                          <Trash2 size={12} />
                        </button>
                     </div>

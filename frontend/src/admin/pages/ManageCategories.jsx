@@ -33,21 +33,29 @@ const CategoryManagement = () => {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (categoryId) => {
+    const idToDelete = categoryId;
+    
+    if (!idToDelete) {
+      alert("Error: Category ID is missing.");
+      return;
+    }
+
     if (window.confirm('Delete this category? This might leave products unassigned.')) {
       try {
         const apiBase = API_BASE_URL;
-        const response = await fetch(`${apiBase}/categories/${id}`, {
+        const response = await fetch(`${apiBase}/categories/${idToDelete}`, {
           method: 'DELETE',
         });
         if (response.ok) {
-          fetchCategories(); // Refresh from data context
+          await fetchCategories();
         } else {
           const errorData = await response.json();
-          alert(`Error: ${errorData.message}`);
+          alert(`Error: ${errorData.message || 'Server error'}`);
         }
       } catch (error) {
         console.error('Error deleting category:', error);
+        alert(`Network Error: ${error.message}. Please check your connection.`);
       }
     }
   };
@@ -107,7 +115,7 @@ const CategoryManagement = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {categories.map((category) => (
           <motion.div 
-            key={category.id} 
+            key={category.id || category._id} 
             whileHover={{ y: -2 }}
             className="group relative overflow-hidden bg-[#1E5D57]/5 backdrop-blur-md rounded-none border-none p-3 transition-all duration-300 shadow-sm"
           >
@@ -135,7 +143,7 @@ const CategoryManagement = () => {
                   <Edit3 size={10} /> Edit
                </button>
                <button 
-                 onClick={() => handleDelete(category.id)}
+                 onClick={() => handleDelete(category.id || category._id)}
                  className="flex-1 bg-white p-1.5 rounded-none text-slate-400 hover:text-red-500 transition-all shadow-sm border border-teal-900/5 flex items-center justify-center gap-1.5 text-[8px] font-bold uppercase tracking-widest"
                >
                   <Trash2 size={10} /> Delete

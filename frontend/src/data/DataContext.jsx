@@ -5,44 +5,9 @@ const DataContext = createContext();
 import { API_BASE_URL, getImageUrl as getImageUrlHelper } from '../api/config';
 
 export const DataProvider = ({ children }) => {
-  const [categories, setCategories] = useState([
-    { id: '1', name: 'Seeds', image: 'category_seeds.jpg' },
-    { id: '2', name: 'Fertilizers', image: 'category_fertilizers.jpg' },
-    { id: '3', name: 'Pesticides', image: 'category_pesticides.jpg' },
-    { id: '4', name: 'Agriculture Equipment', image: 'category_equipment.jpg' }
-  ]);
-  const [products, setProducts] = useState([
-    { id: '1', name: 'Rizo Plus', image: 'rizo.png', description: 'Advanced bio-fertilizer for enhanced root growth.' },
-    { id: '2', name: 'Hira 70', image: 'hira-70.png', description: 'High-potency pesticide for crop protection.' },
-    { id: '3', name: 'Rider Plus', image: 'rider-plus.png', description: 'Professional grade growth promoter.' },
-    { id: '4', name: 'Vito M45', image: 'vito-m45.png', description: 'Broad-spectrum fungicide for healthy crops.' }
-  ]);
-  const [carousel] = useState([
-    {
-      id: 1,
-      title: "SMART AGRICULTURE",
-      subtitle: "NURTURING NATURE WITH PRECISION",
-      description: "ISO 9001:2015 Certified company, Marketing By Hirato providing high-yield solutions for the modern farmer.",
-      image: "carousel-tractor.png",
-      link: "/products"
-    },
-    {
-      id: 2,
-      title: "ISO 9001:2015 CERTIFIED",
-      subtitle: "QUALITY YOU CAN TRUST",
-      description: "High-grade chemical fertilizers and pesticides marketed with international safety standards.",
-      image: "carousel-2.png",
-      link: "/about"
-    },
-    {
-      id: 3,
-      title: "BAREILLY PRECISION",
-      subtitle: "EFFICIENT SUPPLY SOLUTIONS",
-      description: "Safe storage and nationwide distribution of agricultural chemicals from our central facility.",
-      image: "storage_facility_agri.png",
-      link: "/godown"
-    }
-  ]);
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [carousel, setCarousel] = useState([]);
   const [godowns, setGodowns] = useState([
     { id: 1, name: 'Hirato Central Godown', location: 'Bareilly, Uttar Pradesh', capacity: '10,000 MT', storedProducts: 'Fertilizers, Pesticides, Growth Promoters', contactDetails: '+91 11-69652826' },
   ]);
@@ -97,7 +62,46 @@ export const DataProvider = ({ children }) => {
       console.error('Error fetching settings:', error);
     }
   };
+  const addCarouselSlide = async (slideData) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/carousel`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(slideData),
+      });
+      if (response.ok) await fetchCarousel();
+    } catch (error) { console.error('Error adding slide:', error); }
+  };
 
+  const updateCarouselSlide = async (id, slideData) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/carousel/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(slideData),
+      });
+      if (response.ok) await fetchCarousel();
+    } catch (error) { console.error('Error updating slide:', error); }
+  };
+
+  const deleteCarouselSlide = async (id) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/carousel/${id}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) await fetchCarousel();
+    } catch (error) { console.error('Error deleting slide:', error); }
+  };
+
+  const fetchCarousel = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/carousel`);
+      if (response.ok) {
+        const data = await response.json();
+        setCarousel(data.map(slide => ({ ...slide, id: slide._id })));
+      }
+    } catch (error) { console.error('Error fetching carousel:', error); }
+  };
   useEffect(() => {
     const initData = async () => {
       setLoading(true);
@@ -128,6 +132,9 @@ export const DataProvider = ({ children }) => {
       siteName, setSiteName,
       adminEmail, setAdminEmail,
       companyInfo, setCompanyInfo,
+      addCarouselSlide,
+      updateCarouselSlide,
+      deleteCarouselSlide,
       loading
     }}>
       {children}
