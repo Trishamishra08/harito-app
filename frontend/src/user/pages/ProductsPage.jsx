@@ -20,6 +20,8 @@ const ProductsPage = () => {
 
     if (search) {
       setSearchTerm(search);
+    } else {
+      setSearchTerm(''); // Clear if not in URL
     }
 
     if (categoryId && categories.length > 0) {
@@ -32,13 +34,15 @@ const ProductsPage = () => {
       if (category) {
         setSelectedCategory(category.name);
       }
+    } else if (!categoryId && !categoryName) {
+      setSelectedCategory('All'); // Reset if no category in URL
     }
   }, [searchParams, categories]);
 
   // Derive subcategories based on products in selected category
   const subcategories = ['All', ...new Set(
     products
-      .filter(p => selectedCategory === 'All' || p.category === selectedCategory)
+      .filter(p => selectedCategory === 'All' || (p.category && p.category.toLowerCase() === selectedCategory.toLowerCase()))
       .map(p => p.subcategory)
   )];
 
@@ -87,17 +91,27 @@ const ProductsPage = () => {
 
       <div className="max-w-7xl mx-auto px-4 relative mt-10 z-20">
         {/* Horizontal Category Filters - Compact */}
-        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-10">
-           <button 
-             onClick={() => {setSelectedCategory('All'); setActiveSub('All');}}
-             className={`px-4 py-1.5 rounded-none text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm border ${selectedCategory === 'All' ? 'bg-[#3A5A38] text-white border-[#3A5A38] shadow-md' : 'bg-white text-slate-500 border-white hover:text-[#3A5A38] hover:bg-slate-50 hover:shadow-md'}`}
-           >
-             All Solutions
-           </button>
-           {categories.map(cat => (
-             <button 
-               key={cat.id} 
-               onClick={() => {setSelectedCategory(cat.name); setActiveSub('All');}}
+         <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-10">
+            <button 
+              onClick={() => {
+                setSelectedCategory('All'); 
+                setActiveSub('All'); 
+                setSearchTerm('');
+                navigate('/products', { replace: true });
+              }}
+              className={`px-4 py-1.5 rounded-none text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm border ${selectedCategory === 'All' && searchTerm === '' ? 'bg-[#3A5A38] text-white border-[#3A5A38] shadow-md' : 'bg-white text-slate-500 border-white hover:text-[#3A5A38] hover:bg-slate-50 hover:shadow-md'}`}
+            >
+              All Solutions
+            </button>
+            {categories.map(cat => (
+              <button 
+                key={cat.id} 
+                onClick={() => {
+                   setSelectedCategory(cat.name); 
+                   setActiveSub('All');
+                   setSearchTerm('');
+                   navigate(`/products?category=${cat.id || cat._id}`, { replace: true });
+                }}
                className={`px-4 py-1.5 rounded-none text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm border ${selectedCategory === cat.name ? 'bg-[#3A5A38] text-white border-[#3A5A38] shadow-md' : 'bg-white text-slate-500 border-white hover:text-[#3A5A38] hover:bg-slate-50 hover:shadow-md'}`}
              >
                {cat.name}
