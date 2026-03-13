@@ -66,6 +66,7 @@ const ProductDetailsPage = () => {
   const navigate = useNavigate();
   const { products, getImageUrl } = useData();
   const [selectedPack, setSelectedPack] = useState(0);
+  const [activeImage, setActiveImage] = useState(0);
 
   const product = products.find(p => (p._id || p.id) === id);
 
@@ -119,11 +120,19 @@ const ProductDetailsPage = () => {
 
             {/* Left: Image */}
             <div className="bg-[#f8faf6] p-5 flex flex-col gap-3">
-              <Tilt3DImage src={getImageUrl(product.image)} alt={product.name} />
+              <Tilt3DImage
+                key={activeImage} // Force remount on image change for animation
+                src={getImageUrl(product.image)}
+                alt={product.name}
+              />
               {/* Thumbnails */}
               <div className="flex gap-2 justify-center">
                 {[0, 1, 2].map((i) => (
-                  <div key={i} className={`w-12 h-12 border-2 rounded-lg overflow-hidden cursor-pointer transition-all ${i === 0 ? 'border-[#1e3932]' : 'border-slate-200 opacity-40 hover:opacity-70'}`}>
+                  <div
+                    key={i}
+                    onClick={() => setActiveImage(i)}
+                    className={`w-12 h-12 border-2 rounded-lg overflow-hidden cursor-pointer transition-all ${activeImage === i ? 'border-[#1e3932] scale-105' : 'border-slate-200 opacity-40 hover:opacity-70'}`}
+                  >
                     <img src={getImageUrl(product.image)} alt="" className="w-full h-full object-contain p-1" />
                   </div>
                 ))}
