@@ -90,7 +90,7 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <p className="text-[8px] font-black text-[#d4e9e2]/40 uppercase tracking-widest mb-1.5 leading-none">Email Support</p>
-                      <p className="text-xs font-bold tracking-tight">contact@hiratocrop.com</p>
+                      <p className="text-xs font-bold tracking-tight">hiratocropscience@gmail.com</p>
                     </div>
                   </div>
 
@@ -100,7 +100,7 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <p className="text-[8px] font-black text-[#d4e9e2]/40 uppercase tracking-widest mb-1.5 leading-none">Inquiry Hotline</p>
-                      <p className="text-xs font-bold tracking-tight">+91 62604 91554</p>
+                      <p className="text-xs font-bold tracking-tight">+91 11-69652826</p>
                     </div>
                   </div>
 
@@ -110,7 +110,7 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <p className="text-[8px] font-black text-[#d4e9e2]/40 uppercase tracking-widest mb-1.5 leading-none">WhatsApp Support</p>
-                      <p className="text-xs font-bold tracking-tight">+91 91316 26127</p>
+                      <p className="text-xs font-bold tracking-tight">+91 11-69652826</p>
                     </div>
                   </div>
                 </div>

@@ -118,7 +118,7 @@ const AboutPage = () => {
           </motion.div>
 
           {/* Sidebar: Why Choose Us */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4 space-y-5">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -147,8 +147,30 @@ const AboutPage = () => {
               </ul>
 
               <div className="mt-5 pt-3 border-t border-white/10 text-[8px] font-black uppercase tracking-[0.3em] text-green-400">
-                ISO 9001:2015 · CERT NO. TSNUK39907
+                Quality Management System Verified
               </div>
+            </motion.div>
+
+            {/* Visual Certification Section */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="bg-white p-4 border border-slate-100 shadow-xl"
+            >
+              <h3 className="text-[9px] font-black text-[#1e3932] uppercase tracking-[0.3em] mb-4 text-center">Quality Certification</h3>
+              <div className="border-[4px] border-[#f8faf8] p-1.5 shadow-inner">
+                 <img 
+                   src="/images/iso_certificate.png" 
+                   alt="Hirato ISO Certificate" 
+                   className="w-full h-auto cursor-zoom-in"
+                   onClick={() => window.open('/images/iso_certificate.png', '_blank')}
+                 />
+              </div>
+              <p className="text-[8px] text-center mt-3 text-slate-400 font-bold uppercase tracking-widest leading-tight">
+                ISO 9001:2015 · CERT NO. TSNUK39907<br/>
+                Accredited Manufacturer & Trader
+              </p>
             </motion.div>
           </div>
 

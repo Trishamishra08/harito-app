@@ -44,13 +44,13 @@ export const DataProvider = ({ children }) => {
     }
   ]);
   const [godowns, setGodowns] = useState([
-    { id: 1, name: 'Hirato Central Godown', location: 'Bareilly, Uttar Pradesh', capacity: '10,000 MT', storedProducts: 'Fertilizers, Pesticides, Growth Promoters', contactDetails: '+91 62604 91554' },
+    { id: 1, name: 'Hirato Central Godown', location: 'Bareilly, Uttar Pradesh', capacity: '10,000 MT', storedProducts: 'Fertilizers, Pesticides, Growth Promoters', contactDetails: '+91 11-69652826' },
   ]);
   const [loading, setLoading] = useState(true);
 
   // Settings state
   const [siteName, setSiteName] = useState('Hirato Crop Science Private Limited');
-  const [adminEmail, setAdminEmail] = useState('trishamishra@gmail.com');
+  const [adminEmail, setAdminEmail] = useState('hiratocropscience@gmail.com');
   const [companyInfo, setCompanyInfo] = useState({
     fullName: 'Hirato Crop Science Private Limited',
     certification: 'ISO 9001:2015 Certified Marketing By and Trader',
