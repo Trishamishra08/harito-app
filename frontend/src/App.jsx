@@ -1,5 +1,7 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import Lenis from 'lenis';
+import 'lenis/dist/lenis.css';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { DataProvider } from './data/DataContext.jsx';
 import UserLayout from './user/UserLayout.jsx';
 import HomePage from './user/pages/HomePage.jsx';
@@ -22,35 +24,69 @@ import MediaUpload from './admin/pages/MediaUpload.jsx';
 import Settings from './admin/pages/Settings.jsx';
 import AdminLogin from './admin/pages/AdminLogin.jsx';
 
+function SmoothScroll({ children }) {
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
+
+  useEffect(() => {
+    if (isAdmin) return;
+
+    const lenis = new Lenis({
+      duration: 1.2,
+      lerp: 0.1,
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, [isAdmin]);
+
+  return children;
+}
+
 function App() {
   return (
     <DataProvider>
       <Router>
-        <Routes>
-          {/* User Facing Website */}
-          <Route path="/" element={<UserLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="products" element={<ProductsPage />} />
-            <Route path="about" element={<AboutPage />} />
-            <Route path="categories" element={<CategoriesPage />} />
-            <Route path="godown" element={<GodownPage />} />
-            <Route path="contact" element={<ContactPage />} />
-            <Route path="privacy" element={<PrivacyPolicyPage />} />
-            <Route path="terms" element={<TermsAndConditionsPage />} />
-            <Route path="products/:id" element={<ProductDetailsPage />} />
-          </Route>
+        <SmoothScroll>
+          <Routes>
+            {/* User Facing Website */}
+            <Route path="/" element={<UserLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="products" element={<ProductsPage />} />
+              <Route path="about" element={<AboutPage />} />
+              <Route path="categories" element={<CategoriesPage />} />
+              <Route path="godown" element={<GodownPage />} />
+              <Route path="contact" element={<ContactPage />} />
+              <Route path="privacy" element={<PrivacyPolicyPage />} />
+              <Route path="terms" element={<TermsAndConditionsPage />} />
+              <Route path="products/:id" element={<ProductDetailsPage />} />
+            </Route>
 
-          {/* Admin Dashboard */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<AdminDashboard />} />
-            <Route path="products" element={<ManageProducts />} />
-            <Route path="categories" element={<ManageCategories />} />
-            <Route path="godown" element={<ManageGodown />} />
-            <Route path="assets" element={<MediaUpload />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
-        </Routes>
+            {/* Admin Dashboard */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="products" element={<ManageProducts />} />
+              <Route path="categories" element={<ManageCategories />} />
+              <Route path="godown" element={<ManageGodown />} />
+              <Route path="assets" element={<MediaUpload />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
+          </Routes>
+        </SmoothScroll>
       </Router>
     </DataProvider>
   );

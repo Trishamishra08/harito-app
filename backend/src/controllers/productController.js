@@ -13,9 +13,15 @@ export const getProducts = async (req, res) => {
 // Create a new product
 export const createProduct = async (req, res) => {
   try {
-    const { name, category, subcategory, brand, description, image } = req.body;
+    const { 
+      name, category, subcategory, brand, description, image,
+      packSizes, formulation, suitableCrops, usage, benefits, safety 
+    } = req.body;
     
-    const newProduct = new Product({ name, category, subcategory, brand, description, image });
+    const newProduct = new Product({ 
+      name, category, subcategory, brand, description, image,
+      packSizes, formulation, suitableCrops, usage, benefits, safety 
+    });
     const savedProduct = await newProduct.save();
     res.status(201).json(savedProduct);
   } catch (error) {
@@ -27,11 +33,17 @@ export const createProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, category, subcategory, brand, description, image } = req.body;
+    const { 
+      name, category, subcategory, brand, description, image,
+      packSizes, formulation, suitableCrops, usage, benefits, safety 
+    } = req.body;
     
     const updatedProduct = await Product.findByIdAndUpdate(
       id, 
-      { name, category, subcategory, brand, description, image },
+      { 
+        name, category, subcategory, brand, description, image,
+        packSizes, formulation, suitableCrops, usage, benefits, safety 
+      },
       { new: true, runValidators: true }
     );
     

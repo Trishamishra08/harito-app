@@ -105,7 +105,7 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     const initData = async () => {
       setLoading(true);
-      await Promise.all([fetchCategories(), fetchProducts(), fetchSettings()]);
+      await Promise.all([fetchCategories(), fetchProducts(), fetchSettings(), fetchCarousel()]);
       setLoading(false);
     };
     initData();

@@ -81,25 +81,27 @@ const ProductDetailsPage = () => {
     );
   }
 
-  const packSizes = ['1 Litre', '5 Litre', '25 kg Bag'];
+  const packSizes = product.packSizes && product.packSizes.length > 0 
+    ? product.packSizes 
+    : ['1 Liter', '500 ml', '250 ml'];
 
   const extraInfo = {
-    shortDesc: product.description || "High-performance agricultural solution by Hirato Crop Science for optimal crop health and maximized yield potential.",
-    benefits: [
+    shortDesc: `${product.description || "High-performance agricultural solution by Hirato Crop Science."} This ${packSizes[selectedPack]} packaging is designed for optimal stability and efficiency.`,
+    benefits: product.benefits && product.benefits.length > 0 ? product.benefits : [
       "Enhances root development and nutrient uptake efficiency",
       "Improves crop resilience against environmental stress",
       "Optimizes flowering and fruiting for higher productivity",
       "Safe for soil health and beneficial microbial activity",
       "Easy-to-use formulation for modern farming practices"
     ],
-    usage: [
+    usage: product.usage && product.usage.length > 0 ? product.usage : [
       "Mix the recommended dose in sufficient water as per crop requirement.",
       "Apply through foliar spray or fertigation during early morning or late evening.",
       "Ensure uniform coverage on the foliage for best results.",
       "Repeat application after 15–20 days depending on crop stage."
     ],
-    crops: "Wheat, Rice, Sugarcane, Vegetables (Tomato, Chilli, Onion), Fruits (Mango, Grapes, Citrus), and Pulses.",
-    safety: "Keep out of reach of children. Store in a cool, dry place away from direct sunlight. Wear protective gear during application."
+    crops: product.suitableCrops || "Wheat, Rice, Sugarcane, Vegetables (Tomato, Chilli, Onion), Fruits (Mango, Grapes, Citrus), and Pulses.",
+    safety: product.safety || "Keep out of reach of children. Store in a cool, dry place away from direct sunlight. Wear protective gear during application."
   };
 
   return (
@@ -162,15 +164,21 @@ const ProductDetailsPage = () => {
 
               {/* Packing Size */}
               <div>
-                <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Packing Size</p>
+                <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-1.5 flex justify-between">
+                   Packing Size
+                   <span className="text-teal-600 lowercase tracking-normal font-medium">Click to see details</span>
+                </p>
                 <div className="flex flex-wrap gap-1.5">
                   {packSizes.map((size, idx) => (
                     <button
                       key={idx}
-                      onClick={() => setSelectedPack(idx)}
+                      onClick={() => {
+                        setSelectedPack(idx);
+                        setActiveImage(idx % 3); // Cycle through thumbnails
+                      }}
                       className={`px-3 py-1 text-[10px] font-semibold rounded-full border transition-all ${
                         selectedPack === idx
-                          ? 'bg-[#1e3932] text-white border-[#1e3932]'
+                          ? 'bg-[#1e3932] text-white border-[#1e3932] shadow-md scale-105'
                           : 'bg-white text-slate-400 border-slate-200 hover:border-[#1e3932] hover:text-[#1e3932]'
                       }`}
                     >
@@ -180,13 +188,32 @@ const ProductDetailsPage = () => {
                 </div>
               </div>
 
+              {/* Dynamic Content based on selection */}
+              <motion.div 
+                key={selectedPack}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="bg-green-50/50 p-3 rounded-lg border border-green-100/50"
+              >
+                <div className="flex items-center gap-2 mb-1">
+                   <Package size={12} className="text-green-700" />
+                   <h4 className="text-[10px] font-black text-[#1e3932] uppercase tracking-wider">Package Overview</h4>
+                </div>
+                <p className="text-[10px] text-slate-500 leading-snug">
+                   The <span className="font-bold text-green-800">{packSizes[selectedPack]}</span> variant is 
+                   {packSizes[selectedPack].toLowerCase().includes('liter') || packSizes[selectedPack].toLowerCase().includes('kg') 
+                     ? " ideal for professional large-scale farming, covering up to 5-10 acres depending on crop stage." 
+                     : " perfectly measured for precise application in smaller plots or focused pest control spots."}
+                </p>
+              </motion.div>
+
               {/* Meta */}
               <div className="space-y-1.5">
                 {[
                   { label: 'Marketing By', value: 'Hirato Crop Science Pvt. Ltd.' },
                   { label: 'Certification', value: 'ISO 9001:2015 · TSNUK39907' },
                   { label: 'Shelf Life', value: '2 Years from Manufacturing' },
-                  { label: 'Product Form', value: 'Liquid / Granule Formulation' },
+                  { label: 'Product Form', value: product.formulation || 'Liquid / Granule Formulation' },
                   { label: 'Suitable For', value: 'Wheat, Rice, Vegetables, Fruits, Pulses' },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-2 text-[10px]">
