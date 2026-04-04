@@ -16,7 +16,7 @@ const TermsAndConditionsPage = () => {
           <motion.div 
             initial={{ opacity: 0, x: -15 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-8 bg-white p-6 md:p-8 shadow-sm border border-slate-100 rounded-none relative flex flex-col justify-center"
+            className="lg:col-span-12 bg-white p-6 md:p-8 shadow-sm border border-slate-100 rounded-none relative flex flex-col justify-center"
           >
             <div className="absolute top-0 left-0 w-1 h-full bg-[#1e3932]"></div>
             
@@ -50,26 +50,6 @@ const TermsAndConditionsPage = () => {
                 <p className="text-[10px] leading-relaxed font-bold opacity-80">Jurisdiction: <span className="text-[#1e3932]">Bareilly, Uttar Pradesh, India</span>. All disputes shall be settled in local courts.</p>
               </section>
             </div>
-          </motion.div>
-
-          {/* Mini Certificate Sidebar - Compact */}
-          <motion.div 
-            initial={{ opacity: 0, x: 15 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-            className="lg:col-span-4 bg-[#1e3932] p-6 text-white text-center flex flex-col items-center justify-center shadow-lg"
-          >
-            <Shield size={24} className="mb-3 text-[#a4c639]" />
-            <h3 className="text-[9px] font-black uppercase tracking-[0.2em] mb-4">ISO 9001:2015 Verified</h3>
-            <div className="bg-white p-1 shadow-2xl border border-white/10 w-full max-w-[180px]">
-              <img 
-                src="/images/iso_certificate.png" 
-                alt="ISO Cert" 
-                className="w-full h-auto cursor-zoom-in"
-                onClick={() => window.open('/images/iso_certificate.png', '_blank')}
-              />
-            </div>
-            <p className="text-[8px] mt-4 font-bold text-[#d4e9e2]/40 uppercase tracking-widest">TSNUK39907</p>
           </motion.div>
 
         </div>
