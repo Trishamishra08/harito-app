@@ -108,10 +108,16 @@ const ProductDetailsPage = () => {
     <div className="bg-[#f5f7f5] min-h-screen pt-20 pb-10 font-inter">
       <div className="max-w-4xl mx-auto px-4">
 
-        {/* Back */}
-        <Link to="/products" className="inline-flex items-center gap-1 text-slate-400 hover:text-[#1e3932] font-medium text-[11px] mb-3 transition-colors">
-          <ChevronLeft size={12} /> Back to Catalog
-        </Link>
+        {/* Back to Catalog */}
+        <div 
+          onClick={() => navigate('/products')}
+          className="inline-flex items-center gap-1.5 text-slate-400 hover:text-[#1e3932] font-bold text-[11px] mb-4 transition-all cursor-pointer group w-fit relative z-30"
+        >
+          <div className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-[#1e3932] group-hover:text-white transition-all">
+            <ChevronLeft size={12} />
+          </div>
+          <span className="tracking-wide">Back to Catalog</span>
+        </div>
 
         {/* Main Product Card */}
         <motion.div
