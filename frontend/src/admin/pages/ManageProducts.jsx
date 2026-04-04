@@ -19,7 +19,8 @@ import {
   Microscope,
   Leaf,
   Tractor,
-  LayoutGrid
+  LayoutGrid,
+  Loader2
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -92,7 +93,7 @@ const ProductManagement = () => {
         description: product.description,
         image: product.image,
         packSizes: product.packSizes || [],
-        packagingType: hasLiquid ? 'Bottle' : 'Packet',
+        packagingType: product.packagingType || (hasLiquid ? 'Bottle' : 'Packet'),
         formulation: product.formulation || (hasLiquid ? 'Liquid' : 'Powder/Granules'),
         suitableCrops: product.suitableCrops || '',
         usage: Array.isArray(product.usage) ? product.usage.join('\n') : product.usage || '',
@@ -179,12 +180,16 @@ const ProductManagement = () => {
     }
   };
 
+  const [isSaving, setIsSaving] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSaving(true);
     try {
       const apiBase = API_BASE_URL;
+      const targetId = editingProduct?.id || editingProduct?._id;
       const url = editingProduct 
-        ? `${apiBase}/products/${editingProduct.id || editingProduct._id}` 
+        ? `${apiBase}/products/${targetId}` 
         : `${apiBase}/products`;
       
       const method = editingProduct ? 'PUT' : 'POST';
@@ -192,9 +197,11 @@ const ProductManagement = () => {
       // Process multi-line strings back into arrays
       const processedData = {
         ...formData,
-        usage: formData.usage.split('\n').filter(line => line.trim() !== ''),
-        benefits: formData.benefits.split('\n').filter(line => line.trim() !== '')
+        usage: typeof formData.usage === 'string' ? formData.usage.split('\n').filter(line => line.trim() !== '') : formData.usage,
+        benefits: typeof formData.benefits === 'string' ? formData.benefits.split('\n').filter(line => line.trim() !== '') : formData.benefits
       };
+      
+      console.log(`Sending ${method} request to ${url}`, processedData);
       
       const response = await fetch(url, {
         method,
@@ -211,7 +218,9 @@ const ProductManagement = () => {
       }
     } catch (error) {
       console.error('Error saving product:', error);
-      alert('Failed to save product. Is the backend running?');
+      alert('Failed to save product. Check the console for more details. Is the backend running?');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -590,9 +599,17 @@ const ProductManagement = () => {
 
                 <div className="flex gap-4 pt-6">
                   <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-500 font-black text-[10px] uppercase tracking-widest py-3.5 rounded-xl transition-all">Discard Changes</button>
-                    <button type="submit" className="flex-[2] bg-[#1E5D57] hover:bg-[#13423E] text-white font-black text-[10px] uppercase tracking-widest py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 shadow-xl shadow-teal-900/10">
-                    {editingProduct ? 'Update Product Entry' : 'Generate Catalog Entry'} <Check size={16} />
-                  </button>
+                    <button 
+                      type="submit" 
+                      disabled={isSaving}
+                      className="flex-[2] bg-[#1E5D57] hover:bg-[#13423E] disabled:bg-slate-400 text-white font-black text-[10px] uppercase tracking-widest py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 shadow-xl shadow-teal-900/10"
+                    >
+                      {isSaving ? (
+                        <>Processing... <Loader2 className="animate-spin" size={16} /></>
+                      ) : (
+                        <>{editingProduct ? 'Update Product Entry' : 'Generate Catalog Entry'} <Check size={16} /></>
+                      )}
+                    </button>
                 </div>
               </form>
             </motion.div>

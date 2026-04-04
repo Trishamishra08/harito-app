@@ -39,6 +39,11 @@ const productSchema = new mongoose.Schema({
     type: String,
     default: 'Liquid'
   },
+  packagingType: {
+    type: String,
+    enum: ['Bottle', 'Packet'],
+    default: 'Bottle'
+  },
   suitableCrops: {
     type: String,
     default: 'Wheat, Rice, Sugarcane, Vegetables, Fruits, and Pulses'
