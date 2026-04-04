@@ -35,9 +35,9 @@ const Navbar = () => {
   );
 
   return (
-    <header className={`fixed w-full z-[100] top-0 left-0 transition-all duration-500 p-2 md:p-4`}>
-      <nav className={`max-w-6xl mx-auto transition-all duration-500 bg-white/70 backdrop-blur-md rounded-full border border-white/20 shadow-xl relative`}>
-        <div className="flex justify-between items-center px-8 h-14">
+    <header className={`fixed w-full z-[100] top-0 left-0 transition-all duration-700 ${isScrolled ? 'py-1 md:py-2' : 'py-3 md:py-5'}`}>
+      <nav className={`max-w-6xl mx-auto transition-all duration-700 bg-white/80 backdrop-blur-xl rounded-full border border-white/20 shadow-2xl relative ${isScrolled ? 'scale-95 shadow-lg' : 'scale-100'}`}>
+        <div className={`flex justify-between items-center px-8 transition-all duration-700 ${isScrolled ? 'h-12' : 'h-16'}`}>
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
              <div className="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center text-white shadow-sm overflow-hidden shrink-0">

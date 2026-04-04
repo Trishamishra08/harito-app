@@ -145,21 +145,21 @@ const ProductsPage = () => {
                    viewport={{ once: true, margin: "-50px" }}
                    transition={{ duration: 0.5, delay: index % 5 * 0.1 }}
                    onClick={() => navigate(`/products/${product._id || product.id}`)}
-                   className="relative group cursor-pointer perspective-1000 mt-8 md:mt-0"
+                   className="relative group cursor-pointer perspective-1000 mt-8 md:mt-0 w-full"
                  >
                     {/* Product Image Popping Out (3D Effect) - Absolute Center Pro */}
-                    <div className="absolute -top-10 md:-top-12 inset-x-0 z-20 flex justify-center pointer-events-none">
+                    <div className="absolute -top-10 md:-top-12 left-1/2 -translate-x-1/2 z-20 pointer-events-none w-full flex justify-center">
                       <div className="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
                         <img 
                           src={getImageUrl(product.image)} 
                           alt={product.name} 
-                          className="max-h-full max-w-full object-contain filter drop-shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-110 group-hover:-translate-y-2" 
+                          className="w-full h-full object-contain filter drop-shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover:scale-110 group-hover:-translate-y-2 mx-auto" 
                         />
                       </div>
                     </div>
 
                    {/* Card Background Container - Balanced Compact Version */}
-                   <div className="bg-[#fcf8f1] group-hover:bg-[#1e3932] rounded-none p-3 pt-16 md:pt-18 pb-4 transition-all duration-500 shadow-sm border border-[#eee8dc] group-hover:border-[#1e3932] hover:shadow-xl relative z-10 flex flex-col items-center text-center h-[200px] md:h-[230px]">
+                   <div className="w-full bg-[#fcf8f1] group-hover:bg-[#1e3932] rounded-none p-3 pt-16 md:pt-18 pb-4 transition-all duration-500 shadow-sm border border-[#eee8dc] group-hover:border-[#1e3932] hover:shadow-xl relative z-10 flex flex-col items-center text-center h-[200px] md:h-[230px]">
                      
                      {/* Arrows indicator visible on hover */}
                      <div className="absolute top-1/4 left-2 text-white opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-500 hidden md:block">

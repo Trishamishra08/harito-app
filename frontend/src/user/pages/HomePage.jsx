@@ -7,7 +7,19 @@ import Categories from '../sections/Categories.jsx';
 import Godown from '../sections/Godown.jsx';
 import Contact from '../sections/Contact.jsx';
 import { useData } from '../../data/DataContext';
+import { motion } from 'framer-motion';
 import { ArrowRight, ArrowRightCircle, Sprout, Droplets, Leaf, Flower2, User, Search, MapPin } from 'lucide-react';
+
+const Reveal = ({ children, delay = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.8, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+  >
+    {children}
+  </motion.div>
+);
 
 const FeaturedProducts = () => {
   const { products, getImageUrl } = useData();
@@ -194,6 +206,7 @@ const HomePage = () => {
            </div>
         </div>
 
+        <Reveal>
         {/* 2-Column About layout */}
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center pt-10 md:pt-14">
            {/* Left Image Column */}
@@ -242,6 +255,7 @@ const HomePage = () => {
               </div>
            </div>
         </div>
+        </Reveal>
       </section>
 
       {/* Main Categories Hook */}
@@ -250,6 +264,7 @@ const HomePage = () => {
       {/* Featured Products Section */}
       <FeaturedProducts />
       
+      <Reveal>
       {/* Logistics Section - Redesigned to be more compact with fresh background */}
       <section id="logistics" className="py-8 md:py-12 bg-[#F1F8F1] overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 relative">
@@ -301,7 +316,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      </Reveal>
 
+      <Reveal>
       {/* Final Contact Section - Redesigned to be more compact */}
       <section id="contact-hook" className="py-10 md:py-16 bg-white overflow-hidden">
         <div className="max-w-5xl mx-auto px-4">
@@ -348,6 +365,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      </Reveal>
     </div>
   );
 };

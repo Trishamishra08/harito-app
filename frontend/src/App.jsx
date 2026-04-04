@@ -29,29 +29,37 @@ function SmoothScroll({ children }) {
   const isAdmin = location.pathname.startsWith('/admin');
 
   useEffect(() => {
+    // Scroll to top on every route change
+    window.scrollTo(0, 0);
+    
     if (isAdmin) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
-      lerp: 0.1,
+      duration: 1.5,
+      lerp: 0.08,
       smoothWheel: true,
-      wheelMultiplier: 1,
+      wheelMultiplier: 1.1,
       smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
     });
 
+    let rafId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
+
+    // Update lenis on route change if needed
+    lenis.scrollTo(0, { immediate: true });
 
     return () => {
       lenis.destroy();
+      if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [isAdmin]);
+  }, [isAdmin, location.pathname]); // Added location.pathname to trigger scroll to top
 
   return children;
 }
