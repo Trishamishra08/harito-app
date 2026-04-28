@@ -177,8 +177,8 @@ const ProductsPage = () => {
                      {/* Detailed Specs area - Centered Balanced */}
                      <div className="w-full space-y-2 mt-auto mb-1 text-center transition-all duration-500">
                         <div className="flex flex-col items-center border-b border-black/5 group-hover:border-white/10 pb-1.5 transition-colors">
-                           <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[8px] font-bold uppercase tracking-[0.2em] mb-0.5">Category</span>
-                           <span className="text-slate-800 group-hover:text-white text-[10px] font-black uppercase tracking-tight line-clamp-1">{product.category}</span>
+                           <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[8px] font-bold uppercase tracking-[0.2em] mb-0.5">{product.subcategory ? 'Type' : 'Category'}</span>
+                           <span className="text-slate-800 group-hover:text-white text-[10px] font-black uppercase tracking-tight line-clamp-1">{product.subcategory || product.category}</span>
                         </div>
                         <div className="flex flex-col items-center border-b border-black/5 group-hover:border-white/10 pb-1.5 transition-colors">
                            <span className="text-slate-500 group-hover:text-[#d4e9e2] text-[8px] font-bold uppercase tracking-[0.2em] mb-0.5">Brand</span>

@@ -152,7 +152,9 @@ const ProductDetailsPage = () => {
 
               {/* Category + Badge */}
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-medium text-slate-400">{product.category || 'Agricultural'}</span>
+                <span className="text-[10px] font-medium text-slate-400">
+                  {product.category || 'Agricultural'} {product.subcategory ? `> ${product.subcategory}` : ''}
+                </span>
                 <span className="text-[8px] font-bold text-green-700 bg-green-50 border border-green-200 px-2 py-0.5 rounded-full">In Stock</span>
               </div>
 
